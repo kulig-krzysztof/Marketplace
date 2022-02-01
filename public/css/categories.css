@@ -29,11 +29,14 @@ body {
 }
 
 .account {
+    height: 80%;
+    width: 7vw;
     margin-right: 10px;
     background: #600C5DBD 0% 0% no-repeat padding-box;
     border: 1px solid #707070;
     border-radius: 45px;
     color: white;
+    font-size: 20px;
 }
 
 .search {
@@ -46,6 +49,13 @@ body {
     justify-content: center;
 }
 
+.input-container {
+    width:25vw;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
 form {
     width: 100%;
     display: flex;
@@ -55,7 +65,7 @@ form {
 
 .name-search, .location {
     background: #FFFFFF 0% 0% no-repeat padding-box;
-    width: 20%;
+    width: 90%;
 }
 
 .name-search, .location, .search-button {
@@ -94,9 +104,16 @@ form i, footer i {
 .category {
     border: none;
     font-size: 30px;
+    height: 30vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background: none;
+    align-items: center;
+    justify-content: center;
 }
 
-.category, .category-img {
+.category-img {
     height: 25vh;
     width: 25vh;
     border-radius: 50%;
@@ -130,4 +147,81 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
+
+@media only screen and (max-device-width : 420px) {
+    .header {
+        height: 10vh;
+    }
+
+    .account {
+        width: 35vw;
+    }
+
+    .logo-img {
+        height: 70px;
+        width: 100px;
+    }
+
+    .input-container {
+        width: 80vw;
+
+    }
+    .search-bar {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .name-search, .location, .search-button, .input-container {
+        margin: 0;
+    }
+
+    .input-container {
+        margin-bottom: 10px;
+    }
+
+    .search-button {
+        width: 25vw;
+        height: 12vw;
+    }
+
+    form i {
+        margin-bottom: 10px;
+    }
+
+    .text {
+        margin-bottom: 30px;
+    }
+
+    .category-container {
+        width: 100%;
+    }
+
+    .categories {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    .category-img {
+        height: 25vw;
+        width: 25vw;
+    }
+
+    .category {
+        width: 35vw;
+        height: 35vw;
+        font-size: 20px;
+        width:100%;
+    }
+
+    #last-cat {
+        grid-column: auto / span 2;
+        width: 100%;
+    }
+
+    footer div {
+        font-size: 20px;
+    }
 }
