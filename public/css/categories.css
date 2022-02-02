@@ -195,6 +195,7 @@ footer {
     }
 
     .category-container {
+        height: 60vh;
         width: 100%;
     }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/categories.css">
+    <link rel="stylesheet" type="text/css" href="public/css/categories.css">
     <script src="https://kit.fontawesome.com/35aaad20fa.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,7 @@
 <body>
     <div class="base-container">
         <div class="header">
-            <img class="logo-img" src="../img/logo.svg">
+            <img class="logo-img" src="public/img/logo.svg">
             <button class="account">
                 Konto
                 <i class="fas fa-user"></i>
@@ -36,23 +36,23 @@
                 </div>
             <div class="categories">
                 <button class="category">
-                    <img class="category-img" src="../img/uploads/shoes.jpg">
+                    <img class="category-img" src="public/img/uploads/shoes.jpg">
                     Buty
                 </button>
                 <button class="category">
-                    <img class="category-img" src="../img/uploads/tshirts.jpg">
+                    <img class="category-img" src="public/img/uploads/tshirts.jpg">
                     Koszulki
                 </button>
                 <button class="category">
-                    <img class="category-img" src="../img/uploads/hoodies.jpg">
+                    <img class="category-img" src="public/img/uploads/hoodies.jpg">
                     Bluzy
                 </button>
                 <button class="category">
-                    <img class="category-img" src="../img/uploads/jackets.jpg">
+                    <img class="category-img" src="public/img/uploads/jackets.jpg">
                     Kurtki
                 </button>
                 <button id="last-cat" class="category">
-                    <img class="category-img" src="../img/uploads/caps.jpg">
+                    <img class="category-img" src="public/img/uploads/caps.jpg">
                     Akcesoria
                 </button>
             </div>
