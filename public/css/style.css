@@ -10,23 +10,45 @@ body {
 .container {
     width: 100vw;
     height: 100vh;
-    background: transparent linear-gradient(180deg, #00C2FF 0%, #600C5D 100%) 0% 0% no-repeat padding-box;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(127deg, #00c2ff, #600c5d);
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 16s ease infinite;
+    -moz-animation: AnimationName 16s ease infinite;
+    animation: AnimationName 16s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 5%}
+    50%{background-position:100% 96%}
+    100%{background-position:0% 5%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 5%}
+    50%{background-position:100% 96%}
+    100%{background-position:0% 5%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 5%}
+    50%{background-position:100% 96%}
+    100%{background-position:0% 5%}
 }
 
 .logo {
     width: 50%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .login-container {
     width: 50%;
 }
 
-form.login {
+.login {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,7 +62,8 @@ form.login {
     border-radius: 54px;
 }
 
-.login button {
+.button {
+    text-align: center;
     width: 40%;
     background: transparent linear-gradient(180deg, #600C5D 0%, #0C0F10 100%) 0% 0% no-repeat padding-box;
     border: none;
@@ -94,6 +117,7 @@ input {
     height: 160px;
 }
 
+
 .option {
     background: transparent linear-gradient(180deg, #CADDF1 0%, #00C2FFB0 100%) 0% 0% no-repeat padding-box;
     border-radius: 50%;
@@ -118,12 +142,27 @@ input {
         font-size: 20px;
     }
 
+    .login-container {
+        height: 60vh;
+    }
+
     .login-container, .logo {
         width: 100%;
     }
 
-    form.login {
+    .login {
         margin: auto;
+        height: 50vh;
+    }
+
+    .login input {
+        font-size: 15px;
+        width: 60%;
+    }
+
+    .button {
+        width: 70%;
+        text-align: center;
     }
 
     .logo-img {
@@ -150,6 +189,10 @@ input {
     .option {
         height: 45vw;
         width: 45vw;
+    }
+
+    #register {
+        margin-top: -5px;
     }
 }
 

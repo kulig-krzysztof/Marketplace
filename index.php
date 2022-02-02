@@ -9,5 +9,8 @@ Routing::get('index', 'DefaultController');
 Routing::get('actions', 'DefaultController');
 Routing::get('categories', 'DefaultController');
 Routing::get('add', 'DefaultController');
+Routing::get('register', 'DefaultController');
 Routing::post('login', 'SecurityController');
+Routing::post('register', 'SecurityController');
+Routing::post('add', 'AddController');
 Routing::run($path);
