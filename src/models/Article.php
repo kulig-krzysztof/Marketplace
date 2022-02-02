@@ -94,7 +94,7 @@ class Article
         $this->location = $location;
     }
 
-    public function getImg(): string
+    public function getImg()
     {
         return $this->img;
     }

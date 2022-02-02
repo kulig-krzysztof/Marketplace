@@ -16,6 +16,6 @@ i {
 
 @media only screen and (max-device-width : 420px) {
     footer div {
-        font-size: 20px;
+        font-size: 10px;
     }
 }

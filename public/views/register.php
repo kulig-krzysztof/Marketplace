@@ -13,7 +13,7 @@
         <img class="logo-img" src="public/img/logo.svg">
     </div>
     <div class="register-container">
-        <form class="register" action="register" method="post">
+        <form class="register" action="register" method="post" enctype="multipart/form-data">
             <div class="messages">
                 <?php if(isset($messages)) {
                     foreach ($messages as $message) {
