@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/add.css">
+    <link rel="stylesheet" type="text/css" href="public/css/add.css">
     <script src="https://kit.fontawesome.com/35aaad20fa.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <header>
-            <img class="logo-img" src="../img/logo.svg">
+            <img class="logo-img" src="public/img/logo.svg">
             <button class="account">
                 Konto
                 <i class="fas fa-user"></i>

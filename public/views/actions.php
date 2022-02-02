@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,14 +13,14 @@
             Co chcesz zrobić?
         </div>
         <div class="options">
-        <div class="option">
-            <img class="option-icon" src="../img/uploads/shopping-cart.png">
+        <div id="buy-button" class="option" onclick="window.location.href='/categories'">
+            <img class="option-icon" src="public/img/uploads/shopping-cart.png">
             <div class="buy">
                 KUPUJĘ
             </div>
         </div>
-        <div class="option">
-            <img class="option-icon" src="../img/uploads/dollar-symbol.png">
+        <div id="sell-button" class="option" onclick="window.location.href='/add'">
+            <img class="option-icon" src="public/img/uploads/dollar-symbol.png">
             <div class="sell">
                 SPRZEDAJĘ
             </div>
