@@ -10,38 +10,37 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <img class="logo-img" src="public/img/logo.svg">
-            <button class="account">
-                Konto
-                <i class="fas fa-user"></i>
-            </button>
-        </header>
+        <?php include('header.php') ?>
         <div class="title">
             Dodaj ogłoszenie
         </div>
         <div class="form-container">
-            <form>
+            <form action="add" method="post" enctype="multipart/form-data">
             <div class="left-panel">
                 <div id="base-data" class="left-panel-comp">
                     Podstawowe dane:
-                    <input type="text" class="title-input" placeholder="Tytuł ogłoszenia">
-                    <select class="category-select">
-                        <option value="" disabled selected hidden>Kategoria</option>
+                    <input name="title" type="text" class="title-input" placeholder="Tytuł ogłoszenia">
+                    <select name="category" class="category-select">
+                        <option name="category" value="" disabled selected hidden>Kategoria</option>
+                        <option name="category" value="Buty">Buty</option>
+                        <option name="category" value="Kurtki">Kurtki</option>
+                        <option name="category" value="Koszulki">Koszulki</option>
+                        <option name="category" value="Bluzy">Bluzy</option>
+                        <option name="category" value="Akcesoria">Akcesoria</option>
                     </select>
                 </div>
                 
                 <div id="description" class="left-panel-comp">
                     Opis ogłoszenia:
-                    <textarea class="desc-input"></textarea>
+                    <textarea name="desc" class="desc-input"></textarea>
                 </div>
                 
                 <div id="data" class="left-panel-comp">
                     Dane ogłoszenia:
                     <div class="data-input">
-                    <input type="tel" class="number" placeholder="Nr telefonu">
-                    <input type="number" class="price" placeholder="Cena">
-                    <input type="email" class="mail" placeholder="Adres email">
+                    <input name="phone" type="tel" class="number" placeholder="Nr telefonu">
+                    <input name="price" type="number" class="price" placeholder="Cena">
+                    <input name="email" type="email" class="mail" placeholder="Adres email">
                     </div>
                 </div>
             </div>
@@ -54,23 +53,24 @@
             <div class="img-add">
                 <div id="photo-upload" class="right-panel-comp">
                     <i class="fas fa-camera fa-5x"></i>
-                    <input type="file">
+                    <input name="file" type="file">
                 </div>
-                <button id="add" class="right-panel-comp">
+                <div class="messages">
+                    <?php if(isset($messages)) {
+                        foreach ($messages as $message) {
+                            echo $message;
+                        }
+                    }
+                    ?>
+                </div>
+                <button type="submit" id="add" class="right-panel-comp">
                     Dodaj
                 </button>
             </div>
             </div>
             </form>
         </div>
-        <footer>
-            <div>@ 2022 Krzysztof Kulig</div>
-            <div>
-                <i class="fab fa-facebook"></i>
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-github"></i>
-            </div>
-        </footer>
+        <?php include('footer.php') ?>
     </div>
 </body>
 </html>

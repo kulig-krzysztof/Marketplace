@@ -1,0 +1,119 @@
+* {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(127deg, #00c2ff, #600c5d);
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 16s ease infinite;
+    -moz-animation: AnimationName 16s ease infinite;
+    animation: AnimationName 16s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 5%}
+    50%{background-position:100% 96%}
+    100%{background-position:0% 5%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 5%}
+    50%{background-position:100% 96%}
+    100%{background-position:0% 5%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 5%}
+    50%{background-position:100% 96%}
+    100%{background-position:0% 5%}
+}
+
+
+.logo {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.register-container {
+    width: 50%;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 40vh;
+
+    background: #FFFFFFD9 0% 0% no-repeat padding-box;
+    box-shadow: inset 6px 6px 6px #00000029;
+    border: 1px solid #707070;
+    border-radius: 54px;
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 1em;
+    margin: 1em;
+    width: 50%;
+}
+
+button {
+    width: 40%;
+    background: transparent linear-gradient(180deg, #600C5D 0%, #0C0F10 100%) 0% 0% no-repeat padding-box;
+    border: none;
+    border-radius: 19px;
+    color: white;
+    margin: 1em;
+    line-height: 2.5em;
+}
+
+@media only screen and (max-device-width : 420px) {
+    .container {
+        flex-direction: column;
+    }
+
+    * {
+        font-size: 20px;
+    }
+
+    .register-container {
+        height: 60vh;
+    }
+
+    .register-container, .logo {
+        width: 100%;
+    }
+
+    form {
+        margin: auto;
+        height: 60vh;
+    }
+
+    form input {
+        font-size: 15px;
+        width: 60%;
+    }
+
+    form button {
+        width: 70%;
+    }
+
+    .logo-img {
+        height: 7em;
+        margin: 2em;
+    }
+}
