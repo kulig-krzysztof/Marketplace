@@ -13,13 +13,13 @@
             Co chcesz zrobić?
         </div>
         <div class="options">
-        <div class="option">
+        <div id="buy-button" class="option" onclick="window.location.href='/categories'">
             <img class="option-icon" src="public/img/uploads/shopping-cart.png">
             <div class="buy">
                 KUPUJĘ
             </div>
         </div>
-        <div class="option">
+        <div id="sell-button" class="option" onclick="window.location.href='/add'">
             <img class="option-icon" src="public/img/uploads/dollar-symbol.png">
             <div class="sell">
                 SPRZEDAJĘ
