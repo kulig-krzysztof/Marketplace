@@ -79,10 +79,9 @@ body {
 }
 
 .categories>div>img {
-    margin: 10px;
     height: 70%;
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
     border-radius: 1em 1em 0 0;
 }
 

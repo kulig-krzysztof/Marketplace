@@ -19,7 +19,7 @@ class AddUserController extends AppController
 
 
         if ($this->isPost()) {
-            $user = new User($_POST['email'], $_POST['password'], $_POST['name'], $_POST['surname']);
+            $user = new User($_POST['email'], md5($_POST['password']), $_POST['name'], $_POST['surname']);
 
             $email = $_POST['email'];
             $check = $this->userRepository->getUser($email);
