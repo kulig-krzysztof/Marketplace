@@ -81,6 +81,13 @@ button {
     line-height: 2.5em;
 }
 
+.no-valid {
+    border: 3px solid red;
+    border-radius: 1em;
+    box-shadow: 0 0 0.2em red;
+    outline: none;
+}
+
 @media only screen and (max-device-width : 420px) {
     .container {
         flex-direction: column;

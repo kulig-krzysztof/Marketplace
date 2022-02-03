@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/add.css">
+    <script type="text/javascript" src="public/js/add.js" defer></script>
     <script src="https://kit.fontawesome.com/35aaad20fa.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,7 +54,7 @@
             <div class="img-add">
                 <div id="photo-upload" class="right-panel-comp">
                     <i class="fas fa-camera fa-5x"></i>
-                    <input name="file" type="file">
+                    <input name="file" type="file" required>
                 </div>
                 <div class="messages">
                     <?php if(isset($messages)) {
