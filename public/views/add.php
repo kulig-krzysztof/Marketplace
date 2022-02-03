@@ -46,28 +46,18 @@
                 </div>
             </div>
             <div class="right-panel">
-                <div id="location-map" class="right-panel-comp">
+                <div id="location" class="right-panel-comp">
                     Lokalizacja
-                    <div class="map">
-                    </div>
+                    <input type="text" name="location" class="map" placeholder="Wpisz lokalizację">
+                    </input>
                 </div>
-            <div class="img-add">
                 <div id="photo-upload" class="right-panel-comp">
                     <i class="fas fa-camera fa-5x"></i>
                     <input name="file" type="file" required>
                 </div>
-                <div class="messages">
-                    <?php if(isset($messages)) {
-                        foreach ($messages as $message) {
-                            echo $message;
-                        }
-                    }
-                    ?>
-                </div>
                 <button type="submit" id="add" class="right-panel-comp">
                     Dodaj
                 </button>
-            </div>
             </div>
             </form>
         </div>
