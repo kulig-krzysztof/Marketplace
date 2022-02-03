@@ -12,7 +12,7 @@
     <div class="base-container">
         <?php include('header.php') ?>
         <div class="search">
-            <form action="categories" method="get" class="search-bar">
+            <form action="categories" method="post" class="search-bar">
             <div class="input-container">
                 <i class="fas fa-search"></i>
                 <input name="name-search" type="text" class="name-search" placeholder="Czego szukasz?">

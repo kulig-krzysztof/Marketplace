@@ -48,4 +48,29 @@ class ArticleRepository extends Repository
             $user
         ]);
     }
+
+    public function getAllArticles() : array {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM articles;
+        ');
+        $stmt->execute();
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($articles as $article) {
+            $result[] = new Article(
+                $article['title'],
+                $article['category'],
+                $article['description'],
+                $article['number'],
+                $article['price'],
+                $article['email'],
+                $article['location'],
+                $article['img']
+            );
+        }
+
+        return $result;
+    }
 }

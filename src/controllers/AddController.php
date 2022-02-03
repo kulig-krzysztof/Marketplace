@@ -18,6 +18,12 @@ class AddController extends AppController
         $this->articleRepository = new ArticleRepository();
     }
 
+    public function results() {
+
+        $articles = $this->articleRepository->getAllArticles();
+        $this->render('result', ['articles' => $articles]);
+    }
+
 
     public function add() {
 
@@ -31,7 +37,9 @@ class AddController extends AppController
             $article = new Article($_POST['title'],$_POST['category'],$_POST['desc'],$_POST['phone'],$_POST['price'],$_POST['email'],$_POST['location'], $_FILES['file']['name']);
             $this->articleRepository->addArticle($article);
 
-            return $this->render('add', ['messages' => $this->messages, 'add' => $article]);
+            return $this->render('result', [
+                'articles' => $this->articleRepository->getAllArticles(),
+                'messages' => $this->messages]);
         }
         
         $this->render('add');

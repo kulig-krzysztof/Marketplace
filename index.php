@@ -10,6 +10,7 @@ Routing::get('actions', 'DefaultController');
 Routing::get('categories', 'DefaultController');
 Routing::get('add', 'DefaultController');
 Routing::get('register', 'DefaultController');
+Routing::get('results', 'AddController');
 Routing::post('login', 'SecurityController');
 Routing::post('register', 'AddUserController');
 Routing::post('add', 'AddController');
