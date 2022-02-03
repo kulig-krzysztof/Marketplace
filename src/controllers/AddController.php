@@ -18,6 +18,12 @@ class AddController extends AppController
         $this->articleRepository = new ArticleRepository();
     }
 
+    public function results() {
+
+        $articles = $this->articleRepository->getAllArticles();
+        $this->render('result', ['articles' => $articles]);
+    }
+
 
     public function add() {
 
@@ -31,11 +37,28 @@ class AddController extends AppController
             $article = new Article($_POST['title'],$_POST['category'],$_POST['desc'],$_POST['phone'],$_POST['price'],$_POST['email'],$_POST['location'], $_FILES['file']['name']);
             $this->articleRepository->addArticle($article);
 
-            return $this->render('add', ['messages' => $this->messages, 'add' => $article]);
+            return $this->render('result', [
+                'articles' => $this->articleRepository->getAllArticles(),
+                'messages' => $this->messages]);
         }
         
         $this->render('add');
     }
+
+    public function search() {
+        $contentType = isset($_SERVER['CONTENT_TYPE']) ? trim($_SERVER['CONTENT_TYPE']) : '';
+
+        if($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-Type : application/json');
+            http_response_code(200);
+
+            echo json_encode($this->articleRepository->getArticleByTitle($decoded['search']));
+        }
+    }
+
 
     private function validate(array $file) : bool
     {
@@ -50,4 +73,6 @@ class AddController extends AppController
         }
         return true;
     }
+
+
 }

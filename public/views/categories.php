@@ -12,10 +12,10 @@
     <div class="base-container">
         <?php include('header.php') ?>
         <div class="search">
-            <form action="categories" method="get" class="search-bar">
+            <form action="results" method="post" class="search-bar">
             <div class="input-container">
                 <i class="fas fa-search"></i>
-                <input name="name-search" type="text" class="name-search" placeholder="Czego szukasz?">
+                <input name="name-search" type="text" class="name-search" placeholder="Wpisz tytuł lub kategrię">
             </div>
             <div class="input-container">
                 <i class="fas fa-thumbtack"></i>
@@ -28,28 +28,28 @@
                 <div class="text">
                     Kategorie
                 </div>
-            <div class="categories">
-                <button class="category">
+            <form method='post' action="results" class="categories">
+                <button name="category" value="buty" id="buty" class="category">
                     <img class="category-img" src="public/img/uploads/shoes.jpg">
                     Buty
                 </button>
-                <button class="category">
+                <button name="category" value="koszulki" id="koszulki" class="category">
                     <img class="category-img" src="public/img/uploads/tshirts.jpg">
                     Koszulki
                 </button>
-                <button class="category">
+                <button name="category" value="bluzy" id="bluzy" class="category">
                     <img class="category-img" src="public/img/uploads/hoodies.jpg">
                     Bluzy
                 </button>
-                <button class="category">
+                <button name="category" value="kurtki" id="kurtki" class="category">
                     <img class="category-img" src="public/img/uploads/jackets.jpg">
                     Kurtki
                 </button>
-                <button id="last-cat" class="category">
+                <button name="category" value="akcesoria" id="akcesoria" id="last-cat" class="category">
                     <img class="category-img" src="public/img/uploads/caps.jpg">
                     Akcesoria
                 </button>
-            </div>
+            </form>
         </div>
         <?php include('footer.php') ?>
     </div>
