@@ -20,9 +20,9 @@
             <div class="left-panel">
                 <div id="base-data" class="left-panel-comp">
                     Podstawowe dane:
-                    <input name="title" type="text" class="title-input" placeholder="Tytuł ogłoszenia">
+                    <input name="title" type="text" class="title-input" placeholder="Tytuł ogłoszenia" required>
                     <select name="category" class="category-select">
-                        <option name="category" value="" disabled selected hidden>Kategoria</option>
+                        <option name="category" value="" disabled selected hidden required>Kategoria</option>
                         <option name="category" value="Buty">Buty</option>
                         <option name="category" value="Kurtki">Kurtki</option>
                         <option name="category" value="Koszulki">Koszulki</option>
@@ -33,22 +33,22 @@
                 
                 <div id="description" class="left-panel-comp">
                     Opis ogłoszenia:
-                    <textarea name="desc" class="desc-input"></textarea>
+                    <textarea name="desc" class="desc-input" required></textarea>
                 </div>
                 
                 <div id="data" class="left-panel-comp">
                     Dane ogłoszenia:
                     <div class="data-input">
-                    <input name="phone" type="tel" class="number" placeholder="Nr telefonu">
-                    <input name="price" type="number" class="price" placeholder="Cena">
-                    <input name="email" type="email" class="mail" placeholder="Adres email">
+                    <input name="phone" type="tel" class="number" placeholder="Nr telefonu" required>
+                    <input name="price" type="number" class="price" placeholder="Cena" required>
+                    <input name="email" type="email" class="mail" placeholder="Adres email" required>
                     </div>
                 </div>
             </div>
             <div class="right-panel">
                 <div id="location" class="right-panel-comp">
-                    Lokalizacja
-                    <input type="text" name="location" class="map" placeholder="Wpisz lokalizację">
+                    Lokalizacja:
+                    <input type="text" name="location" class="map" placeholder="Wpisz lokalizację" required>
                     </input>
                 </div>
                 <div id="photo-upload" class="right-panel-comp">

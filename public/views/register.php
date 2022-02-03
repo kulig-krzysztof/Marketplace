@@ -23,10 +23,10 @@
                 }
                 ?>
             </div>
-            <input id="email" name="email" type="text" placeholder="Email@email.com">
-            <input id="password" name="password" type="password" placeholder="Hasło">
-            <input name="name" type="text" placeholder="Imię">
-            <input name="surname" type="text" placeholder="Nazwisko">
+            <input id="email" name="email" type="text" placeholder="Email@email.com" required>
+            <input id="password" name="password" type="password" placeholder="Hasło" required>
+            <input name="name" type="text" placeholder="Imię" required>
+            <input name="surname" type="text" placeholder="Nazwisko" required>
             <button type="submit">SIGN UP</button>
         </form>
     </div>

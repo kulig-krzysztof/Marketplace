@@ -45,7 +45,7 @@
                     <img class="category-img" src="public/img/uploads/jackets.jpg">
                     Kurtki
                 </button>
-                <button name="category" value="akcesoria" id="akcesoria" id="last-cat" class="category">
+                <button name="category" value="akcesoria" id="last-cat" class="category">
                     <img class="category-img" src="public/img/uploads/caps.jpg">
                     Akcesoria
                 </button>
