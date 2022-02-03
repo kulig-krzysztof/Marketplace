@@ -12,9 +12,9 @@
 <footer>
     <div>@ 2022 Krzysztof Kulig</div>
     <div>
-        <i class="fab fa-facebook"></i>
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-github"></i>
+        <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/kulig-krzysztof/PAI_project"><i class="fab fa-github"></i></a>
     </div>
 </footer>
 </body>
