@@ -14,4 +14,5 @@ Routing::get('results', 'AddController');
 Routing::post('login', 'SecurityController');
 Routing::post('register', 'AddUserController');
 Routing::post('add', 'AddController');
+Routing::post('search', 'AddController');
 Routing::run($path);

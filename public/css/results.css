@@ -28,7 +28,7 @@ body {
     flex-direction: row;
 }
 
-form {
+.form {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -79,6 +79,7 @@ form {
 }
 
 .categories>div>img {
+    margin: 10px;
     height: 70%;
     width: 100%;
     object-fit: cover;

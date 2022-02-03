@@ -45,6 +45,20 @@ class AddController extends AppController
         $this->render('add');
     }
 
+    public function search() {
+        $contentType = isset($_SERVER['CONTENT_TYPE']) ? trim($_SERVER['CONTENT_TYPE']) : '';
+
+        if($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-Type : application/json');
+            http_response_code(200);
+
+            echo json_encode($this->articleRepository->getArticleByTitle($decoded['search']));
+        }
+    }
+
     private function validate(array $file) : bool
     {
         if($file['size'] > self::MAX_FILE_SIZE) {
@@ -58,4 +72,6 @@ class AddController extends AppController
         }
         return true;
     }
+
+
 }
