@@ -1,9 +1,12 @@
 const form = document.querySelector("form");
 const emailInput = document.getElementById('email');
-const confirmedPasswordInput = form.querySelector('input[name="password"]');
+const confirmedPasswordInput = form.querySelector('input[name="repeatPassword"]');
 
 function isEmail (email) {
     return /\S+@\S+\.\S+/.test(email);
+}
+function arePasswordsSame(password, confirmedPassword) {
+    return password === confirmedPassword;
 }
 
 function markValidation(element, condition) {
@@ -18,5 +21,18 @@ function validateEmail() {
     );
 }
 
+function validatePassword() {
+    setTimeout(function () {
+            const condition = arePasswordsSame(
+                confirmedPasswordInput.previousElementSibling.value,
+                confirmedPasswordInput.value
+            );
+            markValidation(confirmedPasswordInput, condition);
+        },
+        1000
+    );
+}
+
 emailInput.addEventListener('keyup', validateEmail);
+confirmedPasswordInput.addEventListener('keyup', validatePassword);
 

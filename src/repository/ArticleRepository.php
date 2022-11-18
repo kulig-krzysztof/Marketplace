@@ -78,7 +78,7 @@ class ArticleRepository extends Repository
         $searchString = '%'.strtolower($searchString).'%';
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM articles WHERE LOWER(title) LIKE :search OR LOWER(location) LIKE :search;
+            SELECT * FROM articles WHERE LOWER(title) LIKE :search;
         ');
 
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
@@ -87,5 +87,16 @@ class ArticleRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getArticleByLocation(string $searchString) {
+        $searchString = '%'.strtolower($searchString).'%';
 
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM articles WHERE LOWER(location) LIKE :search;
+        ');
+
+        $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
