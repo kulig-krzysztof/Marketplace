@@ -28,7 +28,7 @@
                 <div class="text">
                     Kategorie
                 </div>
-            <form method='post' action="results" class="categories">
+            <form method='post' action="displayCategory" class="categories">
                 <button name="category" value="buty" id="buty" class="category">
                     <img class="category-img" src="public/img/uploads/shoes.jpg">
                     Buty

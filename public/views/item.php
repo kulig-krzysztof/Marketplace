@@ -27,16 +27,14 @@
     </div>
     <div class="category-container">
         <form id="form" action="item" method="post" class="categories">
-            <?php foreach ($articles as $article): ?>
-            <button type="submit" name="item-id" value="<?= $article->getId(); ?>" id="<?= $article->getId(); ?>">
-                <img src="public/img/form-images/<?= $article->getImg(); ?>">
-                <div>
-                    <h2><?= $article->getTitle(); ?></h2>
-                    <p>Cena: <?= $article->getPrice(); ?></p>
-                    <p>Lokalizacja: <?= $article->getLocation(); ?></p>
-                </div>
-            </button>
-            <?php endforeach; ?>
+                <button type="submit" name="item-id" value="id" id="project_1">
+                    <img src="public/img/form-images/<?= $articles->getImg(); ?>">
+                    <div>
+                        <h2><?= $articles->getTitle(); ?></h2>
+                        <p>Cena: <?= $articles->getPrice(); ?></p>
+                        <p>Lokalizacja: <?= $articles->getLocation(); ?></p>
+                    </div>
+                </button>
         </form>
     </div>
     <?php include('footer.php'); ?>
@@ -44,13 +42,13 @@
 
 </body>
 <template id="template">
-<button type="submit" name="item-id" value="" id="">
-    <img src="">
-    <div>
-        <h2>title</h2>
-        <p id="price">Cena: </p>
-        <p id="location">Lokalizacja: </p>
-    </div>
-</button>
+    <button type="submit" name="item-id" value="" id="">
+        <img src="">
+        <div>
+            <h2>title</h2>
+            <p id="price">Cena: </p>
+            <p id="location">Lokalizacja: </p>
+        </div>
+    </button>
 </template>
 </html>

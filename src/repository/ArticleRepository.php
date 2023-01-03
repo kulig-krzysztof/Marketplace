@@ -19,6 +19,7 @@ class ArticleRepository extends Repository
         }
 
         return new Article(
+            $article['id'],
             $article['title'],
             $article['category'],
             $article['description'],
@@ -35,14 +36,15 @@ class ArticleRepository extends Repository
             INSERT INTO articles (title, category, description, number, price, email, location, img, user_id) 
             VALUES (?, ?, ?, ?, ? ,? ,?, ?, ?)
         ');
-        $user = 1;
+        session_start();
+        $user = $_SESSION['id'];
         $stmt->execute([
             $article->getTitle(),
             $article->getCategory(),
             $article->getDesc(),
             $article->getPhone(),
             $article->getPrice(),
-            $article->getEmail(),
+            $_SESSION['email'],
             $article->getLocation(),
             $article->getImg(),
             $user
@@ -60,6 +62,7 @@ class ArticleRepository extends Repository
 
         foreach ($articles as $article) {
             $result[] = new Article(
+                $article['id'],
                 $article['title'],
                 $article['category'],
                 $article['description'],
@@ -78,7 +81,7 @@ class ArticleRepository extends Repository
         $searchString = '%'.strtolower($searchString).'%';
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM articles WHERE LOWER(title) LIKE :search;
+            SELECT * FROM articles WHERE LOWER(title) LIKE :search OR LOWER(category) LIKE :search OR LOWER(location) LIKE :search;
         ');
 
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
@@ -98,5 +101,32 @@ class ArticleRepository extends Repository
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getArticleByCategory(string $searchString) : array {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM articles WHERE LOWER(category) LIKE :search;
+        ');
+        $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
+        $stmt->execute();
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($articles as $article) {
+            $result[] = new Article(
+                $article['id'],
+                $article['title'],
+                $article['category'],
+                $article['description'],
+                $article['number'],
+                $article['price'],
+                $article['email'],
+                $article['location'],
+                $article['img']
+            );
+        }
+
+        return $result;
     }
 }

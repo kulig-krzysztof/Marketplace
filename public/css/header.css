@@ -15,15 +15,35 @@
     margin-left: 20px;
 }
 
-.account {
+.logout_form {
+    width: 20vw;
     height: 80%;
-    width: 8vw;
+    margin-right: 10px;
+}
+
+.logout {
+    text-align: center;
+    width: 100%;
+    background: #600C5DBD 0% 0% no-repeat padding-box;
+    border: 1px solid #707070;
+    border-radius: 45px;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.account {
+    height: 100%;
+    width: 60vw;
     margin-right: 10px;
     background: #600C5DBD 0% 0% no-repeat padding-box;
     border: 1px solid #707070;
     border-radius: 45px;
     color: white;
     font-size: 20px;
+    display: flex;
+    align-items: center;
 }
 
 @media only screen and (max-device-width : 420px) {
@@ -32,7 +52,7 @@
     }
 
     .account {
-        width: 35vw;
+        width: 45vw;
     }
 
     .logo-img {

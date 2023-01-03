@@ -2,6 +2,7 @@
 
 class Article
 {
+    private $id;
     private $title;
     private $category;
     private $desc;
@@ -11,8 +12,9 @@ class Article
     private $location;
     private $img;
 
-    public function __construct($title, $category, $desc, $phone, $price, $email, $location, $img)
+    public function __construct($id, $title, $category, $desc, $phone, $price, $email, $location, $img)
     {
+        $this->id = $id;
         $this->title = $title;
         $this->category = $category;
         $this->desc = $desc;
@@ -23,7 +25,6 @@ class Article
         $this->img = $img;
     }
 
-
     public function getTitle() : string
     {
         return $this->title;
@@ -32,6 +33,10 @@ class Article
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    public function getId() : int {
+        return $this->id;
     }
 
     public function getCategory(): string

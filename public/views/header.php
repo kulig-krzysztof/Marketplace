@@ -10,11 +10,11 @@
 </head>
 <body>
     <div class="header">
-        <img class="logo-img" src="public/img/logo.svg">
-        <button class="account">
-            Konto
-            <i class="fas fa-user"></i>
-        </button>
+        <? session_start() ?>
+        <a href="actions"><img class="logo-img" src="public/img/logo.svg"></a>
+        <form class="logout_form" method="POST" action="logout" class="account">
+            <input class="logout" type="submit" name="Logout" value="<?= $_SESSION['email'] ?>">
+        </form>
 </div>
 </body>
 </html>

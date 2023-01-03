@@ -4,6 +4,8 @@ require_once 'AppController.php';
 require_once __DIR__.'/../models/Article.php';
 require_once __DIR__.'/../repository/ArticleRepository.php';
 
+session_start();
+
 class AddController extends AppController
 {
     const MAX_FILE_SIZE = 1024*1024;
@@ -19,9 +21,13 @@ class AddController extends AppController
     }
 
     public function results() {
-
-        $articles = $this->articleRepository->getAllArticles();
-        $this->render('result', ['articles' => $articles]);
+        if(isset($_SESSION['email'])) {
+            $articles = $this->articleRepository->getAllArticles();
+            $this->render('result', ['articles' => $articles]);
+        }
+        else {
+            $this->render('login', ['messages' => ['You are not logged in!']]);
+        }
     }
 
 
@@ -34,15 +40,19 @@ class AddController extends AppController
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            $article = new Article($_POST['title'],$_POST['category'],$_POST['desc'],$_POST['phone'],$_POST['price'],$_POST['email'],$_POST['location'], $_FILES['file']['name']);
+            $article = new Article(0,$_POST['title'],$_POST['category'],$_POST['desc'],$_POST['phone'],$_POST['price'],$_POST['email'],$_POST['location'], $_FILES['file']['name']);
             $this->articleRepository->addArticle($article);
 
             return $this->render('result', [
                 'articles' => $this->articleRepository->getAllArticles(),
                 'messages' => $this->messages]);
         }
-        
-        $this->render('add');
+        if(!isset($_SESSION['email'])) {
+            $this->render('login', ['messages' => ['You are not logged in!']]);
+        }
+        else {
+            $this->render('add');
+        }
     }
 
     public function search() {
@@ -59,6 +69,11 @@ class AddController extends AppController
         }
     }
 
+    public function displayCategory() {
+            $articles = $this->articleRepository->getArticleByCategory($_POST['category']);
+            $this->render('result', ['articles' => $articles]);
+    }
+
 
     private function validate(array $file) : bool
     {
@@ -73,6 +88,23 @@ class AddController extends AppController
         }
         return true;
     }
+
+    public function item() {
+        if($this->isPost() && isset($_POST['item-id']) && isset($_SESSION['email'])) {
+            $id = trim($_POST['item-id']);
+            $articles = $this->articleRepository->getArticle($id);
+            $this->render('item', ['articles' => $articles]);
+            echo $id;
+            var_dump($articles);
+        }
+        elseif (!isset($_POST['item-id']) && isset($_SESSION['email'])){
+            $this->render('categories');
+        }
+        elseif (!isset($_SESSION['email'])) {
+            $this->render('login', ['messages' => ['You are not logged in!']]);
+        }
+    }
+
 
 
 }

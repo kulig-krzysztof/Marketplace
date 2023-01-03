@@ -1,6 +1,6 @@
 const search = document.querySelector(".name-search");
 const searchLocation = document.querySelector(".location");
-    const articleContainer = document.querySelector('.categories');
+const articleContainer = document.querySelector('.categories');
 
     search.addEventListener("keyup", function(event) {
         if(event.key === "Enter") {
@@ -46,6 +46,8 @@ searchLocation.addEventListener("keyup", function(event) {
     }
 });
 
+
+
     function loadArticles(articles) {
         articles.forEach(article => {
             console.log(article);
@@ -57,8 +59,9 @@ searchLocation.addEventListener("keyup", function(event) {
         const template = document.querySelector("#template");
 
         const clone = template.content.cloneNode(true);
-        const div = clone.querySelector("div");
-        div.id = article.id;
+        const button = clone.querySelector("button");
+        button.id = article.id;
+        button.value = article.id;
 
         const image = clone.querySelector("img");
         image.src = `public/img/form-images/${article.img}`;

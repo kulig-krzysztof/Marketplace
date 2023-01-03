@@ -18,6 +18,9 @@ class UserRepository extends Repository
             return null;
         }
 
+        session_start();
+        $_SESSION['id'] = $user['id'];
+
         return new User(
             $user['email'],
             $user['password'],

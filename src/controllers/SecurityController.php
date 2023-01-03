@@ -23,6 +23,8 @@ class SecurityController extends AppController
 
         $email = $_POST['email'];
         $password = md5($_POST['password']);
+        session_start();
+        $_SESSION['email'] = $email;
 
         $user = $this->userRepository->getUser($email);
 
@@ -39,5 +41,11 @@ class SecurityController extends AppController
         }
 
         return $this->render('actions');
+    }
+
+    public function logout() {
+        session_start();
+        session_unset();
+        return $this->render('login', ['messages' => ['Logged out successfully!']]);
     }
 }
