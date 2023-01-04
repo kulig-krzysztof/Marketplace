@@ -16,13 +16,15 @@
 }
 
 .logout_form {
-    width: 20vw;
+    display: flex;
+    width: 6vw;
     height: 80%;
     margin-right: 10px;
+    justify-content: center;
 }
 
 .logout {
-    text-align: center;
+    justify-content: center;
     width: 100%;
     background: #600C5DBD 0% 0% no-repeat padding-box;
     border: 1px solid #707070;
@@ -30,6 +32,13 @@
     color: white;
     font-size: 20px;
     display: flex;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
     align-items: center;
 }
 

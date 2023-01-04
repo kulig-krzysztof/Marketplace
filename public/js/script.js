@@ -1,6 +1,9 @@
 const form = document.querySelector("form");
 const emailInput = document.getElementById('email');
 const confirmedPasswordInput = form.querySelector('input[name="repeatPassword"]');
+const name = form.querySelector('#name');
+const surname = form.querySelector('#surname');
+const submit = form.querySelector('#submit');
 
 function isEmail (email) {
     return /\S+@\S+\.\S+/.test(email);
@@ -35,4 +38,5 @@ function validatePassword() {
 
 emailInput.addEventListener('keyup', validateEmail);
 confirmedPasswordInput.addEventListener('keyup', validatePassword);
+
 

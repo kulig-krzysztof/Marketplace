@@ -32,8 +32,8 @@
                 <img src="public/img/form-images/<?= $article->getImg(); ?>">
                 <div>
                     <h2><?= $article->getTitle(); ?></h2>
-                    <p>Cena: <?= $article->getPrice(); ?></p>
-                    <p>Lokalizacja: <?= $article->getLocation(); ?></p>
+                    <p><?= "Cena: ".$article->getPrice()." zł"; ?></p>
+                    <p><?= "Lokalizacja: ".$article->getLocation(); ?></p>
                 </div>
             </button>
             <?php endforeach; ?>

@@ -26,9 +26,9 @@
             <input id="email" name="email" type="text" placeholder="Email@email.com">
             <input id="password" name="password" type="password" placeholder="Hasło">
             <input id="repeatPassword" name="repeatPassword" type="password" placeholder="Powtórz hasło">
-            <input name="name" type="text" placeholder="Imię">
-            <input name="surname" type="text" placeholder="Nazwisko">
-            <button type="submit">SIGN UP</button>
+            <input id="name" name="name" type="text" placeholder="Imię">
+            <input id="surname" name="surname" type="text" placeholder="Nazwisko">
+            <button id="submit" type="submit">SIGN UP</button>
         </form>
     </div>
 </div>

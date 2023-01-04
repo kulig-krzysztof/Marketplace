@@ -41,7 +41,7 @@ class ArticleRepository extends Repository
         $stmt->execute([
             $article->getTitle(),
             $article->getCategory(),
-            $article->getDesc(),
+            $article->getDescription(),
             $article->getPhone(),
             $article->getPrice(),
             $_SESSION['email'],
@@ -104,6 +104,7 @@ class ArticleRepository extends Repository
     }
 
     public function getArticleByCategory(string $searchString) : array {
+        $searchString = '%'.strtolower($searchString).'%';
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
@@ -127,6 +128,60 @@ class ArticleRepository extends Repository
             );
         }
 
+        return $result;
+    }
+
+    public function getArticlesByString(string $searchString) : array {
+        $searchString = '%'.strtolower($searchString).'%';
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM articles WHERE LOWER(location) LIKE :search OR LOWER(title) LIKE :search OR LOWER(category) LIKE :search;
+        ');
+        $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
+        $stmt->execute();
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($articles as $article) {
+            $result[] = new Article(
+                $article['id'],
+                $article['title'],
+                $article['category'],
+                $article['description'],
+                $article['number'],
+                $article['price'],
+                $article['email'],
+                $article['location'],
+                $article['img']
+            );
+        }
+
+        return $result;
+    }
+
+    public function getArticlesByEmail(string $email) : array {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM articles WHERE LOWER(email) LIKE :email;
+        ');
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($articles as $article) {
+            $result[] = new Article(
+                $article['id'],
+                $article['title'],
+                $article['category'],
+                $article['description'],
+                $article['number'],
+                $article['price'],
+                $article['email'],
+                $article['location'],
+                $article['img']
+            );
+        }
         return $result;
     }
 }

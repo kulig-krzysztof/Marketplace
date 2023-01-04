@@ -49,12 +49,12 @@ class Article
         $this->category = $category;
     }
 
-    public function getDesc(): string
+    public function getDescription(): string
     {
         return $this->desc;
     }
 
-    public function setDesc(string $desc): void
+    public function setDescription(string $desc): void
     {
         $this->desc = $desc;
     }

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="public/css/results.css">
+    <link rel="stylesheet" type="text/css" href="public/css/item.css">
     <script src="https://kit.fontawesome.com/35aaad20fa.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./public/js/search.js" defer></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wyniki wyszukiwania</title>
+    <title><?= $articles->getTitle(); ?></title>
 </head>
 <body>
 <div class="base-container">
-    <?php include('header.php'); ?>
+    <?php include('header.php'); session_start(); ?>
     <div class="search">
-        <div class="form" class="search-bar">
+        <form class="form" class="search-bar" method="post" action="results">
             <div class="input-container">
                 <i class="fas fa-search"></i>
                 <input name="name-search" type="text" class="name-search" placeholder="Czego szukasz?">
@@ -23,32 +23,38 @@
                 <input type="text" class="location" placeholder="Lokalizacja">
             </div>
             <button type="submit" class="search-button">Szukaj</button>
-        </div>
-    </div>
-    <div class="category-container">
-        <form id="form" action="item" method="post" class="categories">
-                <button type="submit" name="item-id" value="id" id="project_1">
-                    <img src="public/img/form-images/<?= $articles->getImg(); ?>">
-                    <div>
-                        <h2><?= $articles->getTitle(); ?></h2>
-                        <p>Cena: <?= $articles->getPrice(); ?></p>
-                        <p>Lokalizacja: <?= $articles->getLocation(); ?></p>
-                    </div>
-                </button>
         </form>
     </div>
-    <?php include('footer.php'); ?>
-</div>
-
-</body>
-<template id="template">
-    <button type="submit" name="item-id" value="" id="">
-        <img src="">
-        <div>
-            <h2>title</h2>
-            <p id="price">Cena: </p>
-            <p id="location">Lokalizacja: </p>
+    <div class="category-container">
+        <div class="text">
+            <h1>Dane ogłoszenia</h1>
         </div>
-    </button>
-</template>
+        <div class="img-and-price-container">
+            <img src="public/img/form-images/<?= $articles->getImg(); ?>">
+            <div class="item-information">
+                <h2>Tytuł ogłoszenia:</h2>
+                <h3><?= $articles->getTitle(); ?></h3>
+                <h2>Cena:</h2>
+                <h3><?= $articles->getPrice(); ?> zł</h3>
+                <form action="" method="post">
+                    <input type="number" name="bid-value" placeholder="How much would you like to bid?" class="bid-value">
+                    <input type="submit" name="bid" value="Bid" class="bid-button">
+                </form>
+            </div>
+        </div>
+        <hr />
+        <div class="description-and-user-info">
+            <div class="description">
+                <h2>Description:</h2>
+                <h2 id="description-h2"><?= $articles->getDescription(); ?></h2>
+            </div>
+            <div class="user">
+                <h2>Posted by user</h2>
+                <h2><?= $articles->getEmail(); ?></h2>
+            </div>
+        </div>
+    </div>
+</div>
+<?php include('footer.php'); ?>
+</body>
 </html>

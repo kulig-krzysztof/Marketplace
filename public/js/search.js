@@ -68,9 +68,9 @@ searchLocation.addEventListener("keyup", function(event) {
         const title = clone.querySelector("h2");
         title.innerHTML = article.title;
         const price = clone.querySelector("#price");
-        price.innerHTML = article.price;
+        price.innerHTML = "Cena: " + article.price + " zł";
         const location = clone.querySelector("#location");
-        location.innerHTML = article.location;
+        location.innerHTML = "Lokalizacja: " + article.location;
 
         articleContainer.appendChild(clone);
     }

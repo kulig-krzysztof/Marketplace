@@ -10,11 +10,16 @@
 </head>
 <body>
     <div class="header">
-        <? session_start() ?>
+        <?= session_start() ?>
         <a href="actions"><img class="logo-img" src="public/img/logo.svg"></a>
-        <form class="logout_form" method="POST" action="logout" class="account">
-            <input class="logout" type="submit" name="Logout" value="<?= $_SESSION['email'] ?>">
-        </form>
-</div>
+        <div class="buttons">
+            <form class="logout_form" method="POST" action="info" class="account">
+                <input class="logout" type="submit" name="User" value="User">
+            </form>
+            <form class="logout_form" method="POST" action="logout" class="account">
+                <input class="logout" type="submit" name="Logout" value="Logout">
+            </form>
+        </div>
+    </div>
 </body>
 </html>

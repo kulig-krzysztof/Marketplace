@@ -47,7 +47,7 @@ class DefaultController extends AppController {
         $this->render('login');
     }
 
-    public function displayCategory() {
+    public function category() {
         if(!isset($_SESSION['email'])) {
             $this->render('login', ['messages' => ['You are not logged in!']]);
         }
@@ -62,6 +62,15 @@ class DefaultController extends AppController {
         }
         else {
             $this->render('item');
+        }
+    }
+
+    public function info() {
+        if(!isset($_SESSION['email'])) {
+            $this->render('login', ['messages' => ['You are not logged in!']]);
+        }
+        else {
+            $this->render('info');
         }
     }
 }

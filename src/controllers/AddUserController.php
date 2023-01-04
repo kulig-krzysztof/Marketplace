@@ -18,7 +18,7 @@ class AddUserController extends AppController
     {
 
 
-        if ($this->isPost()) {
+        if ($this->isPost() && $_POST['email'] != null && $_POST['password'] != null && $_POST['repeatPassword'] == $_POST['password'] && $_POST['name'] != null && $_POST['surname'] != null) {
             $user = new User($_POST['email'], md5($_POST['password']), $_POST['name'], $_POST['surname']);
 
             $email = $_POST['email'];
@@ -30,6 +30,9 @@ class AddUserController extends AppController
             return $this->render('login', ['messages' => ['User added!']]);
 
 
+        }
+        elseif ($_POST['email'] == null || $_POST['password'] == null || $_POST['repeatPassword'] != $_POST['password'] || $_POST['name'] == null || $_POST['surname'] == null) {
+            return $this->render('register', ['messages' => ['Wrong data!']]);
         }
 
 

@@ -21,9 +21,16 @@ class AddController extends AppController
     }
 
     public function results() {
-        if(isset($_SESSION['email'])) {
+        if(isset($_SESSION['email']) && !isset($_POST['name-search'])) {
             $articles = $this->articleRepository->getAllArticles();
             $this->render('result', ['articles' => $articles]);
+        }
+        elseif (isset($_SESSION['email']) && isset($_POST['name-search'])) {
+            $articles = $this->articleRepository->getArticlesByString($_POST['name-search']);
+            $this->render('result', ['articles' => $articles]);
+            var_dump($articles);
+            var_dump($_POST['name-search']);
+            echo "dupa";
         }
         else {
             $this->render('login', ['messages' => ['You are not logged in!']]);
@@ -69,7 +76,7 @@ class AddController extends AppController
         }
     }
 
-    public function displayCategory() {
+    public function category() {
             $articles = $this->articleRepository->getArticleByCategory($_POST['category']);
             $this->render('result', ['articles' => $articles]);
     }
@@ -94,8 +101,6 @@ class AddController extends AppController
             $id = trim($_POST['item-id']);
             $articles = $this->articleRepository->getArticle($id);
             $this->render('item', ['articles' => $articles]);
-            echo $id;
-            var_dump($articles);
         }
         elseif (!isset($_POST['item-id']) && isset($_SESSION['email'])){
             $this->render('categories');
@@ -104,7 +109,4 @@ class AddController extends AppController
             $this->render('login', ['messages' => ['You are not logged in!']]);
         }
     }
-
-
-
 }
