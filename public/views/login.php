@@ -23,12 +23,8 @@
                         }
                     } ?>
                 </div>
-                <label for="email">
                     <input id="email" name="email" type="text" placeholder="Email@email.com">
-                </label>
-                <label>
                     <input name="password" type="password" placeholder="Hasło">
-                </label>
                 <button class="button" type="submit">LOG IN</button>
                 <div class="button" id="register" onclick="window.location.href='/register'">SIGN UP</div>
             </form>
