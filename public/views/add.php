@@ -49,7 +49,6 @@
                 <div id="location" class="right-panel-comp">
                     Lokalizacja
                     <input type="text" name="location" class="map" placeholder="Wpisz lokalizację">
-                    </input>
                 </div>
                 <div id="photo-upload" class="right-panel-comp">
                     <i class="fas fa-camera fa-5x"></i>

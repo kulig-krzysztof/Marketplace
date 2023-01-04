@@ -15,7 +15,7 @@ body {
 }
 
 .search {
-    background: #E0E7EE 0% 0% no-repeat padding-box;
+    background: #E0E7EE 0 0 no-repeat padding-box;
     width: 100%;
     height: 15vh;
     display: flex;
@@ -39,7 +39,7 @@ body {
 }
 
 .name-search, .location {
-    background: #FFFFFF 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0 0 no-repeat padding-box;
     width: 90%;
 }
 
@@ -66,14 +66,14 @@ body {
 }
 
 .search-button {
-    background: transparent linear-gradient(180deg, #600C5D 0%, #0C0F10 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #600C5D 0%, #0C0F10 100%) 0 0 no-repeat padding-box;
     border: 1px solid #707070;
     color: white;
     width: 10%;
     margin-left: 50px;
 }
 .category-container {
-    background: #E4DDEE 0% 0% no-repeat padding-box;
+    background: #E4DDEE 0 0 no-repeat padding-box;
     width: 100%;
     height: 73vh;
     display: flex;
@@ -116,7 +116,7 @@ body {
 }
 
 .items-container {
-    background: #E4DDEE 0% 0% no-repeat padding-box;
+    background: #E4DDEE 0 0 no-repeat padding-box;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -128,14 +128,14 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background: #E4DDEE 0% 0% no-repeat padding-box;
+    background: #E4DDEE 0 0 no-repeat padding-box;
     justify-content: center;
     align-items: center;
 }
 
 .update-button {
     color: white;
-    background: transparent linear-gradient(180deg, #600C5D 0%, #0C0F10 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #600C5D 0%, #0C0F10 100%) 0 0 no-repeat padding-box;
     border-radius: 39px;
     height: 5vh;
     padding: 0;

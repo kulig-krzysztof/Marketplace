@@ -28,9 +28,6 @@ class AddController extends AppController
         elseif (isset($_SESSION['email']) && isset($_POST['name-search'])) {
             $articles = $this->articleRepository->getArticlesByString($_POST['name-search']);
             $this->render('result', ['articles' => $articles]);
-            var_dump($articles);
-            var_dump($_POST['name-search']);
-            echo "dupa";
         }
         else {
             $this->render('login', ['messages' => ['You are not logged in!']]);
@@ -55,10 +52,10 @@ class AddController extends AppController
                 'messages' => $this->messages]);
         }
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            return $this->render('login', ['messages' => ['You are not logged in!']]);
         }
         else {
-            $this->render('add');
+            return $this->render('add');
         }
     }
 

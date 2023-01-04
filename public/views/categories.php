@@ -30,23 +30,23 @@
                 </div>
             <form method='post' action="category" class="categories">
                 <button name="category" value="buty" id="buty" class="category">
-                    <img class="category-img" src="public/img/uploads/shoes.jpg">
+                    <img alt="shoes" class="category-img" src="public/img/uploads/shoes.jpg">
                     Buty
                 </button>
                 <button name="category" value="koszulki" id="koszulki" class="category">
-                    <img class="category-img" src="public/img/uploads/tshirts.jpg">
+                    <img alt="tshorts" class="category-img" src="public/img/uploads/tshirts.jpg">
                     Koszulki
                 </button>
                 <button name="category" value="bluzy" id="bluzy" class="category">
-                    <img class="category-img" src="public/img/uploads/hoodies.jpg">
+                    <img alt="hoodies" class="category-img" src="public/img/uploads/hoodies.jpg">
                     Bluzy
                 </button>
                 <button name="category" value="kurtki" id="kurtki" class="category">
-                    <img class="category-img" src="public/img/uploads/jackets.jpg">
+                    <img alt="jackets" class="category-img" src="public/img/uploads/jackets.jpg">
                     Kurtki
                 </button>
-                <button name="category" value="akcesoria" id="akcesoria" id="last-cat" class="category">
-                    <img class="category-img" src="public/img/uploads/caps.jpg">
+                <button name="category" value="akcesoria" id="akcesoria" class="category">
+                    <img alt="caps" class="category-img" src="public/img/uploads/caps.jpg">
                     Akcesoria
                 </button>
             </form>

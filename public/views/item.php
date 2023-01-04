@@ -30,7 +30,7 @@
             <h1>Dane ogłoszenia</h1>
         </div>
         <div class="img-and-price-container">
-            <img src="public/img/form-images/<?= $articles->getImg(); ?>">
+            <img alt="Item Image" src="public/img/form-images/<?= $articles->getImg(); ?>">
             <div class="item-information">
                 <h2>Tytuł ogłoszenia:</h2>
                 <h3><?= $articles->getTitle(); ?></h3>

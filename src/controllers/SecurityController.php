@@ -8,10 +8,10 @@ require_once __DIR__.'/../repository/ArticleRepository.php';
 
 class SecurityController extends AppController
 {
-    private $messages = [];
-    private $userInfo = [];
-    private $userRepository;
-    private $articleRepository;
+    private array $messages = [];
+    private array $userInfo = [];
+    private UserRepository $userRepository;
+    private ArticleRepository $articleRepository;
 
     public function __construct()
     {

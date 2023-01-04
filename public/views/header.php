@@ -10,8 +10,7 @@
 </head>
 <body>
     <div class="header">
-        <?= session_start() ?>
-        <a href="actions"><img class="logo-img" src="public/img/logo.svg"></a>
+        <a href="actions"><img alt="Grance" class="logo-img" src="public/img/logo.svg"></a>
         <div class="buttons">
             <form class="logout_form" method="POST" action="info" class="account">
                 <input class="logout" type="submit" name="User" value="User">

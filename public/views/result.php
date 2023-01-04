@@ -29,7 +29,7 @@
         <form id="form" action="item" method="post" class="categories">
             <?php foreach ($articles as $article): ?>
             <button type="submit" name="item-id" value="<?= $article->getId(); ?>" id="<?= $article->getId(); ?>">
-                <img src="public/img/form-images/<?= $article->getImg(); ?>">
+                <img alt="Item Image" src="public/img/form-images/<?= $article->getImg(); ?>">
                 <div>
                     <h2><?= $article->getTitle(); ?></h2>
                     <p><?= "Cena: ".$article->getPrice()." zł"; ?></p>
@@ -45,7 +45,7 @@
 </body>
 <template id="template">
 <button type="submit" name="item-id" value="" id="">
-    <img src="">
+    <img alt="" src="">
     <div>
         <h2>title</h2>
         <p id="price">Cena: </p>

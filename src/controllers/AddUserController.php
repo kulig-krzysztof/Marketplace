@@ -6,7 +6,7 @@ require_once __DIR__.'/../repository/UserRepository.php';
 
 class AddUserController extends AppController
 {
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct()
     {
@@ -36,6 +36,6 @@ class AddUserController extends AppController
         }
 
 
-        $this->render('register');
+        return $this->render('register');
     }
 }
