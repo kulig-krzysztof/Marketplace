@@ -184,4 +184,34 @@ class ArticleRepository extends Repository
         }
         return $result;
     }
+
+    public function updateItem(int $id): void {
+        $stmt = $this->database->connect()->prepare('
+            UPDATE articles SET title = ?, category = ?, description = ?, number = ?, price = ?, email = ?, location = ?, img = ?, user_id = ? WHERE id = ?
+        ');
+        //$stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        /*
+        $stmt->bindParam(":title", $_POST['title'], PDO::PARAM_STR);
+        $stmt->bindParam(":category", $_POST['category'], PDO::PARAM_STR);
+        $stmt->bindParam(":description", $_POST['desc'], PDO::PARAM_STR);
+        $stmt->bindParam(":number", $_POST['phone'], PDO::PARAM_INT);
+        $stmt->bindParam(":price", $_POST['price'], PDO::PARAM_INT);
+        $stmt->bindParam(":email", $_SESSION['email'], PDO::PARAM_STR);
+        $stmt->bindParam(":location", $_POST['location'], PDO::PARAM_STR);
+        $stmt->bindParam(":file", $_FILES['file']['name'], PDO::PARAM_STR);
+        $stmt->bindParam(":user_id", $_SESSION['id'], PDO::PARAM_INT);
+        */
+        $stmt->execute([
+            $_POST['title'],
+            $_POST['category'],
+            $_POST['desc'],
+            $_POST['phone'],
+            $_POST['price'],
+            $_SESSION['email'],
+            $_POST['location'],
+            $_FILES['file']['name'],
+            $_SESSION['id'],
+            $id
+        ]);
+    }
 }

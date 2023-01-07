@@ -22,4 +22,6 @@ Routing::post('item', 'AddController');
 Routing::post('info', 'SecurityController');
 Routing::post('updateUserData', 'SecurityController');
 Routing::post('updateDataSite', 'DefaultController');
+Routing::post('updateItemData', 'AddController');
+Routing::post('updateItemSite', 'AddController');
 Routing::run($path);

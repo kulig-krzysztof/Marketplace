@@ -91,4 +91,22 @@ class DefaultController extends AppController {
             $this->render('change-user-data');
         }
     }
+
+    public function updateItemData() {
+        if(!isset($_SESSION['email'])) {
+            $this->render('login', ['messages' => ['You are not logged in!']]);
+        }
+        else {
+            $this->render('updateItemData');
+        }
+    }
+
+    public function updateItemSite() {
+        if(!isset($_SESSION['email'])) {
+            $this->render('login', ['messages' => ['You are not logged in!']]);
+        }
+        else {
+            $this->render('change-item-data');
+        }
+    }
 }

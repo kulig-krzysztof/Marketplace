@@ -50,7 +50,7 @@
         <h1>User items</h1>
     </div>
     <div class="items-container">
-        <form id="form" action="item" method="post" class="categories">
+        <form id="form" action="updateItemSite" method="post" class="categories">
             <?php foreach ($articles as $article): ?>
                 <button type="submit" name="item-id" value="<?= $article->getId(); ?>" id="<?= $article->getId(); ?>">
                     <img alt="Item image" src="public/img/form-images/<?= $article->getImg(); ?>">

@@ -69,28 +69,6 @@ class SecurityController extends AppController
     }
 
     public function updateUserData() {
-        /*
-        if(!$this->isPost() || $_POST['repeatPassword'] != $_POST['password'] || $_POST['name'] == null || $_POST['surname'] == null) {
-            return $this->render('login');
-        }
-
-        elseif ($this->isPost() && $_POST['repeatPassword'] == $_POST['password'] && $_POST['name'] != null && $_POST['surname'] != null) {
-            $this->userRepository->changeData($_SESSION['email']);
-            $user = $this->userRepository->getUser($_SESSION['email']);
-            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
-
-            if(!$user) {
-                return $this->render('login', ['messages' => ['You are not logged in!']]);
-            }
-            else return $this->render('info', ['user' => $user, 'articles' => $articles]);
-        }
-
-        else {
-            return $this->render('login', ['messages' => ['Something went wrong!']]);
-        }
-
-        */
-
         if(!$this->isPost()) {
             return $this->render('login');
         }
