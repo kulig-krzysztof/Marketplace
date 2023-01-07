@@ -24,6 +24,14 @@
             <button type="submit" class="search-button">Szukaj</button>
         </form>
     </div>
+    <div class="messages">
+        <?php if(isset($messages)) {
+            foreach ($messages as $message) {
+                echo $message;
+            }
+        }
+        ?>
+    </div>
     <div class="user-data">
         <h1>User Data</h1>
     </div>
@@ -34,7 +42,7 @@
         <h3><?= $user->getSurname(); ?></h3>
         <h2>Email</h2>
         <h3><?= $user->getEmail(); ?></h3>
-        <form class="update-form" action="info" method="post">
+        <form class="update-form" action="updateDataSite" method="post">
             <button class="update-button" type="submit" name="update" value="Update">Update</button>
         </form>
     </div>

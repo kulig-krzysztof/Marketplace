@@ -20,4 +20,6 @@ Routing::post('search', 'AddController');
 Routing::post('category', 'AddController');
 Routing::post('item', 'AddController');
 Routing::post('info', 'SecurityController');
+Routing::post('updateUserData', 'SecurityController');
+Routing::post('updateDataSite', 'DefaultController');
 Routing::run($path);

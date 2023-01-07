@@ -41,4 +41,16 @@ class UserRepository extends Repository
             $user->getSurname()
         ]);
     }
+
+    public function changeData(string $email): void {
+        $name = ucfirst(strtolower($_POST['name']));
+        $surname = ucfirst(strtolower($_POST['surname']));
+        $stmt = $this->database->connect()->prepare('
+            UPDATE users SET name = :name, surname = :surname WHERE email = :email
+        ');
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':surname', $surname, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+    }
 }
