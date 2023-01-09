@@ -42,7 +42,7 @@
         <div class="description-and-user-info">
             <div class="description">
                 <h2>Description:</h2>
-                <h2 id="description-h2"><?= $articles->getDescription(); ?></h2>
+                <h2 id="description-h2"><?= str_replace("\n", "<br>", $articles->getDescription()); ?></h2>
             </div>
             <div class="user">
                 <h2>Posted by user</h2>
@@ -78,7 +78,6 @@
                     <div id="data" class="left-panel-comp">
                         Dane ogłoszenia:
                         <div class="data-input">
-                            <input name="phone" type="tel" class="number" placeholder="Nr telefonu" value="<?= $articles->getPhone(); ?>">
                             <input name="price" type="number" class="price" placeholder="Cena" value="<?= $articles->getPrice(); ?>">
                             <input name="email" type="email" class="mail" placeholder="Adres email" value="<?= $articles->getEmail(); ?>">
                         </div>
@@ -99,6 +98,14 @@
                 </div>
             </form>
         </div>
+    </div>
+    <div class="offers-container">
+        <?php foreach ($offers as $offer): ?>
+        <div><?= $offer->getLocation(); ?></div>
+        <div><?= $offer->getPrice(); ?></div>
+        <div><?= $offer->getOfferFromEmail(); ?></div>
+        <br>
+        <?php endforeach; ?>
     </div>
 </div>
 <?php include('footer.php'); ?>

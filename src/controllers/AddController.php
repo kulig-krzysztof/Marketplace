@@ -3,8 +3,10 @@
 require_once 'AppController.php';
 require_once __DIR__.'/../models/Article.php';
 require_once __DIR__.'/../models/User.php';
+require_once __DIR__.'/../models/Offer.php';
 require_once __DIR__.'/../repository/ArticleRepository.php';
 require_once __DIR__.'/../repository/UserRepository.php';
+require_once __DIR__.'/../repository/OfferRepository.php';
 
 session_start();
 
@@ -16,12 +18,14 @@ class AddController extends AppController
     private $messages = [];
     private $articleRepository;
     private $userRepository;
+    private $offerRepository;
 
     public function __construct()
     {
         parent::__construct();
         $this->articleRepository = new ArticleRepository();
         $this->userRepository = new UserRepository();
+        $this->offerRepository = new OfferRepository();
     }
 
     public function results() {
@@ -48,7 +52,7 @@ class AddController extends AppController
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            $article = new Article(0,$_POST['title'],$_POST['category'],$_POST['desc'],$_POST['phone'],$_POST['price'],$_POST['email'],$_POST['location'], $_FILES['file']['name']);
+            $article = new Article(0,$_POST['title'],$_POST['category'],$_POST['desc'],$_POST['price'],$_SESSION['email'],$_POST['location'], $_FILES['file']['name']);
             $this->articleRepository->addArticle($article);
 
             return $this->render('result', [
@@ -100,6 +104,7 @@ class AddController extends AppController
     public function item() {
         if($this->isPost() && isset($_POST['item-id']) && isset($_SESSION['email'])) {
             $id = trim($_POST['item-id']);
+            $_SESSION['item-id'] = $id;
             $articles = $this->articleRepository->getArticle($id);
             $this->render('item', ['articles' => $articles]);
         }
@@ -115,8 +120,9 @@ class AddController extends AppController
         $id = intval($_POST['item-id']);
         $articles = $this->articleRepository->getArticle($id);
         $_SESSION['item-id'] = $id;
+        $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
         $_SESSION['default-image'] = $articles->getImg();
-        return $this->render('change-item-data' , ['articles' => $articles]);
+        return $this->render('change-item-data' , ['articles' => $articles, 'offers' => $offers]);
     }
 
     public function updateItemData() {
@@ -127,8 +133,8 @@ class AddController extends AppController
             );
             $this->articleRepository->updateItem($_SESSION['item-id']);
             $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
             $user = $this->userRepository->getUser($_SESSION['email']);
-            unset($_SESSION['item-id']);
             return $this->render('info' , ['articles' => $articles, 'user' => $user]);
 
         }

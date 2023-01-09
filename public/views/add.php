@@ -39,9 +39,7 @@
                 <div id="data" class="left-panel-comp">
                     Dane ogłoszenia:
                     <div class="data-input">
-                    <input name="phone" type="tel" class="number" placeholder="Nr telefonu">
-                    <input name="price" type="number" class="price" placeholder="Cena">
-                    <input name="email" type="email" class="mail" placeholder="Adres email">
+                    <input name="price" type="number" class="price" placeholder="Cena" step=".01">
                     </div>
                 </div>
             </div>

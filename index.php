@@ -24,4 +24,5 @@ Routing::post('updateUserData', 'SecurityController');
 Routing::post('updateDataSite', 'DefaultController');
 Routing::post('updateItemData', 'AddController');
 Routing::post('updateItemSite', 'AddController');
+Routing::post('bid', 'OfferController');
 Routing::run($path);

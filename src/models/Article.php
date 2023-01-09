@@ -6,19 +6,17 @@ class Article
     private $title;
     private $category;
     private $desc;
-    private $phone;
     private $price;
     private $email;
     private $location;
     private $img;
 
-    public function __construct($id, $title, $category, $desc, $phone, $price, $email, $location, $img)
+    public function __construct($id, $title, $category, $desc, $price, $email, $location, $img)
     {
         $this->id = $id;
         $this->title = $title;
         $this->category = $category;
         $this->desc = $desc;
-        $this->phone = $phone;
         $this->price = $price;
         $this->email = $email;
         $this->location = $location;
@@ -59,22 +57,12 @@ class Article
         $this->desc = $desc;
     }
 
-    public function getPhone(): int
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(int $phone): void
-    {
-        $this->phone = $phone;
-    }
-
-    public function getPrice(): int
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): void
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }
@@ -86,7 +74,7 @@ class Article
 
     public function setEmail(string $email): void
     {
-        $this->email = $email;
+        $this->desc = $email;
     }
 
     public function getLocation()

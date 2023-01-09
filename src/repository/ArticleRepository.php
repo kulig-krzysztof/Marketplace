@@ -7,7 +7,7 @@ class ArticleRepository extends Repository
 {
     public function getArticle(int $id): ?Article {
         $stmt = $this->database->connect()->prepare('
-        SELECT * FROM public.articles WHERE id = :id 
+        SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.location, items.img FROM items INNER JOIN users ON items.user_id = users.id INNER JOIN categories ON items.category = categories.id  WHERE items.id = :id
         ');
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -23,7 +23,6 @@ class ArticleRepository extends Repository
             $article['title'],
             $article['category'],
             $article['description'],
-            $article['number'],
             $article['price'],
             $article['email'],
             $article['location'],
@@ -33,21 +32,36 @@ class ArticleRepository extends Repository
 
     public function addArticle(Article $article): void {
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO articles (title, category, description, number, price, email, location, img, user_id) 
-            VALUES (?, ?, ?, ?, ? ,? ,?, ?, ?)
+            INSERT INTO items (title, category, description, price, location, img, user_id) 
+            VALUES (?, ?, ?, ?, ? ,? ,?)
         ');
         session_start();
-        $user = $_SESSION['id'];
+        if($article->getCategory() == "Buty") {
+            $category = 1;
+        }
+        elseif ($article->getCategory() == "Koszulki") {
+            $category = 2;
+        }
+        elseif ($article->getCategory() == "Bluzy") {
+            $category = 3;
+        }
+        elseif ($article->getCategory() == "Kurtki") {
+            $category = 4;
+        }
+        elseif ($article->getCategory() == "Akcesoria") {
+            $category = 5;
+        }
+        else {
+            $category = -1;
+        }
         $stmt->execute([
             $article->getTitle(),
-            $article->getCategory(),
+            $category,
             $article->getDescription(),
-            $article->getPhone(),
             $article->getPrice(),
-            $_SESSION['email'],
             $article->getLocation(),
             $article->getImg(),
-            $user
+            $_SESSION['id']
         ]);
     }
 
@@ -55,7 +69,7 @@ class ArticleRepository extends Repository
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM articles;
+            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.location, items.img FROM items INNER JOIN categories ON items.category = categories.id INNER JOIN users ON items.user_id = users.id;
         ');
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -66,7 +80,6 @@ class ArticleRepository extends Repository
                 $article['title'],
                 $article['category'],
                 $article['description'],
-                $article['number'],
                 $article['price'],
                 $article['email'],
                 $article['location'],
@@ -108,7 +121,7 @@ class ArticleRepository extends Repository
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM articles WHERE LOWER(category) LIKE :search;
+            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.location, items.img FROM categories INNER JOIN items ON categories.id = items.category INNER JOIN users ON items.user_id = users.id WHERE LOWER(categories.category) LIKE :search;
         ');
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
         $stmt->execute();
@@ -120,7 +133,6 @@ class ArticleRepository extends Repository
                 $article['title'],
                 $article['category'],
                 $article['description'],
-                $article['number'],
                 $article['price'],
                 $article['email'],
                 $article['location'],
@@ -136,7 +148,7 @@ class ArticleRepository extends Repository
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM articles WHERE LOWER(location) LIKE :search OR LOWER(title) LIKE :search OR LOWER(category) LIKE :search;
+            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.location, items.img FROM items INNER JOIN categories ON items.category = categories.id INNER JOIN users ON items.user_id = users.id WHERE LOWER(items.location) LIKE :search OR LOWER(items.title) LIKE :search OR LOWER(categories.category) LIKE :search;
         ');
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
         $stmt->execute();
@@ -148,7 +160,6 @@ class ArticleRepository extends Repository
                 $article['title'],
                 $article['category'],
                 $article['description'],
-                $article['number'],
                 $article['price'],
                 $article['email'],
                 $article['location'],
@@ -163,7 +174,7 @@ class ArticleRepository extends Repository
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM articles WHERE LOWER(email) LIKE :email;
+            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.location, items.img FROM users INNER JOIN items ON users.id = items.user_id INNER JOIN categories ON items.category = categories.id WHERE LOWER(users.email) LIKE :email;
         ');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
@@ -175,7 +186,6 @@ class ArticleRepository extends Repository
                 $article['title'],
                 $article['category'],
                 $article['description'],
-                $article['number'],
                 $article['price'],
                 $article['email'],
                 $article['location'],
@@ -187,7 +197,7 @@ class ArticleRepository extends Repository
 
     public function updateItem(int $id): void {
         $stmt = $this->database->connect()->prepare('
-            UPDATE articles SET title = ?, category = ?, description = ?, number = ?, price = ?, email = ?, location = ?, img = ?, user_id = ? WHERE id = ?
+            UPDATE items SET title = ?, category = ?, description = ?, price = ?, location = ?, img = ? WHERE id = ?
         ');
         //$stmt->bindParam(":id", $id, PDO::PARAM_INT);
         /*
@@ -201,16 +211,32 @@ class ArticleRepository extends Repository
         $stmt->bindParam(":file", $_FILES['file']['name'], PDO::PARAM_STR);
         $stmt->bindParam(":user_id", $_SESSION['id'], PDO::PARAM_INT);
         */
+
+        if($_POST['category'] == "Buty") {
+            $category = 1;
+        }
+        elseif ($_POST['category'] == "Koszulki") {
+            $category = 2;
+        }
+        elseif ($_POST['category'] == "Bluzy") {
+            $category = 3;
+        }
+        elseif ($_POST['category'] == "Kurtki") {
+            $category = 4;
+        }
+        elseif ($_POST['category'] == "Akcesoria") {
+            $category = 5;
+        }
+        else {
+            $category = -1;
+        }
         $stmt->execute([
             $_POST['title'],
-            $_POST['category'],
+            $category,
             $_POST['desc'],
-            $_POST['phone'],
             $_POST['price'],
-            $_SESSION['email'],
             $_POST['location'],
             $_FILES['file']['name'],
-            $_SESSION['id'],
             $id
         ]);
     }

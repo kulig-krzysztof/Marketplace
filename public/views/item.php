@@ -36,8 +36,17 @@
                 <h3><?= $articles->getTitle(); ?></h3>
                 <h2>Cena:</h2>
                 <h3><?= $articles->getPrice(); ?> zł</h3>
-                <form action="" method="post">
-                    <input type="number" name="bid-value" placeholder="How much would you like to bid?" class="bid-value">
+                <form action="bid" method="post">
+                    <div class="messages">
+                        <?php if(isset($messages)) {
+                            foreach ($messages as $message) {
+                                echo $message;
+                            }
+                        }
+                        ?>
+                    </div>
+                    <input type="text" name="location" placeholder="What location do you offer?">
+                    <input type="number" step="0.01" name="bid-value" placeholder="How much would you like to bid?" class="bid-value">
                     <input type="submit" name="bid" value="Bid" class="bid-button">
                 </form>
             </div>
@@ -46,7 +55,7 @@
         <div class="description-and-user-info">
             <div class="description">
                 <h2>Description:</h2>
-                <h2 id="description-h2"><?= $articles->getDescription(); ?></h2>
+                <h2 id="description-h2"><?= str_replace("\n", "<br>", $articles->getDescription()); ?></h2>
             </div>
             <div class="user">
                 <h2>Posted by user</h2>
