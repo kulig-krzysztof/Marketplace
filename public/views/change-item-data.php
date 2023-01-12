@@ -4,6 +4,10 @@
     <link rel="stylesheet" type="text/css" href="public/css/change-item-data.css">
     <script src="https://kit.fontawesome.com/35aaad20fa.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./public/js/search.js" defer></script>
+    <script type="text/javascript" src="./public/js/change-item-data.js" defer></script>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,16 +82,18 @@
                     <div id="data" class="left-panel-comp">
                         Dane ogłoszenia:
                         <div class="data-input">
-                            <input name="price" type="number" class="price" placeholder="Cena" value="<?= $articles->getPrice(); ?>">
-                            <input name="email" type="email" class="mail" placeholder="Adres email" value="<?= $articles->getEmail(); ?>">
+                            <input name="price" type="number" class="price" placeholder="Cena" value="<?= $articles->getPrice(); ?>" step="0.01">
+                            <input name="city-name" type="text" class="city-name" placeholder="Lokalizacja (miasto)" value="<?= $articles->getLocation(); ?>">
+                            <input name="size" type="number" class="size" step="0.5" placeholder="Rozmiar" value="<?= $articles->getSize(); ?>">
                         </div>
                     </div>
                 </div>
                 <div class="right-panel">
-                    <div id="location" class="right-panel-comp">
-                        Lokalizacja
-                        <input type="text" name="location" class="map" placeholder="Wpisz lokalizację" value="<?= $articles->getLocation(); ?>">
-                    </div>
+                    <section>
+                        <div id="map" class="mapboxgl-map"></div>
+                        <input id="lng" type="text" name="lng" hidden>
+                        <input id="lat" type="text" name="lat" hidden>
+                    </section>
                     <div id="photo-upload" class="right-panel-comp">
                         <i class="fas fa-camera fa-5x"></i>
                         <input name="file" type="file">

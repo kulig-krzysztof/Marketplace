@@ -109,4 +109,8 @@ class DefaultController extends AppController {
             $this->render('change-item-data');
         }
     }
+
+    public function mapa() {
+        $this->render('mapa');
+    }
 }

@@ -8,7 +8,7 @@ class OfferRepository extends Repository
     public function getOffersByItemId(int $id): array {
         $result = [];
         $stmt = $this->database->connect()->prepare('
-            SELECT offers.id, users.email, offers.location, offers.price, offers.item_id FROM public.offers INNER JOIN users ON offers.offer_from_id = users.id WHERE offers.item_id = :id 
+            SELECT offers.id, users.email, offers.location_id, offers.price, offers.item_id FROM public.offers INNER JOIN users ON offers.offer_from_id = users.id WHERE offers.item_id = :id 
         ');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -29,7 +29,7 @@ class OfferRepository extends Repository
 
     public function addOffer(Offer $offer): void {
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO offers (offer_from_id, location, price, item_id) VALUES (?, ?, ?, ?)
+            INSERT INTO offers (offer_from_id, location_id, price, item_id) VALUES (?, ?, ?, ?)
         ');
         session_start();
         $stmt->execute([

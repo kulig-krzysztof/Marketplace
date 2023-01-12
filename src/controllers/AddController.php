@@ -52,12 +52,14 @@ class AddController extends AppController
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            $article = new Article(0,$_POST['title'],$_POST['category'],$_POST['desc'],$_POST['price'],$_SESSION['email'],$_POST['location'], $_FILES['file']['name']);
-            $this->articleRepository->addArticle($article);
+                $article = new Article(0,$_POST['title'],$_POST['category'],$_POST['desc'],$_POST['price'],$_SESSION['email'], $_FILES['file']['name'], floatval($_POST['lng']), floatval($_POST['lat']), $_POST['city-name'], $_POST['size']);
+                var_dump($_REQUEST['lng']);
+                $this->articleRepository->addArticle($article);
 
-            return $this->render('result', [
-                'articles' => $this->articleRepository->getAllArticles(),
-                'messages' => $this->messages]);
+                return $this->render('result', [
+                    'articles' => $this->articleRepository->getAllArticles(),
+                    'messages' => $this->messages]);
+
         }
         if(!isset($_SESSION['email'])) {
             return $this->render('login', ['messages' => ['You are not logged in!']]);

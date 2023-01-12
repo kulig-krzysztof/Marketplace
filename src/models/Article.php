@@ -8,10 +8,13 @@ class Article
     private $desc;
     private $price;
     private $email;
-    private $location;
     private $img;
+    private $lng;
+    private $lat;
+    private $city_name;
+    private $size;
 
-    public function __construct($id, $title, $category, $desc, $price, $email, $location, $img)
+    public function __construct($id, $title, $category, $desc, $price, $email, $img, $lng, $lat, $city_name, $size)
     {
         $this->id = $id;
         $this->title = $title;
@@ -19,8 +22,11 @@ class Article
         $this->desc = $desc;
         $this->price = $price;
         $this->email = $email;
-        $this->location = $location;
         $this->img = $img;
+        $this->lng = $lng;
+        $this->lat = $lat;
+        $this->city_name = $city_name;
+        $this->size = $size;
     }
 
     public function getTitle() : string
@@ -77,14 +83,24 @@ class Article
         $this->desc = $email;
     }
 
-    public function getLocation()
+    public function getLng() : float
     {
-        return $this->location;
+        return $this->lng;
     }
 
-    public function setLocation($location): void
+    public function setLng($lng): void
     {
-        $this->location = $location;
+        $this->lng = $lng;
+    }
+
+    public function getLat() : float
+    {
+        return $this->lat;
+    }
+
+    public function setLat($lat): void
+    {
+        $this->lat = $lat;
     }
 
     public function getImg()
@@ -97,5 +113,23 @@ class Article
         $this->img = $img;
     }
 
+    public function getLocation() : string
+    {
+        return $this->city_name;
+    }
 
+    public function setLocation(string $city_name): void
+    {
+        $this->city_name = $city_name;
+    }
+
+    public function getSize() : float
+    {
+        return $this->size;
+    }
+
+    public function setSize(float $size): void
+    {
+        $this->size = $size;
+    }
 }

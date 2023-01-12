@@ -2,8 +2,9 @@ const search = document.querySelector(".name-search");
 const searchLocation = document.querySelector(".location");
 const articleContainer = document.querySelector('.categories');
 
-    search.addEventListener("keyup", function(event) {
-        if(event.key === "Enter") {
+if(search) {
+    search.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
             event.preventDefault();
 
             const data = {search: this.value};
@@ -16,61 +17,64 @@ const articleContainer = document.querySelector('.categories');
                 body: JSON.stringify(data)
             }).then(function (response) {
                 return response.json();
-            }).then(function(articles) {
+            }).then(function (items) {
                 articleContainer.innerHTML = "";
-                loadArticles(articles);
+                loadArticles(items);
             })
 
         }
     });
+}
 
-searchLocation.addEventListener("keyup", function(event) {
-    if(event.key === "Enter") {
-        event.preventDefault();
+if(searchLocation) {
+    searchLocation.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
 
-        const data = {search: this.value};
+            const data = {search: this.value};
 
-        fetch("/search", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(function (response) {
-            return response.json();
-        }).then(function(articles) {
-            articleContainer.innerHTML = "";
-            loadArticles(articles);
+            fetch("/search", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(function (response) {
+                return response.json();
+            }).then(function (items) {
+                articleContainer.innerHTML = "";
+                loadArticles(items);
+            })
+
+        }
+    });
+}
+
+
+
+    function loadArticles(items) {
+        items.forEach(item => {
+            console.log(item);
+            createArticle(item);
         })
-
-    }
-});
-
-
-
-    function loadArticles(articles) {
-        articles.forEach(article => {
-            console.log(article);
-            createArticle(article);
-        })
     }
 
-    function  createArticle(article) {
+    function  createArticle(item) {
         const template = document.querySelector("#template");
 
         const clone = template.content.cloneNode(true);
         const button = clone.querySelector("button");
-        button.id = article.id;
-        button.value = article.id;
+        button.id = item.id;
+        button.value = item.id;
 
         const image = clone.querySelector("img");
-        image.src = `public/img/form-images/${article.img}`;
+        image.src = `public/img/form-images/${item.img}`;
         const title = clone.querySelector("h2");
-        title.innerHTML = article.title;
+        title.innerHTML = item.title;
         const price = clone.querySelector("#price");
-        price.innerHTML = "Cena: " + article.price + " zł";
+        price.innerHTML = "Cena: " + item.price + " zł";
         const location = clone.querySelector("#location");
-        location.innerHTML = "Lokalizacja: " + article.location;
+        location.innerHTML = "Lokalizacja: " + item.city_name;
 
         articleContainer.appendChild(clone);
     }

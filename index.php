@@ -25,4 +25,7 @@ Routing::post('updateDataSite', 'DefaultController');
 Routing::post('updateItemData', 'AddController');
 Routing::post('updateItemSite', 'AddController');
 Routing::post('bid', 'OfferController');
+Routing::get('map', 'MapController');
+Routing::get('places', 'MapController');
+Routing::get('mapa', 'DefaultController');
 Routing::run($path);

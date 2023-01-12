@@ -5,6 +5,7 @@ require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/AddController.php';
 require_once 'src/controllers/AddUserController.php';
 require_once 'src/controllers/OfferController.php';
+require_once 'src/controllers/MapController.php';
 
 
 

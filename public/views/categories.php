@@ -15,7 +15,7 @@
             <form action="results" method="post" class="search-bar">
             <div class="input-container">
                 <i class="fas fa-search"></i>
-                <input name="name-search" type="text" class="name-search" placeholder="Wpisz tytuł lub kategrię">
+                <input name="name-search" type="text" class="name-search" placeholder="Wpisz tytuł lub kategorię">
             </div>
             <div class="input-container">
                 <i class="fas fa-thumbtack"></i>
