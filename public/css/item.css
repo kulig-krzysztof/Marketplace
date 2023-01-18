@@ -117,3 +117,32 @@ body {
 .description-h2 {
 
 }
+
+#map {
+    height: 100%;
+}
+
+.marker {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Logo_Wydzia%C5%82u_Informatyki_i_Telekomunikacji_Politechniki_Krakowskiej.png/480px-Logo_Wydzia%C5%82u_Informatyki_i_Telekomunikacji_Politechniki_Krakowskiej.png');
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    box-shadow: 0 0 1em rgba(0,0,0,0.5) ;
+}
+
+section {
+    width: 100%;
+    height: 50vh;
+    grid-template-columns: 1fr !important;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+}
+.mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}

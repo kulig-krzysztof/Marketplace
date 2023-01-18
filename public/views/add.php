@@ -51,8 +51,8 @@
             <div class="right-panel">
                 <section>
                     <div id="map" class="mapboxgl-map"></div>
-                    <input id="lng" type="text" name="lng" hidden required>
-                    <input id="lat" type="text" name="lat" hidden required>
+                    <input id="lng" type="text" name="lng" hidden>
+                    <input id="lat" type="text" name="lat" hidden>
                 </section>
                 <div id="photo-upload" class="right-panel-comp">
                     <i class="fas fa-camera fa-5x"></i>

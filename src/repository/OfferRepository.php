@@ -8,7 +8,7 @@ class OfferRepository extends Repository
     public function getOffersByItemId(int $id): array {
         $result = [];
         $stmt = $this->database->connect()->prepare('
-            SELECT offers.id, users.email, offers.location_id, offers.price, offers.item_id FROM public.offers INNER JOIN users ON offers.offer_from_id = users.id WHERE offers.item_id = :id 
+            SELECT offers.id, offers.offer_from_id, offers.city_name, offers.price, offers.item_id, offers.lng, offers.lat, users.email, offers.data FROM public.offers INNER JOIN users ON offers.offer_from_id = users.id WHERE offers.item_id = :id 
         ');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -18,10 +18,14 @@ class OfferRepository extends Repository
         foreach ($offers as $offer) {
             $result[] = new  Offer(
                 $offer['id'],
-                $offer['email'],
-                $offer['location'],
+                $offer['offer_from_id'],
+                $offer['city_name'],
                 $offer['price'],
-                $offer['item_id']
+                $offer['item_id'],
+                $offer['lng'],
+                $offer['lat'],
+                $offer['email'],
+                $offer['data']
             );
         }
         return $result;
@@ -29,14 +33,47 @@ class OfferRepository extends Repository
 
     public function addOffer(Offer $offer): void {
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO offers (offer_from_id, location_id, price, item_id) VALUES (?, ?, ?, ?)
+            INSERT INTO offers (offer_from_id, city_name, price, item_id, lng, lat, data) VALUES (?, ?, ?, ?, ? ,?, ?)
         ');
         session_start();
         $stmt->execute([
             $_SESSION['id'],
-            $offer->getLocation(),
+            $offer->getCityName(),
             $offer->getPrice(),
-            $_SESSION['item-id']
+            $_SESSION['item-id'],
+            $offer->getLng(),
+            $offer->getLat(),
+            $offer->getData()
         ]);
+    }
+
+    public function getOffersForItem(int $id): array {
+        $stmt = $this->database->connect()->prepare('
+            SELECT offers.id, offers.offer_from_id, offers.city_name, offers.price, offers.item_id, offers.lng, offers.lat, users.email, offers.data FROM public.offers INNER JOIN users ON offers.offer_from_id = users.id WHERE offers.item_id = :id 
+        ');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getOfferItemId(int $id) : int {
+        $stmt = $this->database->connect()->prepare('
+            SELECT offers.item_id FROM offers WHERE id = :id
+        ');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_BOTH);
+        var_dump($result[0]);
+        return $result[0];
+    }
+
+    public function removeOtherOffers(int $acceptedOfferId, int $itemId) : void {
+        $stmt = $this->database->connect()->prepare('
+            DELETE FROM offers WHERE item_id = :itemId AND id != :acceptedOfferId
+        ');
+        $stmt->bindParam(':itemId', $itemId, PDO::PARAM_INT);
+        $stmt->bindParam(':acceptedOfferId', $acceptedOfferId, PDO::PARAM_INT);
+        $stmt->execute();
     }
 }

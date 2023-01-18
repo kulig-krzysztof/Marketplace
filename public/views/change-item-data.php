@@ -106,12 +106,9 @@
         </div>
     </div>
     <div class="offers-container">
-        <?php foreach ($offers as $offer): ?>
-        <div><?= $offer->getLocation(); ?></div>
-        <div><?= $offer->getPrice(); ?></div>
-        <div><?= $offer->getOfferFromEmail(); ?></div>
-        <br>
-        <?php endforeach; ?>
+            <section>
+                <div id="map2" class="mapboxgl-map"></div>
+            </section>
     </div>
 </div>
 <?php include('footer.php'); ?>

@@ -266,4 +266,12 @@ class ArticleRepository extends Repository
             $id
         ]);
     }
+
+    public function setArticleInactive(int $id) : void {
+        $stmt = $this->database->connect()->prepare('
+            UPDATE items SET active = false WHERE id = :id
+        ');
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }

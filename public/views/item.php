@@ -4,6 +4,9 @@
     <link rel="stylesheet" type="text/css" href="public/css/item.css">
     <script src="https://kit.fontawesome.com/35aaad20fa.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./public/js/search.js" defer></script>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,8 +48,15 @@
                         }
                         ?>
                     </div>
-                    <input type="text" name="location" placeholder="What location do you offer?">
-                    <input type="number" step="0.01" name="bid-value" placeholder="How much would you like to bid?" class="bid-value">
+                    <input type="text" name="location" placeholder="What city do you offer? (required)" required>
+                    <input type="number" step="0.01" name="bid-value" placeholder="How much would you like to bid?" class="bid-value" required>
+                    <input type="datetime-local" id="meeting-time" name="meeting-time" required>
+                    <section>
+                        <h1>Choose exact location on the map</h1>
+                        <div id="map" class="mapboxgl-map"></div>
+                        <input id="lng" type="text" name="lng" hidden required>
+                        <input id="lat" type="text" name="lat" hidden required>
+                    </section>
                     <input type="submit" name="bid" value="Bid" class="bid-button">
                 </form>
             </div>
@@ -55,7 +65,7 @@
         <div class="description-and-user-info">
             <div class="description">
                 <h2>Description:</h2>
-                <h2 id="description-h2"><?= str_replace("\n", "<br>", $articles->getDescription()); ?></h2>
+                <div id="description-h2"><?= str_replace("\n", "<br>", $articles->getDescription()); ?></div>
             </div>
             <div class="user">
                 <h2>Posted by user</h2>

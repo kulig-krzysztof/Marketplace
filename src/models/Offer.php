@@ -3,42 +3,50 @@
 class Offer
 {
     private $id;
-    private $offer_from_email;
-    private $location;
+    private $offer_from_id;
+    private $city_name;
     private $price;
     private $item_id;
+    private $lng;
+    private $lat;
+    private $email;
+    private $data;
 
-    public function __construct($id, $offer_from_email, $location, $price, $item_id)
+    public function __construct($id, $offer_from_id, $city_name, $price, $item_id, $lng, $lat, $email, $data)
     {
         $this->id = $id;
-        $this->offer_from_email = $offer_from_email;
-        $this->location = $location;
+        $this->offer_from_id = $offer_from_id;
+        $this->city_name = $city_name;
         $this->price = $price;
         $this->item_id = $item_id;
+        $this->lng = $lng;
+        $this->lat = $lat;
+        $this->email = $email;
+        $this->data = $data;
     }
 
     public function getId() : int {
         return $this->id;
     }
 
-    public function getOfferFromEmail() : string
+    public function getOfferFromId() : int
     {
-        return $this->offer_from_email;
+        return $this->offer_from_id;
     }
 
-    public function setOfferFromEmail(string $offer_from_email): void
+    public function setOfferFromId(string $offer_from_id): void
     {
-        $this->offer_from_email = $offer_from_email;
+        $this->offer_from_id = $offer_from_id;
     }
 
-    public function getLocation(): string
+    public function getCityName(): string
     {
-        return $this->location;
+        return $this->city_name;
     }
 
-    public function setLocation(string $location): void
+    public function setCityName(string $city_name): void
     {
-        $this->location = $location;
+        $this->city_name = $city_name;
     }
 
     public function getPrice(): float
@@ -61,5 +69,35 @@ class Offer
         $this->item_id = $item_id;
     }
 
+    public function getLng() : float {
+        return $this->lng;
+    }
 
+    public function setLng(float $lng) : void {
+        $this->lng = $lng;
+    }
+
+    public function getLat() : float {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat) : void {
+        $this->lat = $lat;
+    }
+
+    public function getEmail() : string {
+        return $this->email;
+    }
+
+    public function setEmail(string $email) : void {
+        $this->email = $email;
+    }
+
+    public function getData() : string {
+        return $this->data;
+    }
+
+    public function setData(string $data) : void {
+        $this->data = $data;
+    }
 }

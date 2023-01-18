@@ -137,7 +137,7 @@ class AddController extends AppController
             $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
             $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
             $user = $this->userRepository->getUser($_SESSION['email']);
-            return $this->render('info' , ['articles' => $articles, 'user' => $user]);
+            return $this->render('info' , ['articles' => $articles, 'user' => $user, 'offers' => $offers]);
 
         }
         elseif (!isset($_SESSION['email'])) {

@@ -282,7 +282,7 @@ body {
     outline: none;
 }
 
-#map {
+#map, #map2 {
     height: 100%;
 }
 
