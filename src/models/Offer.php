@@ -11,8 +11,9 @@ class Offer
     private $lat;
     private $email;
     private $data;
+    private $state_of_offer;
 
-    public function __construct($id, $offer_from_id, $city_name, $price, $item_id, $lng, $lat, $email, $data)
+    public function __construct($id, $offer_from_id, $city_name, $price, $item_id, $lng, $lat, $email, $data, $state_of_offer)
     {
         $this->id = $id;
         $this->offer_from_id = $offer_from_id;
@@ -23,6 +24,7 @@ class Offer
         $this->lat = $lat;
         $this->email = $email;
         $this->data = $data;
+        $this->state_of_offer = $state_of_offer;
     }
 
     public function getId() : int {
@@ -99,5 +101,13 @@ class Offer
 
     public function setData(string $data) : void {
         $this->data = $data;
+    }
+
+    public function getState() : string {
+        return $this->state_of_offer;
+    }
+
+    public function setState(string $state_of_offer) : void {
+        $this->state_of_offer = $state_of_offer;
     }
 }

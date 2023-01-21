@@ -60,12 +60,14 @@ class SecurityController extends AppController
         }
 
         $user = $this->userRepository->getUser($_SESSION['email']);
-        $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+        $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+        $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
+        $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
 
         if(!$user) {
             return $this->render('login', ['messages' => ['You are not logged in!']]);
         }
-        else return $this->render('info', ['user' => $user, 'articles' => $articles]);
+        else return $this->render('info', ['user' => $user, 'activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles, 'biddedArticles' => $biddedArticles]);
     }
 
     public function updateUserData() {
@@ -84,8 +86,9 @@ class SecurityController extends AppController
             }
             $this->userRepository->changeData($_SESSION['email']);
             $user = $this->userRepository->getUser($_SESSION['email']);
-            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
-            return $this->render('info', ['user' => $user, 'articles' => $articles]);
+            $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
+            return $this->render('info', ['user' => $user, 'activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles]);
         }
         else {
             return $this->render('change-user-data', ['messages' => ['Wrong data!']]);

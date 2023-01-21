@@ -44,7 +44,12 @@
                     <div class="data-input">
                     <input name="price" type="number" class="price" placeholder="Cena" step=".01">
                     <input name="city-name" type="text" class="city-name" placeholder="Lokalizacja (miasto)">
-                    <input name="size" type="number" class="size" step="0.5" placeholder="Rozmiar">
+                    <input name="size" type="text" class="size" placeholder="Rozmiar">
+                        <select name="state">
+                            <option name="category" value="" disabled selected hidden>Stan produktu</option>
+                            <option name="state" value="false">Używany</option>
+                            <option name="state" value="true">Nowy</option>
+                        </select>
                     </div>
                 </div>
             </div>

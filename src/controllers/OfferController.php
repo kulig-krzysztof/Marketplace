@@ -27,7 +27,7 @@ class OfferController extends AppController
 
     public function bid() {
         if(isset($_SESSION['email']) && isset($_POST['bid'])) {
-            $offer = new Offer(0, $_SESSION['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], $_POST['lng'], $_POST['lat'], $_SESSION['email'], $_POST['meeting-time']);
+            $offer = new Offer(0, $_SESSION['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], $_POST['lng'], $_POST['lat'], $_SESSION['email'], $_POST['meeting-time'], "active");
             $articles = $this->articleRepository->getArticle($_SESSION['item-id']);
             $this->offerRepository->addOffer($offer);
             return $this->render('item', ['messages' => ['Bid added!'], 'articles' => $articles]);
@@ -54,9 +54,37 @@ class OfferController extends AppController
             $user = $this->userRepository->getUser($_SESSION['email']);
             $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
             $this->offerRepository->removeOtherOffers($_POST['id'], $id);
+            $this->offerRepository->setOfferAccepted($_POST['id']);
             $article = $this->articleRepository->getArticle($_SESSION['item-id']);
             if ($articles != null) $this->render('info', ['messages' => ['Offer Accepted'], 'user' => $user, 'articles' => $articles]);
-            else $this->render('item', ['messages' => ['Bid added!'], 'articles' => $article]);
+            else $this->render('item', ['messages' => ['Bid accepted!'], 'articles' => $article]);
         }
+    }
+
+    public function declineOffer() {
+        if(isset($_SESSION['email']) && isset($_POST['decline'])) {
+            $user = $this->userRepository->getUser($_SESSION['email']);
+            $this->offerRepository->declineOffer($_POST['id']);
+            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $article = $this->articleRepository->getArticle($_SESSION['item-id']);
+            if ($articles != null) $this->render('info', ['messages' => ['Offer Declined'], 'user' => $user, 'articles' => $articles]);
+            else $this->render('item', ['messages' => ['Bid accepted!'], 'articles' => $article]);
+        }
+    }
+
+    public function respondToOffer() {
+        if(isset($_SESSION['email']) && isset($_POST['respond'])) {
+            $article = $this->articleRepository->getArticle($_SESSION['item-id']);
+            $offer = $this->offerRepository->getOfferObjectById($_POST['id']);
+            $_SESSION['offer-id'] = $_POST['id'];
+            $this->render('respond-to-offer', ['articles' => $article, 'offers' => $offer]);
+        }
+    }
+
+    public function respondTo() {
+        $offers = $this->offerRepository->getOfferById($_SESSION['offer-id']);
+        header('Content-type: application/json');
+        http_response_code(200);
+        echo json_encode($offers);
     }
 }

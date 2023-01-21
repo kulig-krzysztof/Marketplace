@@ -40,6 +40,8 @@
                 <h3><?= $articles->getTitle(); ?></h3>
                 <h2>Cena:</h2>
                 <h3><?= $articles->getPrice(); ?> zł</h3>
+                <h2>Stan:</h2>
+                <h3><?= $articles->getStateString(); ?></h3>
             </div>
         </div>
         <hr />
@@ -84,7 +86,12 @@
                         <div class="data-input">
                             <input name="price" type="number" class="price" placeholder="Cena" value="<?= $articles->getPrice(); ?>" step="0.01">
                             <input name="city-name" type="text" class="city-name" placeholder="Lokalizacja (miasto)" value="<?= $articles->getLocation(); ?>">
-                            <input name="size" type="number" class="size" step="0.5" placeholder="Rozmiar" value="<?= $articles->getSize(); ?>">
+                            <input name="size" type="text" class="size" placeholder="Rozmiar" value="<?= $articles->getSize(); ?>">
+                            <select name="state">
+                                <option name="state" value="<?= $articles->getState(); ?>" selected hidden><?= $articles->getStateString(); ?></option>
+                                <option name="state" value="false">Używany</option>
+                                <option name="state" value="true">Nowy</option>
+                            </select>
                         </div>
                     </div>
                 </div>

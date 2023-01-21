@@ -51,14 +51,19 @@ class AddController extends AppController
                 $_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
+            if($_POST['state'] == "true" || $_POST['state'] == 1) {
+                $state = true;
+            }
+            else {
+                $state = false;
+            }
+            var_dump($state);
 
-                $article = new Article(0,$_POST['title'],$_POST['category'],$_POST['desc'],$_POST['price'],$_SESSION['email'], $_FILES['file']['name'], floatval($_POST['lng']), floatval($_POST['lat']), $_POST['city-name'], $_POST['size']);
+                $article = new Article(0,$_POST['title'],$_POST['category'],$_POST['desc'],$_POST['price'],$_SESSION['email'], $_FILES['file']['name'], floatval($_POST['lng']), floatval($_POST['lat']), $_POST['city-name'], $_POST['size'], $state);
                 var_dump($_REQUEST['lng']);
                 $this->articleRepository->addArticle($article);
 
-                return $this->render('result', [
-                    'articles' => $this->articleRepository->getAllArticles(),
-                    'messages' => $this->messages]);
+                return $this->render('categories', ['messages' => $this->messages]);
 
         }
         if(!isset($_SESSION['email'])) {
@@ -134,10 +139,12 @@ class AddController extends AppController
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
             $this->articleRepository->updateItem($_SESSION['item-id']);
-            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
+            $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
             $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
             $user = $this->userRepository->getUser($_SESSION['email']);
-            return $this->render('info' , ['articles' => $articles, 'user' => $user, 'offers' => $offers]);
+            return $this->render('info' , ['activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles, 'biddedArticles' => $biddedArticles, 'user' => $user, 'offers' => $offers]);
 
         }
         elseif (!isset($_SESSION['email'])) {
@@ -147,14 +154,33 @@ class AddController extends AppController
         elseif (!is_uploaded_file($_FILES['file']['tmp_name'])) {
             $_FILES['file']['name'] = $_SESSION['default-image'];
             $this->articleRepository->updateItem($_SESSION['item-id']);
-            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
+            $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
+            $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
             $user = $this->userRepository->getUser($_SESSION['email']);
             unset($_SESSION['item-id']);
-            return $this->render('info' , ['articles' => $articles, 'user' => $user]);
+            return $this->render('info' , ['activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles, 'biddedArticles' => $biddedArticles, 'user' => $user, 'offers' => $offers]);
         }
 
         else {
             return $this->render('login', ['messages' => ['Something went wrong!']]);
         }
+    }
+
+    public function inactiveItemData() {
+        $id = intval($_POST['item-id']);
+        $articles = $this->articleRepository->getArticle($id);
+        $_SESSION['item-id'] = $id;
+        $offers = $this->offerRepository->getOfferByItemId($_SESSION['item-id']);
+        return $this->render('inactive-item-data' , ['articles' => $articles, 'offers' => $offers]);
+    }
+
+    public function biddedItemData() {
+        $id = intval($_POST['item-id']);
+        $articles = $this->articleRepository->getArticle($id);
+        $_SESSION['item-id'] = $id;
+        $offers = $this->offerRepository->getOfferByItemId($_SESSION['item-id']);
+        return $this->render('bidded-item-data', ['articles' => $articles, 'offers' => $offers]);
     }
 }

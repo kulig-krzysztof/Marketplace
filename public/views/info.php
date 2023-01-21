@@ -47,17 +47,51 @@
         </form>
     </div>
     <div class="user-items">
-        <h1>User items</h1>
+        <h1>User active items</h1>
     </div>
     <div class="items-container">
         <form id="form" action="updateItemSite" method="post" class="categories">
-            <?php foreach ($articles as $article): ?>
-                <button type="submit" name="item-id" value="<?= $article->getId(); ?>" id="<?= $article->getId(); ?>">
-                    <img alt="Item image" src="public/img/form-images/<?= $article->getImg(); ?>">
+            <?php foreach ($activeArticles as $activeArticle): ?>
+                <button type="submit" name="item-id" value="<?= $activeArticle->getId(); ?>" id="<?= $activeArticle->getId(); ?>">
+                    <img alt="Item image" src="public/img/form-images/<?= $activeArticle->getImg(); ?>">
                     <div>
-                        <h2><?= $article->getTitle(); ?></h2>
-                        <p><?= "Cena: ".$article->getPrice()." zł"; ?></p>
-                        <p><?= "Lokalizacja: ".$article->getLocation(); ?></p>
+                        <h2><?= $activeArticle->getTitle(); ?></h2>
+                        <p><?= "Cena: ".$activeArticle->getPrice()." zł"; ?></p>
+                        <p><?= "Lokalizacja: ".$activeArticle->getLocation(); ?></p>
+                    </div>
+                </button>
+            <?php endforeach; ?>
+        </form>
+    </div>
+    <div class="user-items">
+        <h1>User archive items</h1>
+    </div>
+    <div class="items-container">
+        <form id="form" action="inactiveItemData" method="post" class="categories">
+            <?php foreach ($inactiveArticles as $inactiveArticle): ?>
+                <button type="submit" name="item-id" value="<?= $inactiveArticle->getId(); ?>" id="<?= $inactiveArticle->getId(); ?>">
+                    <img alt="Item image" src="public/img/form-images/<?= $inactiveArticle->getImg(); ?>">
+                    <div>
+                        <h2><?= $inactiveArticle->getTitle(); ?></h2>
+                        <p><?= "Cena: ".$inactiveArticle->getPrice()." zł"; ?></p>
+                        <p><?= "Lokalizacja: ".$inactiveArticle->getLocation(); ?></p>
+                    </div>
+                </button>
+            <?php endforeach; ?>
+        </form>
+    </div>
+    <div class="user-items">
+        <h1>Bidded Items</h1>
+    </div>
+    <div class="items-container">
+        <form id="form" action="biddedItemData" method="post" class="categories">
+            <?php foreach ($biddedArticles as $biddedArticle): ?>
+                <button type="submit" name="item-id" value="<?= $biddedArticle->getId(); ?>" id="<?= $biddedArticle->getId(); ?>">
+                    <img alt="Item image" src="public/img/form-images/<?= $biddedArticle->getImg(); ?>">
+                    <div>
+                        <h2><?= $biddedArticle->getTitle(); ?></h2>
+                        <p><?= "Cena: ".$biddedArticle->getPrice()." zł"; ?></p>
+                        <p><?= "Lokalizacja: ".$biddedArticle->getLocation(); ?></p>
                     </div>
                 </button>
             <?php endforeach; ?>

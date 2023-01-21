@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/item.css">
     <script src="https://kit.fontawesome.com/35aaad20fa.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./public/js/search.js" defer></script>
+    <script type="text/javascript" src="./public/js/inactive-item-data.js" defer></script>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
@@ -37,30 +37,15 @@
             <div class="item-information">
                 <h2>Tytuł ogłoszenia:</h2>
                 <h3><?= $articles->getTitle(); ?></h3>
-                <h2>Cena:</h2>
-                <h3><?= $articles->getPrice(); ?> zł</h3>
-                <h2>Stan:</h2>
-                <h3><?= $articles->getStateString(); ?></h3>
-                <form action="bid" method="post">
-                    <div class="messages">
-                        <?php if(isset($messages)) {
-                            foreach ($messages as $message) {
-                                echo $message;
-                            }
-                        }
-                        ?>
-                    </div>
-                    <input type="text" name="location" placeholder="What city do you offer? (required)" required>
-                    <input type="number" step="0.01" name="bid-value" placeholder="How much would you like to bid?" class="bid-value" required>
-                    <input type="datetime-local" id="meeting-time" name="meeting-time" required>
-                    <section>
-                        <h1>Choose exact location on the map</h1>
-                        <div id="map" class="mapboxgl-map"></div>
-                        <input id="lng" type="text" name="lng" hidden required>
-                        <input id="lat" type="text" name="lat" hidden required>
-                    </section>
-                    <input type="submit" name="bid" value="Bid" class="bid-button">
-                </form>
+                <h2>Sold For:</h2>
+                <h3><?= $offers->getPrice(); ?> zł</h3>
+                <h2>Location:</h2>
+                <h3><?= $offers->getCityName(); ?></h3>
+                <section>
+                    <div id="map" class="mapboxgl-map"></div>
+                </section>
+                <h2>Date and time of meeting</h2>
+                <h3><?= $offers->getData(); ?></h3>
             </div>
         </div>
         <hr />

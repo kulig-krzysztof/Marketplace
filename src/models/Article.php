@@ -13,8 +13,9 @@ class Article
     private $lat;
     private $city_name;
     private $size;
+    private $state;
 
-    public function __construct($id, $title, $category, $desc, $price, $email, $img, $lng, $lat, $city_name, $size)
+    public function __construct($id, $title, $category, $desc, $price, $email, $img, $lng, $lat, $city_name, $size, $state)
     {
         $this->id = $id;
         $this->title = $title;
@@ -27,6 +28,7 @@ class Article
         $this->lat = $lat;
         $this->city_name = $city_name;
         $this->size = $size;
+        $this->state = $state;
     }
 
     public function getTitle() : string
@@ -123,13 +125,31 @@ class Article
         $this->city_name = $city_name;
     }
 
-    public function getSize() : float
+    public function getSize() : string
     {
         return $this->size;
     }
 
-    public function setSize(float $size): void
+    public function setSize(string $size): void
     {
         $this->size = $size;
+    }
+    public function getState() : bool
+    {
+        return $this->state;
+    }
+
+    public function setState(bool $state): void
+    {
+        $this->state = $state;
+    }
+
+    public function getStateString() : string {
+        if ($this->state == 0) {
+            return "Używany";
+        }
+        else {
+            return "Nowy";
+        }
     }
 }

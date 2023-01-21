@@ -7,14 +7,7 @@ const map1 = new mapboxgl.Map({
     zoom: 9 // starting zoom
 });
 
-const map2 = new mapboxgl.Map({
-    container: 'map2', // container ID
-// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    style: 'mapbox://styles/mapbox/streets-v12', // style URL
-    center: [19.94498, 50.06465], // starting position [lng, lat]
-    zoom: 9 // starting zoom
-});
-
+var marker = new mapboxgl.Marker();
 var lng;
 var lat;
 function add_marker (event) {
@@ -28,11 +21,12 @@ function add_marker (event) {
 }
 map1.on('click', add_marker);
 
-fetch("/offers", {
+fetch("/respondTo", {
     method: "GET"
 }).then(function (response) {
     return response.json();
 }).then(function(offers) {
+    console.log(offers);
     offers.map(offer => {
         offer.coordinates = [JSON.parse(offer.lng), JSON.parse(offer.lat)];
         offer.title = JSON.parse(offer.id)
@@ -55,15 +49,9 @@ function placeMarkers(offers) {
             .setPopup(
                 new mapboxgl.Popup({ offset: 25 }) // add popups
                     .setHTML(
-                        `<h3>${feature.description}</h3><p>${feature.data}</p>
-                         <form method="post" action="acceptOffer"><input type="hidden" name="id" value="${feature.id}"><input type="submit" name="accept" value="Accept"></form>
-                         <form method="post" action="declineOffer"><input type="hidden" name="id" value="${feature.id}"><input type="submit" name="decline" value="Decline"></form>
-                         <form method="post" action="respondToOffer"><input type="hidden" name="id" value="${feature.id}"><input type="submit" name="respond" value="Respond"></form>
-                        `
+                        `<h3>${feature.description}</h3><p>${feature.data}</p>`
                     )
             )
-            .addTo(map2);
+            .addTo(map1);
     }
 }
-
-
