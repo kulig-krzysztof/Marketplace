@@ -172,7 +172,7 @@ class AddController extends AppController
         $id = intval($_POST['item-id']);
         $articles = $this->articleRepository->getArticle($id);
         $_SESSION['item-id'] = $id;
-        $offers = $this->offerRepository->getOfferByItemId($_SESSION['item-id']);
+        $offers = $this->offerRepository->getWinnerOfferByItemId($_POST['item-id']);
         return $this->render('inactive-item-data' , ['articles' => $articles, 'offers' => $offers]);
     }
 
@@ -182,5 +182,13 @@ class AddController extends AppController
         $_SESSION['item-id'] = $id;
         $offers = $this->offerRepository->getOfferByItemId($_SESSION['item-id']);
         return $this->render('bidded-item-data', ['articles' => $articles, 'offers' => $offers]);
+    }
+
+    public function boughtItemData() {
+        $id = intval($_POST['item-id']);
+        $articles = $this->articleRepository->getArticle($id);
+        $_SESSION['item-id'] = $id;
+        $offers = $this->offerRepository->getWinnerOfferByItemId($_SESSION['item-id']);
+        return $this->render('bought-item-data', ['articles' => $articles, 'offers' => $offers]);
     }
 }

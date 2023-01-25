@@ -63,11 +63,12 @@ class SecurityController extends AppController
         $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
         $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
         $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
+        $boughtArticles = $this->articleRepository->getBoughtArticlesByUserId($_SESSION['id']);
 
         if(!$user) {
             return $this->render('login', ['messages' => ['You are not logged in!']]);
         }
-        else return $this->render('info', ['user' => $user, 'activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles, 'biddedArticles' => $biddedArticles]);
+        else return $this->render('info', ['user' => $user, 'activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles, 'biddedArticles' => $biddedArticles, 'boughtArticles' => $boughtArticles]);
     }
 
     public function updateUserData() {

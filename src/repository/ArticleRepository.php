@@ -337,8 +337,38 @@ class ArticleRepository extends Repository
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM users INNER JOIN items ON users.id = items.user_id INNER JOIN categories ON items.category = categories.id INNER JOIN offers ON items.id = offers.item_id WHERE offers.offer_from_id = :id AND items.active = true
+            SELECT DISTINCT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM users INNER JOIN items ON users.id = items.user_id INNER JOIN categories ON items.category = categories.id INNER JOIN offers ON items.id = offers.item_id WHERE offers.offer_from_id = :id AND items.active = true
         ');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($articles as $article) {
+            $result[] = new Article(
+                $article['id'],
+                $article['title'],
+                $article['category'],
+                $article['description'],
+                $article['price'],
+                $article['email'],
+                $article['img'],
+                $article['lng'],
+                $article['lat'],
+                $article['city_name'],
+                $article['size'],
+                $article['new']
+            );
+        }
+        return $result;
+    }
+
+    public function getBoughtArticlesByUserId(int $id): array
+    {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare("
+            SELECT DISTINCT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM users INNER JOIN items ON users.id = items.user_id INNER JOIN categories ON items.category = categories.id INNER JOIN offers ON items.id = offers.item_id WHERE offers.offer_from_id = :id AND items.active = false AND offers.state_of_offer = 'accepted' AND items.user_id != :id OR offers.user_id_2 = :id AND items.active = false AND offers.state_of_offer = 'accepted' AND items.user_id != :id
+        ");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);

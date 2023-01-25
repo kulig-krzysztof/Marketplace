@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/item.css">
     <script src="https://kit.fontawesome.com/35aaad20fa.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./public/js/inactive-item-data.js" defer></script>
+    <script type="text/javascript" src="./public/js/bidded-item-data.js" defer></script>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
@@ -40,16 +40,16 @@
                 <h2>Price:</h2>
                 <h3><?= $articles->getPrice(); ?></h3>
                 <h2>Bidded value:</h2>
-                <h3><?= $offers->getPrice(); ?> zł</h3>
+                <h3 class="bidded-value"></h3>
                 <h2>State</h2>
-                <h3><?= $offers->getState(); ?></h3>
+                <h3 class="bid-state"></h3>
                 <h2>Location:</h2>
-                <h3><?= $offers->getCityName(); ?></h3>
+                <h3 class="selected-city-name"></h3>
                 <section>
                     <div id="map" class="mapboxgl-map"></div>
                 </section>
                 <h2>Date and time of meeting</h2>
-                <h3><?= $offers->getData(); ?></h3>
+                <h3 class="selected-date"></h3>
             </div>
         </div>
         <hr />

@@ -41,10 +41,32 @@ class OfferController extends AppController
     }
 
     public function offers() {
-        $offers = $this->offerRepository->getOffersForItem($_SESSION['item-id']);
+        $offers = $this->offerRepository->getWinnerOfferForItem($_SESSION['item-id'], $_SESSION['id']);
         header('Content-type: application/json');
         http_response_code(200);
         echo json_encode($offers);
+    }
+
+    public function allOffersForItem() {
+        $offers = $this->offerRepository->getOffersForItem($_SESSION['item-id'], $_SESSION['id']);
+        header('Content-type: application/json');
+        http_response_code(200);
+        echo json_encode($offers);
+    }
+
+    public function offersOfBidder() {
+        $offersOfBidder = $this->offerRepository->getOffersForItemBidder($_SESSION['item-id'], $_SESSION['id']);
+        $_SESSION['offer-id'] = $offersOfBidder[0]["id"];
+        header('Content-type: application/json');
+        http_response_code(200);
+        echo json_encode($offersOfBidder);
+    }
+
+    public function counterOffer() {
+        $counterOffer = $this->offerRepository->getResponseOffer($_SESSION['item-id'], $_SESSION['id']);
+        header('Content-type: application/json');
+        http_response_code(200);
+        echo json_encode($counterOffer);
     }
 
     public function acceptOffer() {
@@ -53,8 +75,8 @@ class OfferController extends AppController
             $this->articleRepository->setArticleInactive($id);
             $user = $this->userRepository->getUser($_SESSION['email']);
             $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
-            $this->offerRepository->removeOtherOffers($_POST['id'], $id);
-            $this->offerRepository->setOfferAccepted($_POST['id']);
+            $this->offerRepository->removeOtherOffers($id, $_POST['id']);
+            $this->offerRepository->setOfferAccepted($_POST['id'], $_SESSION['id']);
             $article = $this->articleRepository->getArticle($_SESSION['item-id']);
             if ($articles != null) $this->render('info', ['messages' => ['Offer Accepted'], 'user' => $user, 'articles' => $articles]);
             else $this->render('item', ['messages' => ['Bid accepted!'], 'articles' => $article]);
@@ -86,5 +108,18 @@ class OfferController extends AppController
         header('Content-type: application/json');
         http_response_code(200);
         echo json_encode($offers);
+    }
+
+    public function respond() {
+        if(isset($_SESSION['email']) && isset($_POST['respond'])) {
+            $article = $this->articleRepository->getArticle($_SESSION['item-id']);
+            $user = $this->userRepository->getUser($_SESSION['email']);
+            $offer = new Offer(0, $_SESSION['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], $_POST['lng'], $_POST['lat'], $_SESSION['email'], $_POST['meeting-time'], "active");
+            $this->offerRepository->setOfferResponded($_SESSION['offer-id']);
+            $this->offerRepository->respondToOffer($offer);
+            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            if ($articles != null) $this->render('info', ['messages' => ['Responded to offer'], 'user' => $user, 'articles' => $articles]);
+            else $this->render('item', ['messages' => ['Bid accepted!'], 'articles' => $article]);
+        }
     }
 }
