@@ -105,7 +105,7 @@
                         <i class="fas fa-camera fa-5x"></i>
                         <input name="file" type="file">
                     </div>
-                    <button type="submit" id="add" class="right-panel-comp">
+                    <button type="submit" id="add" class="right-panel-comp button-36">
                         Update
                     </button>
                 </div>

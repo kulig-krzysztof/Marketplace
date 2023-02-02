@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="../../public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/login.css">
     <script type="text/javascript" src="../../public/js/script.js" defer></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,8 +25,8 @@
                 </div>
                     <input id="email" name="email" type="text" placeholder="Email@email.com">
                     <input name="password" type="password" placeholder="Hasło">
-                <button class="button" type="submit">LOG IN</button>
-                <button class="button" type="button" id="register" onclick="window.location.href='/register'">SIGN UP</button>
+                <button id="login-button" class="button-36" type="submit">LOG IN</button>
+                <button class="button-36" type="button" id="register" onclick="window.location.href='/registerPage'">SIGN UP</button>
             </form>
         </div>
     </div>

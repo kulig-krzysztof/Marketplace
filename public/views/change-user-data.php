@@ -47,7 +47,7 @@
                 <input type="password" name="password">
                 <h2>Repeat password</h2>
                 <input type="password" name="repeatPassword">
-                <input type="submit" value="Update" class="update-button">
+                <input type="submit" value="Update" class="update-button button-36">
             </form>
         </div>
     </div>

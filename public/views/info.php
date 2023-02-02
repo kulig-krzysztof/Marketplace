@@ -21,7 +21,7 @@
                 <i class="fas fa-thumbtack"></i>
                 <input type="text" class="location" placeholder="Lokalizacja">
             </div>
-            <button type="submit" class="search-button">Szukaj</button>
+            <button type="submit" class="button-36">Szukaj</button>
         </form>
     </div>
     <div class="messages">
@@ -43,7 +43,7 @@
         <h2>Email</h2>
         <h3><?= $user->getEmail(); ?></h3>
         <form class="update-form" action="updateDataSite" method="post">
-            <button class="update-button" type="submit" name="update" value="Update">Update</button>
+            <button class="button-36" type="submit" name="update" value="Update">Update</button>
         </form>
     </div>
     <div class="user-items">

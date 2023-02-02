@@ -9,37 +9,42 @@
 
 }
 
-.logo-img {
+.logo-img, .menu-img {
     height: 55px;
     width: 80px;
     margin-left: 20px;
 }
 
-.logout_form {
-    display: flex;
-    width: 6vw;
-    height: 80%;
-    margin-right: 10px;
-    justify-content: center;
+#menu {
+    position: absolute;
+    top: 7vh;
+    right: 0;
+    background-color: white;
+    z-index: 1;
+    height: 10vh;
+    width: 15vw;
+    box-shadow: 3px 3px 34px -8px rgba(66, 68, 90, 1);
 }
 
-.logout {
-    justify-content: center;
+#logout {
+    border-top: 1px solid lightgray;
+}
+
+.menu-component {
     width: 100%;
-    background: #600C5DBD 0% 0% no-repeat padding-box;
-    border: 1px solid #707070;
-    border-radius: 45px;
-    color: white;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
+    height: 50%;
+    border: none;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: row;
+.button {
+    width: 100%;
     height: 100%;
-    align-items: center;
+    border: none;
+}
+
+.button:hover {
+    background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+    color: white;
 }
 
 .account {

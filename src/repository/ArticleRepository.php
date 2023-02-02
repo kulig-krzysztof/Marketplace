@@ -42,6 +42,7 @@ class ArticleRepository extends Repository
             VALUES (?, ?, ?, ?, ? ,? ,?, ?, ?, ?, ?)
         ');
         session_start();
+        $_SESSION['id'] = 1;
         if ($article->getCategory() == "Buty") {
             $category = 1;
         } elseif ($article->getCategory() == "Koszulki") {

@@ -39,7 +39,7 @@ class DefaultController extends AppController {
             $this->render('add');
         }
     }
-    public function register() {
+    public function registerPage() {
         $this->render('register');
     }
 
@@ -110,7 +110,7 @@ class DefaultController extends AppController {
         }
     }
 
-    public function mapa() {
-        $this->render('mapa');
+    public function formTest() {
+        $this->render('form-test');
     }
 }

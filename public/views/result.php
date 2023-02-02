@@ -22,7 +22,7 @@
                 <i class="fas fa-thumbtack"></i>
                 <input type="text" class="location" placeholder="Lokalizacja">
             </div>
-            <button type="submit" class="search-button">Szukaj</button>
+            <button type="submit" class="button-36">Szukaj</button>
         </div>
     </div>
     <div class="category-container">

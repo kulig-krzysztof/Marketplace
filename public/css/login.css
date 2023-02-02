@@ -23,21 +23,20 @@ body {
 }
 
 @-webkit-keyframes AnimationName {
-    0%{background-position:0% 5%}
+    0%{background-position:0 5%}
     50%{background-position:100% 96%}
-    100%{background-position:0% 5%}
+    100%{background-position:0 5%}
 }
 @-moz-keyframes AnimationName {
-    0%{background-position:0% 5%}
+    0%{background-position:0 5%}
     50%{background-position:100% 96%}
-    100%{background-position:0% 5%}
+    100%{background-position:0 5%}
 }
 @keyframes AnimationName {
-    0%{background-position:0% 5%}
+    0%{background-position:0 5%}
     50%{background-position:100% 96%}
-    100%{background-position:0% 5%}
+    100%{background-position:0 5%}
 }
-
 
 .logo {
     width: 50%;
@@ -45,31 +44,24 @@ body {
     justify-content: center;
 }
 
-.register-container {
+.login-container {
     width: 50%;
 }
-form {
+
+.login {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 80%;
-    height: 50vh;
+    height: 40vh;
 
-    background: #FFFFFFD9 0% 0% no-repeat padding-box;
+    background: #FFFFFFD9 0 0 no-repeat padding-box;
     box-shadow: inset 6px 6px 6px #00000029;
     border: 1px solid #707070;
     border-radius: 54px;
 }
 
-input {
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid gray;
-    padding: 1em;
-    margin: 1em;
-    width: 50%;
-}
 
 .button-36 {
     background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
@@ -98,6 +90,77 @@ input {
     transition-duration: .1s;
 }
 
+#login-button {
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    .button-36 {
+        padding: 0 2.6rem;
+    }
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 1em;
+    margin: 1em;
+    width: 50%;
+}
+
+.title {
+    width: 30%;
+    background: #CADDF187 0 0 no-repeat padding-box;
+    border: 1px solid #707070;
+    border-radius: 48px;
+    text-align: center;
+    padding: 5px;
+    font-size: 45px;
+    color: #707070;
+    margin-bottom: 5%;
+}
+
+.option-container {
+    width: 100vw;
+    height: 100vh;
+    background: transparent linear-gradient(180deg, #00C2FF 0%, #600C5D 100%) 0 0 no-repeat padding-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.options {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.option-icon {
+    width: 180px;
+    height: 160px;
+}
+
+
+.option {
+    background: transparent linear-gradient(180deg, #CADDF1 0%, #00C2FFB0 100%) 0 0 no-repeat padding-box;
+    border-radius: 50%;
+    height: 50vh;
+    width: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buy, .sell {
+    font-size: 40px;
+}
+
 .no-valid {
     border: 3px solid red;
     border-radius: 1em;
@@ -114,30 +177,57 @@ input {
         font-size: 20px;
     }
 
-    .register-container {
+    .login-container {
         height: 60vh;
     }
 
-    .register-container, .logo {
+    .login-container, .logo {
         width: 100%;
     }
 
-    form {
+    .login {
         margin: auto;
-        height: 60vh;
+        height: 50vh;
     }
 
-    form input {
+    .login input {
         font-size: 15px;
         width: 60%;
     }
 
-    form button {
+    .button {
         width: 70%;
+        text-align: center;
     }
 
     .logo-img {
         height: 7em;
         margin: 2em;
     }
+
+    .title {
+        width: 80%;
+        font-size: 40px;
+        margin-bottom: 20%;
+        margin-top: -20%;
+    }
+
+    .sell, .buy {
+        font-size: 25px;
+    }
+
+    .option-icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .option {
+        height: 45vw;
+        width: 45vw;
+    }
+
+    #register {
+        margin-top: -5px;
+    }
 }
+

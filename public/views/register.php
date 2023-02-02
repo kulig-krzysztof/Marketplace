@@ -28,7 +28,7 @@
             <input id="repeatPassword" name="repeatPassword" type="password" placeholder="Powtórz hasło">
             <input id="name" name="name" type="text" placeholder="Imię">
             <input id="surname" name="surname" type="text" placeholder="Nazwisko">
-            <button id="submit" type="submit">SIGN UP</button>
+            <button class="button-36" id="submit" type="submit">SIGN UP</button>
         </form>
     </div>
 </div>

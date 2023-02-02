@@ -1,9 +1,40 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
 * {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
     margin: 0;
+    font-family: montserrat, arial, verdana;
+}
+
+#msform .button-36 {
+    background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+    width: 100px;
+    margin: 10px 5px;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    height: 3rem;
+    padding: 0 1.6rem;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+    transition: all .5s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-36:hover {
+    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+    transition-duration: .1s;
 }
 
 .title {
@@ -19,8 +50,12 @@ body {
 
 .form-container {
     width: 100%;
-    overflow: auto;
-    background: #E4DDEE 0% 0% no-repeat padding-box;
+    height: 74vh;
+    display: flex;
+    flex-direction: column;
+    background:
+            linear-gradient(rgba(224,231,238, 0.6), rgba(200,170,239, 0.6));
+            /*linear-gradient(rgb(224,231,238), rgb(200,170,239));*/
 }
 
 .left-panel-comp, .right-panel-comp {
@@ -56,24 +91,11 @@ body {
     justify-content: center;
 }
 
-form {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.title-input, .desc-input, .size, .price, .mail, .category-select, .map, .city-name {
+.title-input, .desc-input, .size, .price, .mail, .category-select, .city-name {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: none;
     width: 94%;
     height: 25%;
-}
-
-.title-input, .desc-input, .category-select, .data-input {
-    margin-left: 3%;
-    margin-right: 3%;
 }
 
 .title-input {
@@ -92,13 +114,24 @@ form {
 }
 
 #photo-upload {
-    height: 15vh;
+    height: 18vh;
     width: 100%;
     margin-top: 3vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#file-input {
+    width: 50% !important;
+}
+
+.preview img {
+    width:100px;
+    height: 100px;
+    display:none;
+    margin-bottom: 30px;
 }
 
 #base-data, section {
@@ -137,13 +170,6 @@ form {
     width: 100%;
 }
 
-.map {
-    margin-left: 3%;
-    margin-right: 3%;
-    background-color: white;
-    height: 100%;
-}
-
 #add {
     background: transparent linear-gradient(180deg, #600C5D 0%, #0C0F10 100%) 0% 0% no-repeat padding-box;
     border: 1px solid #707070;
@@ -166,8 +192,147 @@ form {
     outline: none;
 }
 
+/*basic reset*/
+* {margin: 0; padding: 0;}
+
+/*form styles*/
+#msform {
+    width: 40vw;
+    margin: 50px auto;
+    text-align: center;
+    position: relative;
+    background: transparent;
+}
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 3px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 20px 30px 20px 30px;
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 10%;
+
+    /*stacking fieldsets above each other*/
+    position: relative;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+    display: none;
+}
+/*inputs*/
+#msform input, #msform select {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 13px;
+}
+
+#msform textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 13px;
+    height: 30vh;
+}
+
+/*buttons*/
+#msform .action-button {
+    width: 100px;
+    background: #27AE60;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+/*headings*/
+.fs-title {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #2C3E50;
+    margin-bottom: 10px;
+}
+.fs-subtitle {
+    font-weight: normal;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+#progressbar li {
+    list-style-type: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 12px;
+    width: 25%;
+    float: left;
+    position: relative;
+}
+
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 20px;
+    line-height: 20px;
+    display: block;
+    font-size: 12px;
+    color: #333;
+    background: white;
+    border-radius: 3px;
+    margin: 0 auto 5px auto;
+}
+
+/*progressbar connectors*/
+#progressbar li:after {
+    display: inline-block;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+    left: -50%;
+    top: 9px;
+    z-index: -1; /*put it behind the numbers*/
+}
+
+#progressbar li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+    background-color: #455EB5;
+    color: white;
+}
+
 #map {
     height: 100%;
+    width: 100%;
 }
 
 .marker {
@@ -181,8 +346,7 @@ form {
 
 section {
     width: 100%;
-    height: 50vh;
-    grid-template-columns: 1fr !important;
+    height: 30vh;
     padding: 0 !important;
     overflow: hidden;
 }
