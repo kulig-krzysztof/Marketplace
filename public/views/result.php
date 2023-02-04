@@ -12,19 +12,7 @@
 <body>
 <div class="base-container">
     <?php include('header.php'); ?>
-    <div class="search">
-        <div class="form" class="search-bar">
-            <div class="input-container">
-                <i class="fas fa-search"></i>
-                <input name="name-search" type="text" class="name-search" placeholder="Czego szukasz?">
-            </div>
-            <div class="input-container">
-                <i class="fas fa-thumbtack"></i>
-                <input type="text" class="location" placeholder="Lokalizacja">
-            </div>
-            <button type="submit" class="button-36">Szukaj</button>
-        </div>
-    </div>
+    <?php include('search-bar.php'); ?>
     <div class="category-container">
         <form id="form" action="item" method="post" class="categories">
             <?php foreach ($articles as $article): ?>

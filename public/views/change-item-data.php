@@ -16,19 +16,7 @@
 <body>
 <div class="base-container">
     <?php include('header.php'); session_start(); ?>
-    <div class="search">
-        <form class="form" class="search-bar" method="post" action="results">
-            <div class="input-container">
-                <i class="fas fa-search"></i>
-                <input name="name-search" type="text" class="name-search" placeholder="Czego szukasz?">
-            </div>
-            <div class="input-container">
-                <i class="fas fa-thumbtack"></i>
-                <input type="text" class="location" placeholder="Lokalizacja">
-            </div>
-            <button type="submit" class="search-button">Szukaj</button>
-        </form>
-    </div>
+    <?php include('search-bar.php'); ?>
     <div class="category-container">
         <div class="text">
             <h1>Dane ogłoszenia</h1>

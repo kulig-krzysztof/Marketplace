@@ -17,10 +17,6 @@
                 <i class="fas fa-search"></i>
                 <input name="name-search" type="text" class="name-search" placeholder="Wpisz tytuł lub kategorię">
             </div>
-            <div class="input-container">
-                <i class="fas fa-thumbtack"></i>
-                <input type="text" class="location" placeholder="Lokalizacja">
-            </div>
                 <button type="submit" class="button-36">Szukaj</button>
             </form>
         </div>

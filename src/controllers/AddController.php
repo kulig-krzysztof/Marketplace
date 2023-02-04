@@ -57,10 +57,8 @@ class AddController extends AppController
             else {
                 $state = false;
             }
-            var_dump($state);
 
                 $article = new Article(0,$_POST['title'],$_POST['category'],$_POST['desc'],$_POST['price'],$_SESSION['email'], $_FILES['file']['name'], floatval($_POST['lng']), floatval($_POST['lat']), $_POST['city-name'], $_POST['size'], $state);
-                var_dump($_REQUEST['lng']);
                 $this->articleRepository->addArticle($article);
 
                 return $this->render('categories', ['messages' => $this->messages]);

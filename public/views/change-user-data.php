@@ -12,19 +12,7 @@
 <body>
 <div class="base-container">
     <?php include('header.php') ?>
-    <div class="search">
-        <form action="results" method="post" class="search-bar">
-            <div class="input-container">
-                <i class="fas fa-search"></i>
-                <input name="name-search" type="text" class="name-search" placeholder="Wpisz tytuł lub kategrię">
-            </div>
-            <div class="input-container">
-                <i class="fas fa-thumbtack"></i>
-                <input type="text" class="location" placeholder="Lokalizacja">
-            </div>
-            <button type="submit" class="search-button">Szukaj</button>
-        </form>
-    </div>
+    <?php include('search-bar.php'); ?>
     <div class="data-container">
         <div class="user-data">
             <h1>User Data</h1>
