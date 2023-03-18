@@ -19,6 +19,18 @@
                 <form class="menu-component" method="POST" action="info" class="account">
                     <input class="button" type="submit" name="User" value="User">
                 </form>
+                <form class="menu-component" method="get" action="userItems" class="account">
+                    <input class="button" type="submit" name="UserItems" value="Active Auctions">
+                </form>
+                <form class="menu-component" method="get" action="archiveItems" class="account">
+                    <input class="button" type="submit" name="ArchiveItems" value="Archive Auctions">
+                </form>
+                <form class="menu-component" method="get" action="biddedItems" class="account">
+                    <input class="button" type="submit" name="BiddedItems" value="Bidded Items">
+                </form>
+                <form class="menu-component" method="get" action="boughtItems" class="account">
+                    <input class="button" type="submit" name="BoughtItems" value="Bought Auctions">
+                </form>
                 <form class="menu-component" id="logout" method="POST" action="logout" class="account">
                     <input class="button" type="submit" name="Logout" value="Logout">
                 </form>

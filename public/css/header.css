@@ -21,7 +21,7 @@
     right: 0;
     background-color: white;
     z-index: 1;
-    height: 10vh;
+    height: 30vh;
     width: 15vw;
     box-shadow: 3px 3px 34px -8px rgba(66, 68, 90, 1);
 }
@@ -32,7 +32,7 @@
 
 .menu-component {
     width: 100%;
-    height: 50%;
+    height: 5vh;
     border: none;
 }
 
