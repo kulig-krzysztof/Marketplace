@@ -26,12 +26,12 @@
         <h1>User Data</h1>
     </div>
     <div class="user-info">
-        <h2>Name</h2>
-        <h3><?= $user->getName(); ?></h3>
-        <h2>Surname</h2>
-        <h3><?= $user->getSurname(); ?></h3>
-        <h2>Email</h2>
-        <h3><?= $user->getEmail(); ?></h3>
+        <h3>Name</h3>
+        <div><?= $user->getName(); ?></div>
+        <h3>Surname</h3>
+        <div><?= $user->getSurname(); ?></div>
+        <h3>Email</h3>
+        <div><?= $user->getEmail(); ?></div>
         <form class="update-form" action="updateDataSite" method="post">
             <button class="button-36" type="submit" name="update" value="Update">Update</button>
         </form>

@@ -27,15 +27,15 @@
                 ?>
             </div>
             <form class="data-form" action="updateUserData" method="post">
-                <h2>Name</h2>
+                <h3>Name</h3>
                 <input type="text" name="name">
-                <h2>Surname</h2>
+                <h3>Surname</h3>
                 <input type="text" name="surname">
-                <h2>Password</h2>
+                <h3>Password</h3>
                 <input type="password" name="password">
-                <h2>Repeat password</h2>
+                <h3>Repeat password</h3>
                 <input type="password" name="repeatPassword">
-                <input type="submit" value="Update" class="update-button button-36">
+                <input type="submit" value="Update" class="update-button button-36" id="button-36">
             </form>
         </div>
     </div>

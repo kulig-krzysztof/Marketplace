@@ -36,6 +36,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+
 }
 
 .name-search, .location {
@@ -91,25 +92,43 @@ body {
     justify-content: flex-start;
 }
 
-.user-data, .user-info, .user-items {
+.user-info {
+    background: white;
+    border: 0 none;
+    border-radius: 3px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 20px 30px 20px 30px;
+    box-sizing: border-box;
+    width: 30%;
+    margin: 0 10%;
+    position: relative;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    background: #E4DDEE 0 0 no-repeat padding-box;
-    justify-content: center;
-    align-items: center;
 }
 
-.update-button {
-    color: white;
-    background: transparent linear-gradient(180deg, #600C5D 0%, #0C0F10 100%) 0 0 no-repeat padding-box;
-    border-radius: 39px;
-    height: 5vh;
-    padding: 0;
-    border: 0;
-    text-align: center;
+.user-data {
+    margin-bottom: 5vh;
+}
+
+.user-info>div {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #2C3E50;
     font-size: 20px;
-    width: 100px;
+    text-align: center;
+}
+
+.update-form {
+    margin-top: 2vh;
+}
+
+h3 {
+    margin: 0 0 10px 0;
 }
 
 .button-36 {
