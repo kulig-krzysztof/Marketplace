@@ -121,14 +121,24 @@ class AddController extends AppController
         }
     }
 
-    public function updateItemSite() {
-        $id = intval($_POST['item-id']);
+    public function activeItemSite() {
+        $id = intval($_GET['item-id']);
         $articles = $this->articleRepository->getArticle($id);
         $_SESSION['item-id'] = $id;
         $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
         $_SESSION['default-image'] = $articles->getImg();
-        return $this->render('change-item-data' , ['articles' => $articles, 'offers' => $offers]);
+        return $this->render('active-item-data' , ['articles' => $articles, 'offers' => $offers]);
     }
+
+    public function updateItemSite() {
+        $id = intval($_GET['item-id']);
+        $articles = $this->articleRepository->getArticle($id);
+        $_SESSION['item-id'] = $id;
+        $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
+        $_SESSION['default-image'] = $articles->getImg();
+        return $this->render('update-item-data' , ['articles' => $articles, 'offers' => $offers]);
+    }
+
 
     public function updateItemData() {
         if($this->isPost() && isset($_SESSION['email']) && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
@@ -137,12 +147,12 @@ class AddController extends AppController
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
             $this->articleRepository->updateItem($_SESSION['item-id']);
-            $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
-            $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
-            $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
+            $articles = $this->articleRepository->getArticle($_SESSION['item-id']);
+            //$inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
+            //$biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
             $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
-            $user = $this->userRepository->getUser($_SESSION['email']);
-            return $this->render('info' , ['activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles, 'biddedArticles' => $biddedArticles, 'user' => $user, 'offers' => $offers]);
+            //$user = $this->userRepository->getUser($_SESSION['email']);
+            return $this->render('active-item-data' , ['articles' => $articles, 'offers' => $offers]);
 
         }
         elseif (!isset($_SESSION['email'])) {
@@ -151,14 +161,11 @@ class AddController extends AppController
 
         elseif (!is_uploaded_file($_FILES['file']['tmp_name'])) {
             $_FILES['file']['name'] = $_SESSION['default-image'];
-            $this->articleRepository->updateItem($_SESSION['item-id']);
-            $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
-            $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
-            $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
+            $this->articleRepository->updateItem($_POST['item-id']);
+            $articles = $this->articleRepository->getArticle($_SESSION['item-id']);
             $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
-            $user = $this->userRepository->getUser($_SESSION['email']);
             unset($_SESSION['item-id']);
-            return $this->render('info' , ['activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles, 'biddedArticles' => $biddedArticles, 'user' => $user, 'offers' => $offers]);
+            return $this->render('active-item-data' , ['articles' => $articles, 'offers' => $offers]);
         }
 
         else {

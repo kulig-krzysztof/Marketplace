@@ -15,7 +15,7 @@
 </div>
 <div class="category-container">
     <div class="user-items">
-        <h1>User archive items</h1>
+        <h1>Your archive items</h1>
     </div>
     <div class="messages">
         <?php if(isset($messages)) {

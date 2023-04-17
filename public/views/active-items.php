@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/active-items.css">
     <link rel="stylesheet" type="text/css" href="public/css/item-display.css">
+    <script type="text/javascript" src="../../public/js/active-items.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -14,7 +15,7 @@
     <?php include('search-bar.php'); ?>
 <div class="category-container">
     <div class="user-items">
-        <h1>User active items</h1>
+        <h1>Your active items</h1>
     </div>
     <div class="messages">
         <?php if(isset($messages)) {
@@ -25,7 +26,7 @@
         ?>
     </div>
     <div class="items-container">
-        <form id="form" action="updateItemSite" method="post" class="categories">
+        <form id="form" action="activeItemSite" method="get" class="categories">
             <?php foreach ($activeArticles as $activeArticle): ?>
                 <button type="submit" name="item-id" value="<?= $activeArticle->getId(); ?>" id="<?= $activeArticle->getId(); ?>">
                     <img alt="Item image" src="public/img/form-images/<?= $activeArticle->getImg(); ?>">
