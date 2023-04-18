@@ -164,10 +164,24 @@ class AddController extends AppController
             $this->articleRepository->updateItem($_POST['item-id']);
             $articles = $this->articleRepository->getArticle($_SESSION['item-id']);
             $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
-            unset($_SESSION['item-id']);
+            //unset($_SESSION['item-id']);
             return $this->render('active-item-data' , ['articles' => $articles, 'offers' => $offers]);
         }
 
+        else {
+            return $this->render('login', ['messages' => ['Something went wrong!']]);
+        }
+    }
+
+    public function showOffersForItem() {
+        if($this->isGet() && isset($_SESSION['email'])) {
+            $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
+            $articles = $this->articleRepository->getArticle($_SESSION['item-id']);
+            return $this->render('offers-for-item', ['articles' => $articles, 'offers' => $offers]);
+        }
+        elseif(!isset($_SESSION['email'])) {
+            return $this->render('login', ['messages' => ['You are not logged in!']]);
+        }
         else {
             return $this->render('login', ['messages' => ['Something went wrong!']]);
         }

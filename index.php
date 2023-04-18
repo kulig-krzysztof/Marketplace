@@ -43,4 +43,5 @@ Routing::get('userItems', 'SecurityController');
 Routing::get('archiveItems', 'SecurityController');
 Routing::get('biddedItems', 'SecurityController');
 Routing::get('boughtItems', 'SecurityController');
+Routing::get('showOffersForItem', 'AddController');
 Routing::run($path);
