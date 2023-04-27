@@ -16,7 +16,7 @@
                 <i class="fas fa-search"></i>
                 <input name="name-search" type="text" class="name-search" placeholder="Wpisz tytuł lub kategorię">
             </div>
-            <button type="submit" class="button-36">Szukaj</button>
+            <button type="submit" class="button-search">Szukaj</button>
         </form>
     </div>
 </body>

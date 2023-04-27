@@ -36,10 +36,10 @@ function placeMarkers(offers) {
             .setPopup(
                 new mapboxgl.Popup({ offset: 25 }) // add popups
                     .setHTML(
-                        `<h3>Cena:</h3><p>${feature.price} zł</p><h3>Data i godzina:</h3><p>${feature.data}</p>
-                         <form method="post" action="acceptOffer"><input type="hidden" name="id" value="${feature.id}"><input class="button-36" type="submit" name="accept" value="Accept"></form>
-                         <form method="post" action="declineOffer"><input type="hidden" name="id" value="${feature.id}"><input class="button-36" type="submit" name="decline" value="Decline"></form>
-                         <form method="post" action="respondToOffer"><input type="hidden" name="id" value="${feature.id}"><input class="button-36" type="submit" name="respond" value="Respond"></form>
+                        `<h3 class="popup-h3">Autor:</h3><p class="popup-p">${feature.email}</p><h3 class="popup-h3">Cena:</h3><p class="popup-p">${feature.price} zł</p><h3 class="popup-h3">Data i godzina:</h3><p class="popup-p">${feature.data}</p>
+                         <form method="post" action="acceptOffer"><input type="hidden" name="id" value="${feature.id}"><input class="offer-button" type="submit" name="accept" value="Accept"></form>
+                         <form method="post" action="declineOffer"><input type="hidden" name="id" value="${feature.id}"><input class="offer-button" type="submit" name="decline" value="Decline"></form>
+                         <form method="post" action="respondToOffer"><input type="hidden" name="id" value="${feature.id}"><input class="offer-button" type="submit" name="respond" value="Respond"></form>
                         `
                     )
             )

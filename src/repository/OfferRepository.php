@@ -94,7 +94,7 @@ class OfferRepository extends Repository
 
     public function getWinnerOfferForItem(int $id, int $user_id): array {
         $stmt = $this->database->connect()->prepare("
-            SELECT offers.id, offers.offer_from_id, offers.city_name, offers.price, offers.item_id, offers.lng, offers.lat, users.email, offers.data, offers.state_of_offer FROM public.offers INNER JOIN users ON offers.offer_from_id = users.id WHERE offers.item_id = :id AND offers.state_of_offer = 'accepted'
+            SELECT offers.id, offers.offer_from_id, offers.city_name, offers.price, offers.item_id, offers.lng, offers.lat, users.email, offers.data, offers.state_of_offer, offers.user_id_2 FROM public.offers INNER JOIN users ON offers.offer_from_id = users.id WHERE offers.item_id = :id AND offers.state_of_offer = 'accepted'
         ");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         //$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -105,7 +105,7 @@ class OfferRepository extends Repository
 
     public function getOffersForItemBidder(int $id, int $user_id): array {
         $stmt = $this->database->connect()->prepare("
-            SELECT offers.id, offers.offer_from_id, offers.city_name, offers.price, offers.item_id, offers.lng, offers.lat, users.email, offers.data, offers.state_of_offer FROM public.offers INNER JOIN users ON offers.offer_from_id = users.id WHERE offers.item_id = :id AND offers.offer_from_id = :user_id
+            SELECT offers.id, offers.offer_from_id, offers.city_name, offers.price, offers.item_id, offers.lng, offers.lat, users.email, offers.data, offers.state_of_offer FROM public.offers INNER JOIN users ON offers.offer_from_id = users.id WHERE offers.item_id = :id AND offers.offer_from_id = :user_id AND offers.state_of_offer = 'active'
         ");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -229,6 +229,22 @@ class OfferRepository extends Repository
     public function setOfferResponded(int $id) : void {
         $stmt = $this->database->connect()->prepare("
             UPDATE offers SET state_of_offer = 'responded' WHERE offers.id = :id;
+        ");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function deleteOffers(int $id) : void {
+        $stmt = $this->database->connect()->prepare("
+            DELETE FROM offers WHERE offers.item_id = :id;
+        ");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function deleteOffer(int $id) : void {
+        $stmt = $this->database->connect()->prepare("
+            DELETE FROM offers WHERE id = :id;
         ");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();

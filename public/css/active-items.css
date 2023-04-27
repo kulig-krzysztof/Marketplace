@@ -14,26 +14,11 @@ body {
     margin: 0;
 }
 
-.search {
-    background: #E0E7EE 0 0 no-repeat padding-box;
-    width: 100%;
-    height: 15vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.input-container {
-    width:25vw;
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-}
 
 .category-container {
     background:
-            linear-gradient(rgba(224,231,238, 0.6), rgba(200,170,239, 0.6));
+            #E6E6E6;
+            /*linear-gradient(rgba(224,231,238, 0.6), rgba(102,102,102, 0.6)); */
     width: 100%;
     height: 73vh;
     display: flex;
@@ -47,31 +32,4 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-.button-36 {
-    background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
-    border-radius: 8px;
-    border-style: none;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    cursor: pointer;
-    flex-shrink: 0;
-    font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    height: 3rem;
-    width: 10vw;
-    padding: 0 1.6rem;
-    text-align: center;
-    text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
-    transition: all .5s;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-}
-
-.button-36:hover {
-    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
-    transition-duration: .1s;
 }

@@ -34,9 +34,18 @@ function placeMarkers(offers) {
             .setPopup(
                 new mapboxgl.Popup({ offset: 25 }) // add popups
                     .setHTML(
-                        `<h3>${feature.description}</h3><p>${feature.data}</p>`
+                        `<h3 class="popup-h3">Cena:</h3><p class="popup-p">${feature.price} zł</p><h3 class="popup-h3">Data i godzina:</h3><p class="popup-p">${feature.data}</p>`
                     )
             )
             .addTo(map1);
     }
 }
+
+const mapContainer = document.querySelector("#map");
+const mapAndDescriptionContainer = document.querySelector(".map-and-description-container");
+const meetingInformationContainer = document.querySelector(".meeting-information-container");
+const descriptionAndUserInfo = document.querySelector(".description-and-user-info");
+
+mapContainer.addEventListener('hover', function() {
+    mapContainer.classList.remove()
+});

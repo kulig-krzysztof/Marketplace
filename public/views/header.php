@@ -17,22 +17,22 @@
             </div>
             <div id="menu" style="display: none;">
                 <form class="menu-component" method="POST" action="info" class="account">
-                    <input class="button" type="submit" name="User" value="User">
+                    <input class="button" type="submit" name="User" value="Dane użytkownika">
                 </form>
                 <form class="menu-component" method="get" action="userItems" class="account">
-                    <input class="button" type="submit" name="UserItems" value="Active Auctions">
+                    <input class="button" type="submit" name="UserItems" value="Aktywne aukcje">
                 </form>
                 <form class="menu-component" method="get" action="archiveItems" class="account">
-                    <input class="button" type="submit" name="ArchiveItems" value="Archive Auctions">
+                    <input class="button" type="submit" name="ArchiveItems" value="Zakończone aukcje">
                 </form>
                 <form class="menu-component" method="get" action="biddedItems" class="account">
-                    <input class="button" type="submit" name="BiddedItems" value="Bidded Items">
+                    <input class="button" type="submit" name="BiddedItems" value="Licytowane przedmioty">
                 </form>
                 <form class="menu-component" method="get" action="boughtItems" class="account">
-                    <input class="button" type="submit" name="BoughtItems" value="Bought Auctions">
+                    <input class="button" type="submit" name="BoughtItems" value="Zakupione przedmioty">
                 </form>
                 <form class="menu-component" id="logout" method="POST" action="logout" class="account">
-                    <input class="button" type="submit" name="Logout" value="Logout">
+                    <input class="button" type="submit" name="Logout" value="Wyloguj">
                 </form>
             </div>
     </div>

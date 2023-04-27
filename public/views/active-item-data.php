@@ -4,6 +4,9 @@
     <link rel="stylesheet" type="text/css" href="public/css/active-item-data.css">
     <script src="https://kit.fontawesome.com/35aaad20fa.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./public/js/search.js" defer></script>
+    <script type="text/javascript" src="./public/js/offers-for-item.js" defer></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,27 +32,35 @@
                     <div id="state" class="info-container"><?= $articles->getStateString(); ?></div>
                     <div id="buttons-container">
                         <form action="updateItemSite" method="get" id="update-form">
-                            <button class="button-36" type="submit" name="item-id" value="<?= $articles->getId();?>">Aktualizuj</button>
+                            <button class="button-36 action-button" type="submit" name="item-id" value="<?= $articles->getId();?>">Aktualizuj</button>
                         </form>
-                        <form action="showOffersForItem" method="get" id="offers-form">
-                            <button class="button-36" type="submit" name="item-id" value="<?= $articles->getId();?>">Pokaż oferty</button>
+                        <form action="deleteItem" method="get" id="delete-form">
+                            <button class="button-36 action-button" type="submit" name="item-id" value="<?= $articles->getId();?>">Usuń ogłoszenie</button>
                         </form>
                     </div>
                 </div>
             </div>
-            <hr />
-            <div class="description-and-user-info">
-                <div class="description">
-                    <h2>Description:</h2>
-                    <div id="description-h2"><?= str_replace("\n", "<br>", $articles->getDescription()); ?></div>
+            <div class="map-and-description-container">
+                <div class="meeting-information-container">
+                    <h2>Oferty:</h2>
+                    <section>
+                        <div id="map2" class="mapboxgl-map"></div>
+                    </section>
                 </div>
-                <div class="user">
-                    <h2>Posted by user</h2>
-                    <div id="user-email"><?= $articles->getEmail(); ?></div>
+                <div class="description-and-user-info">
+                    <div class="description">
+                        <h2>Description:</h2>
+                        <div id="description-h2"><?= str_replace("\n", "<br>", $articles->getDescription()); ?></div>
+                    </div>
                 </div>
+            </div>
+            <div class="user">
+                <h2>Posted by user</h2>
+                <div id="user-email"><?= $articles->getEmail(); ?></div>
             </div>
         </div>
     </div>
-    <?php include('footer.php'); ?>
 </div>
+    <?php include('footer.php'); ?>
 </body>
+</html>

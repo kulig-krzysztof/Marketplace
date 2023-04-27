@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="public/css/item.css">
+    <link rel="stylesheet" type="text/css" href="public/css/bought-item-data.css">
     <script src="https://kit.fontawesome.com/35aaad20fa.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./public/js/bought-item-data.js" defer></script>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -17,38 +17,38 @@
     <?php include('header.php'); session_start(); ?>
     <?php include('search-bar.php'); ?>
     <div class="category-container">
-        <div class="text">
-            <h1>Dane ogłoszenia</h1>
-        </div>
-        <div class="img-and-price-container">
-            <img alt="Item Image" src="public/img/form-images/<?= $articles->getImg(); ?>">
-            <div class="item-information">
-                <h2>Tytuł ogłoszenia:</h2>
-                <h3><?= $articles->getTitle(); ?></h3>
-                <h2>Price:</h2>
-                <h3><?= $articles->getPrice(); ?></h3>
-                <h2>Bidded value:</h2>
-                <h3 class="bidded-value"><?= $offers->getPrice(); ?></h3>
-                <h2>State</h2>
-                <h3 class="bid-state"><?= $offers->getState(); ?></h3>
-                <h2>Location:</h2>
-                <h3 class="selected-city-name"><?= $offers->getCityName(); ?></h3>
-                <section>
-                    <div id="map" class="mapboxgl-map"></div>
-                </section>
-                <h2>Date and time of meeting</h2>
-                <h3 class="selected-date"><?= $offers->getData(); ?></h3>
+        <div class="main-container">
+            <div class="text">
+                <h1>Dane ogłoszenia</h1>
             </div>
-        </div>
-        <hr />
-        <div class="description-and-user-info">
-            <div class="description">
-                <h2>Description:</h2>
-                <div id="description-h2"><?= str_replace("\n", "<br>", $articles->getDescription()); ?></div>
+            <div class="img-and-price-container">
+                <img alt="Item Image" src="public/img/form-images/<?= $articles->getImg(); ?>">
+                <div class="item-information">
+                    <h2>Tytuł ogłoszenia:</h2>
+                    <div id="title" class="info-container"><?= $articles->getTitle(); ?></div>
+                    <h2>Cena początkowa:</h2>
+                    <div id="price" class="info-container"><?= $articles->getPrice(); ?></div>
+                    <h2>Stan:</h2>
+                    <div id="state" class="info-container"><?= $articles->getStateString(); ?></div>
+                </div>
+            </div>
+            <div class="map-and-description-container">
+                <div class="meeting-information-container">
+                    <h2>Oferty:</h2>
+                    <section>
+                        <div id="map" class="mapboxgl-map"></div>
+                    </section>
+                </div>
+                <div class="description-and-user-info">
+                    <div class="description">
+                        <h2>Description:</h2>
+                        <div id="description-h2"><?= str_replace("\n", "<br>", $articles->getDescription()); ?></div>
+                    </div>
+                </div>
             </div>
             <div class="user">
                 <h2>Posted by user</h2>
-                <h2><?= $articles->getEmail(); ?></h2>
+                <div id="user-email"><?= $articles->getEmail(); ?></div>
             </div>
         </div>
     </div>

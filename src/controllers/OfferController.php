@@ -122,4 +122,19 @@ class OfferController extends AppController
             else $this->render('item', ['messages' => ['Bid accepted!'], 'articles' => $article]);
         }
     }
+
+    public function deleteOffer() {
+        if($this->isGet() && isset($_SESSION['email']) && isset($_GET['offer-id'])) {
+            $id = intval($_GET['offer-id']);
+            $article = $this->articleRepository->getArticleByOfferId($id);
+            $this->offerRepository->deleteOffer($id);
+            return $this->render('item', ['messages' => ['Oferta usunięta'], 'articles' => $article]);
+        }
+        if(!isset($_SESSION['email'])) {
+            return $this->render('login', ['messages' => ['You are not logged in!']]);
+        }
+        else {
+            return $this->render('login', ['messages' => ['Coś poszło nie tak']]);
+        }
+    }
 }

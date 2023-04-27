@@ -10,7 +10,7 @@ body {
 }
 
 #msform .button-36 {
-    background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+    background-color: black;
     width: 100px;
     margin: 10px 5px;
     border-radius: 8px;
@@ -33,7 +33,7 @@ body {
 }
 
 .button-36:hover {
-    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+    box-shadow: rgba(10,10,10, 0.5) 0 2px 30px;
     transition-duration: .1s;
 }
 
@@ -44,7 +44,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 60px;
-    background: #E0E7EE 0% 0% no-repeat padding-box;
+    background: #CFCFCF 0% 0% no-repeat padding-box;
     text-align: center;
 }
 
@@ -54,7 +54,8 @@ body {
     display: flex;
     flex-direction: column;
     background:
-            linear-gradient(rgba(224,231,238, 0.6), rgba(200,170,239, 0.6));
+            rgba(230,230,230, 0.6);
+        /*linear-gradient(rgba(224,231,238, 0.6), rgba(102,102,102, 0.6)); */
             /*linear-gradient(rgb(224,231,238), rgb(200,170,239));*/
 }
 
@@ -326,7 +327,7 @@ body {
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-    background-color: #455EB5;
+    background-color: black;
     color: white;
 }
 

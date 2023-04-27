@@ -194,26 +194,16 @@ h2, h1 {
     width: 80%;
 }
 
-#map2 {
+#map {
     height: 100%;
 }
 
 .marker {
-    background-image: url('../img/message-question.svg');
+    background-image: url('../img/checked.png');
     background-size: cover;
     width: 40px;
     height: 40px;
     cursor: pointer;
-}
-
-.counter-offer-marker {
-    background-image: url('../img/reply-solid.svg');
-    background-size: cover;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    background-color: white;
-    box-shadow: 0 0 1em rgba(0,0,0,0.5) ;
 }
 
 section {

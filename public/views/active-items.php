@@ -8,14 +8,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Active items</title>
+    <title>Aktywne aukcje</title>
 </head>
 <div class="base-container">
     <?php include('header.php') ?>
     <?php include('search-bar.php'); ?>
 <div class="category-container">
     <div class="user-items">
-        <h1>Your active items</h1>
+        <h1>Twoje aktywne aukcje</h1>
     </div>
     <div class="messages">
         <?php if(isset($messages)) {

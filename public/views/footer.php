@@ -10,11 +10,11 @@
 </head>
 <body>
 <footer>
-    <div>@ 2022 Krzysztof Kulig</div>
+    <div>@ 2023 Krzysztof Kulig</div>
     <div>
         <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
         <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
-            <a href="https://github.com/kulig-krzysztof/PAI_project"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/kulig-krzysztof/PAI_project"><i class="fab fa-github"></i></a>
     </div>
 </footer>
 </body>

@@ -17,11 +17,6 @@ fetch("/offersOfBidder", {
         offer.title = JSON.parse(offer.id)
         offer.description = JSON.parse(offer.price)
     });
-    document.querySelector(".bidded-value").innerHTML = offersOfBidder[0].price + " zł";
-    document.querySelector(".bid-state").innerHTML = offersOfBidder[0].state_of_offer;
-    document.querySelector(".selected-city-name").innerHTML = offersOfBidder[0].city_name;
-    document.querySelector(".selected-date").innerHTML = offersOfBidder[0].data;
-    console.log(offersOfBidder[0].price)
     placeMarkers(offersOfBidder);
 });
 
@@ -35,7 +30,6 @@ fetch("/counterOffer", {
         offer.title = JSON.parse(offer.id)
         offer.description = JSON.parse(offer.price)
     });
-    console.log(counterOffer[0].price)
     placeCounterOfferMarker(counterOffer);
 });
 
@@ -53,7 +47,8 @@ function placeMarkers(offersOfBidder) {
             .setPopup(
                 new mapboxgl.Popup({ offset: 25 }) // add popups
                     .setHTML(
-                        `<h3>${feature.description}</h3><p>${feature.data}</p>`
+                        `<h2 class="popup-h2">Twoja oferta:</h2><h3 class="popup-h3">Cena:</h3><p class="popup-p">${feature.price} zł</p><h3 class="popup-h3">Data i godzina:</h3><p class="popup-p">${feature.data}</p>
+                         <form action="deleteOffer" method="get"><button class="offer-button" type="submit" name="offer-id" value="${feature.id}">Usuń</button></form>`
                     )
             )
             .addTo(map1);
@@ -64,7 +59,7 @@ function placeCounterOfferMarker(counterOffer) {
     for (const feature of counterOffer) {
         // create a HTML element for each feature
         const el = document.createElement('div');
-        el.className = 'marker';
+        el.className = 'counter-offer-marker';
         console.log(feature)
 
         // make a marker for each feature and add to the map
@@ -73,10 +68,10 @@ function placeCounterOfferMarker(counterOffer) {
             .setPopup(
                 new mapboxgl.Popup({ offset: 25 }) // add popups
                     .setHTML(
-                        `<h3>${feature.description}</h3><p>${feature.data}</p>
-                         <form method="post" action="acceptOffer"><input type="hidden" name="id" value="${feature.id}"><input type="submit" name="accept" value="Accept"></form>
-                         <form method="post" action="declineOffer"><input type="hidden" name="id" value="${feature.id}"><input type="submit" name="decline" value="Decline"></form>
-                         <form method="post" action="respondToOffer"><input type="hidden" name="id" value="${feature.id}"><input type="submit" name="respond" value="Respond"></form>
+                        `<h3 class="popup-h3">Cena:</h3><p class="popup-p">${feature.price} zł</p><h3 class="popup-h3">Data i godzina:</h3><p class="popup-p">${feature.data}</p>
+                         <form method="post" action="acceptOffer"><input type="hidden" name="id" value="${feature.id}"><input class="offer-button" type="submit" name="accept" value="Accept"></form>
+                         <form method="post" action="declineOffer"><input type="hidden" name="id" value="${feature.id}"><input class="offer-button" type="submit" name="decline" value="Decline"></form>
+                         <form method="post" action="respondToOffer"><input type="hidden" name="id" value="${feature.id}"><input class="offer-button" type="submit" name="respond" value="Respond"></form>
                         `
                     )
             )

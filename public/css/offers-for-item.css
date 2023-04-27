@@ -26,8 +26,7 @@ body {
 }
 
 .main-container {
-    background:
-            linear-gradient(rgba(224,231,238, 0.6), rgba(200,170,239, 0.6));
+    background-color: #E6E6E6;
     height: 73vh;
     width: 100%;
     display: flex;

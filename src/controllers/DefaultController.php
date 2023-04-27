@@ -109,8 +109,4 @@ class DefaultController extends AppController {
             $this->render('change-item-data');
         }
     }
-
-    public function formTest() {
-        $this->render('form-test');
-    }
 }

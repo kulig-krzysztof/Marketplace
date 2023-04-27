@@ -14,7 +14,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(127deg, #00c2ff, #600c5d);
+    background: linear-gradient(127deg, #E6E6E6, #555555);
     background-size: 400% 400%;
 
     -webkit-animation: AnimationName 16s ease infinite;
@@ -40,24 +40,28 @@ body {
 
 .title {
     width: 30%;
-    background: #CADDF187 0 0 no-repeat padding-box;
-    border: 1px solid #707070;
+    background: #c1c1c1 0 0 no-repeat padding-box;
     border-radius: 48px;
     text-align: center;
     padding: 5px;
     font-size: 45px;
-    color: #707070;
+    color: black;
     margin-bottom: 5%;
 }
 
 .option-container {
     width: 100vw;
     height: 100vh;
-    background: transparent linear-gradient(180deg, #00C2FF 0%, #600C5D 100%) 0 0 no-repeat padding-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(127deg, #E6E6E6, #555555);
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 16s ease infinite;
+    -moz-animation: AnimationName 16s ease infinite;
+    animation: AnimationName 16s ease infinite;
 }
 
 .options {
@@ -75,7 +79,8 @@ body {
 
 
 .option {
-    background: transparent linear-gradient(180deg, #CADDF1 0%, #00C2FFB0 100%) 0 0 no-repeat padding-box;
+    background-color: #c1c1c1;
+    /*background: transparent linear-gradient(180deg, #E6E6E6 0%, #333333 100%) 0 0 no-repeat padding-box; */
     border-radius: 50%;
     height: 50vh;
     width: 50vh;
@@ -88,12 +93,12 @@ body {
 
 .option:hover {
     transform: scale(1.1);
-    box-shadow: rgba(125, 56, 226, 0.8) 0 1px 30px;
+    box-shadow: rgba(102,102,102, 0.8) 0 1px 30px;
     transition-duration: .3s;
 }
 
 .buy, .sell {
-    font-size: 40px;
+    font-size: 50px;
 }
 
 @media only screen and (max-device-width : 420px) {

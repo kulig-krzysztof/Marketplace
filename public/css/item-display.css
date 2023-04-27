@@ -30,13 +30,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #455EB5;
+    background-color: #555555;
     /*background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);*/
 }
 
 #form>button:hover {
     transform: scale(1.1);
-    box-shadow: rgba(69,94,181, 0.8) 0 0 10px;
+    box-shadow: rgba(10,10,10, 0.8) 0 0 10px;
     transition-duration: .3s;
 }
 

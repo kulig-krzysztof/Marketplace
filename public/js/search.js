@@ -79,6 +79,8 @@ if(searchLocation) {
         articleContainer.appendChild(clone);
     }
 
+/*
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3VsaWcta3J6eXN6dG9mIiwiYSI6ImNsY3EydTJ5YzAxeHEzcXAwajJrOW1ncTgifQ.YRwmFveycWBp-xaTfTqRSQ';
 const map = new mapboxgl.Map({
     container: 'map', // container ID
@@ -142,3 +144,6 @@ var date = new Date();
 var currentDate = date.getFullYear() + "-" + date.getMonth()+1 + "-" + date.getDate() + "T" + date.getHours() + ":" + date.getMinutes();
 console.log(currentDate);
 document.getElementById("meeting-time").setAttribute('min', currentDate);
+
+
+ */

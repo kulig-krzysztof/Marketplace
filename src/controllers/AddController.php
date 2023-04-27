@@ -210,4 +210,20 @@ class AddController extends AppController
         $offers = $this->offerRepository->getWinnerOfferByItemId($_SESSION['item-id']);
         return $this->render('bought-item-data', ['articles' => $articles, 'offers' => $offers]);
     }
+
+    public function deleteItem() {
+        if($this->isGet() && isset($_SESSION['email'])) {
+            $id = intval($_GET['item-id']);
+            $this->articleRepository->deleteItem($id);
+            $this->offerRepository->deleteOffers($id);
+            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            return $this->render('active-items', ['activeArticles' => $articles, 'messages' => ['Usunięto aukcję pomyślnie']]);
+        }
+        elseif(!isset($_SESSION['email'])) {
+            return $this->render('login', ['messages' => ['You are not logged in!']]);
+        }
+        else {
+            return $this->render('login', ['messages' => ['Something went wrong!']]);
+        }
+    }
 }

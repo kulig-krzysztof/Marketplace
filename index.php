@@ -44,4 +44,6 @@ Routing::get('archiveItems', 'SecurityController');
 Routing::get('biddedItems', 'SecurityController');
 Routing::get('boughtItems', 'SecurityController');
 Routing::get('showOffersForItem', 'AddController');
+Routing::get('deleteItem', 'AddController');
+Routing::get('deleteOffer', 'OfferController');
 Routing::run($path);

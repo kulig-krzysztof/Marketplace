@@ -7,7 +7,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bidded items</title>
+    <title>Licytowane przedmioty</title>
 </head>
 <div class="base-container">
     <?php include('header.php') ?>
@@ -15,7 +15,7 @@
 </div>
 <div class="category-container">
     <div class="user-items">
-        <h1>User bidded items</h1>
+        <h1>Licytowane przez Ciebie przedmioty</h1>
     </div>
     <div class="messages">
         <?php if(isset($messages)) {

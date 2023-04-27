@@ -34,7 +34,7 @@ function placeMarkers(offers) {
             .setPopup(
                 new mapboxgl.Popup({ offset: 25 }) // add popups
                     .setHTML(
-                        `<h3>${feature.description}</h3><p>${feature.data}</p>`
+                        `<h2 class="popup-h2">Twoja oferta</h2><h3 class="popup-h3">Kwota</h3><p class="popup-p">${feature.description} zł</p><h3 class="popup-h3">Data i godzina</h3><p class="popup-p">${feature.data}</p>`
                     )
             )
             .addTo(map1);

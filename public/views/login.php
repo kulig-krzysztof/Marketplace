@@ -25,8 +25,8 @@
                 </div>
                     <input id="email" name="email" type="text" placeholder="Email@email.com">
                     <input name="password" type="password" placeholder="Hasło">
-                <button id="login-button" class="button-36" type="submit">LOG IN</button>
-                <button class="button-36" type="button" id="register" onclick="window.location.href='/registerPage'">SIGN UP</button>
+                <button id="login-button" class="button-36" type="submit">ZALOGUJ</button>
+                <button class="button-36" type="button" id="register" onclick="window.location.href='/registerPage'">REJESTRACJA</button>
             </form>
         </div>
     </div>

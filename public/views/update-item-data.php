@@ -10,13 +10,13 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
-    <title>Dodaj ogłoszenie</title>
+    <title>Zmień dane ogłoszenia</title>
 </head>
 <body>
 <div class="container">
-    <?php include('header.php') ?>
+    <?php include('header.php'); session_start(); ?>
     <div class="title">
-        Dodaj ogłoszenie
+        Zmień dane ogłoszenia
     </div>
     <div class="form-container">
         <!-- multistep form -->

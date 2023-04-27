@@ -335,9 +335,9 @@ class ArticleRepository extends Repository
     {
         $result = [];
 
-        $stmt = $this->database->connect()->prepare('
-            SELECT DISTINCT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM users INNER JOIN items ON users.id = items.user_id INNER JOIN categories ON items.category = categories.id INNER JOIN offers ON items.id = offers.item_id WHERE offers.offer_from_id = :id AND items.active = true
-        ');
+        $stmt = $this->database->connect()->prepare("
+            SELECT DISTINCT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM users INNER JOIN items ON users.id = items.user_id INNER JOIN categories ON items.category = categories.id INNER JOIN offers ON items.id = offers.item_id WHERE offers.offer_from_id = :id AND items.active = true AND offers.state_of_offer = 'active'
+        ");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -389,5 +389,45 @@ class ArticleRepository extends Repository
             );
         }
         return $result;
+    }
+
+    public function deleteItem(int $id) : void {
+        $stmt = $this->database->connect()->prepare("
+            DELETE FROM items WHERE items.id = :id;
+        ");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function getArticleByOfferId(int $id) : ?Article {
+        $stmt = $this->database->connect()->prepare('
+        SELECT items.id, items.title, categories.category, items.description, items.price, users.email,
+            items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM items
+            INNER JOIN users ON items.user_id = users.id INNER JOIN categories ON items.category = categories.id
+            INNER JOIN offers ON items.id = offers.item_id WHERE offers.id = :id
+        ');
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $article = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($article == false) {
+            return null;
+        }
+
+        return new Article(
+            $article['id'],
+            $article['title'],
+            $article['category'],
+            $article['description'],
+            $article['price'],
+            $article['email'],
+            $article['img'],
+            $article['lng'],
+            $article['lat'],
+            $article['city_name'],
+            $article['size'],
+            $article['new']
+        );
     }
 }
