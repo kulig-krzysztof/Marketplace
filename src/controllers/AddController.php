@@ -31,14 +31,24 @@ class AddController extends AppController
     public function results() {
         if(isset($_SESSION['email']) && !isset($_POST['name-search'])) {
             $articles = $this->articleRepository->getAllArticles();
-            $this->render('result', ['articles' => $articles]);
+            if($articles != null) {
+                $this->render('result', ['articles' => $articles]);
+            }
+            else {
+                $this->render('result', ['articles' => $articles, 'messages' => ['Nie znaleziono żadnych artykułów do wyświetlenia.']]);
+            }
         }
         elseif (isset($_SESSION['email']) && isset($_POST['name-search'])) {
             $articles = $this->articleRepository->getArticlesByString($_POST['name-search']);
-            $this->render('result', ['articles' => $articles]);
+            if($articles != null) {
+                $this->render('result', ['articles' => $articles]);
+            }
+            else {
+                $this->render('result', ['articles' => $articles, 'messages' => ['Nie znaleziono żadnych artykułów do wyświetlenia.']]);
+            }
         }
         else {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
     }
 
@@ -65,7 +75,7 @@ class AddController extends AppController
 
         }
         if(!isset($_SESSION['email'])) {
-            return $this->render('login', ['messages' => ['You are not logged in!']]);
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             return $this->render('add');
@@ -117,7 +127,7 @@ class AddController extends AppController
             $this->render('categories');
         }
         elseif (!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
     }
 
@@ -156,7 +166,7 @@ class AddController extends AppController
 
         }
         elseif (!isset($_SESSION['email'])) {
-            return $this->render('login', ['messages' => ['You are not logged in!']]);
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
 
         elseif (!is_uploaded_file($_FILES['file']['tmp_name'])) {
@@ -169,7 +179,7 @@ class AddController extends AppController
         }
 
         else {
-            return $this->render('login', ['messages' => ['Something went wrong!']]);
+            return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
         }
     }
 
@@ -180,10 +190,10 @@ class AddController extends AppController
             return $this->render('offers-for-item', ['articles' => $articles, 'offers' => $offers]);
         }
         elseif(!isset($_SESSION['email'])) {
-            return $this->render('login', ['messages' => ['You are not logged in!']]);
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
-            return $this->render('login', ['messages' => ['Something went wrong!']]);
+            return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
         }
     }
 
@@ -220,10 +230,10 @@ class AddController extends AppController
             return $this->render('active-items', ['activeArticles' => $articles, 'messages' => ['Usunięto aukcję pomyślnie']]);
         }
         elseif(!isset($_SESSION['email'])) {
-            return $this->render('login', ['messages' => ['You are not logged in!']]);
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
-            return $this->render('login', ['messages' => ['Something went wrong!']]);
+            return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
         }
     }
 }

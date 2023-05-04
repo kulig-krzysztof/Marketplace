@@ -30,10 +30,10 @@ class OfferController extends AppController
             $offer = new Offer(0, $_SESSION['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], $_POST['lng'], $_POST['lat'], $_SESSION['email'], $_POST['meeting-time'], "active");
             $articles = $this->articleRepository->getArticle($_SESSION['item-id']);
             $this->offerRepository->addOffer($offer);
-            return $this->render('item', ['messages' => ['Bid added!'], 'articles' => $articles]);
+            return $this->render('item', ['messages' => ['Dodano ofertę!'], 'articles' => $articles]);
         }
         if(!isset($_SESSION['email'])) {
-            return $this->render('login', ['messages' => ['You are not logged in!']]);
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             return $this->render('result');
@@ -78,8 +78,8 @@ class OfferController extends AppController
             $this->offerRepository->removeOtherOffers($id, $_POST['id']);
             $this->offerRepository->setOfferAccepted($_POST['id'], $_SESSION['id']);
             $article = $this->articleRepository->getArticle($_SESSION['item-id']);
-            if ($articles != null) $this->render('info', ['messages' => ['Offer Accepted'], 'user' => $user, 'articles' => $articles]);
-            else $this->render('item', ['messages' => ['Bid accepted!'], 'articles' => $article]);
+            if ($articles != null) $this->render('info', ['messages' => ['Zaakceptowano ofertę'], 'user' => $user, 'articles' => $articles]);
+            else $this->render('item', ['messages' => ['Zaakceptowano ofertę!'], 'articles' => $article]);
         }
     }
 
@@ -89,8 +89,8 @@ class OfferController extends AppController
             $this->offerRepository->declineOffer($_POST['id']);
             $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
             $article = $this->articleRepository->getArticle($_SESSION['item-id']);
-            if ($articles != null) $this->render('info', ['messages' => ['Offer Declined'], 'user' => $user, 'articles' => $articles]);
-            else $this->render('item', ['messages' => ['Bid accepted!'], 'articles' => $article]);
+            if ($articles != null) $this->render('info', ['messages' => ['Odrzucono ofertę'], 'user' => $user, 'articles' => $articles]);
+            else $this->render('item', ['messages' => ['Odrzucono ofertę!'], 'articles' => $article]);
         }
     }
 
@@ -118,8 +118,8 @@ class OfferController extends AppController
             $this->offerRepository->setOfferResponded($_SESSION['offer-id']);
             $this->offerRepository->respondToOffer($offer);
             $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
-            if ($articles != null) $this->render('info', ['messages' => ['Responded to offer'], 'user' => $user, 'articles' => $articles]);
-            else $this->render('item', ['messages' => ['Bid accepted!'], 'articles' => $article]);
+            if ($articles != null) $this->render('info', ['messages' => ['Wysłano odpowiedź'], 'user' => $user, 'articles' => $articles]);
+            else $this->render('item', ['messages' => ['Wysłano odpowiedź!'], 'articles' => $article]);
         }
     }
 
@@ -131,7 +131,7 @@ class OfferController extends AppController
             return $this->render('item', ['messages' => ['Oferta usunięta'], 'articles' => $article]);
         }
         if(!isset($_SESSION['email'])) {
-            return $this->render('login', ['messages' => ['You are not logged in!']]);
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             return $this->render('login', ['messages' => ['Coś poszło nie tak']]);

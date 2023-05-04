@@ -15,7 +15,7 @@ class DefaultController extends AppController {
 
     public function actions() {
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             $this->render('actions');
@@ -24,7 +24,7 @@ class DefaultController extends AppController {
 
     public function categories() {
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             $this->render('categories');
@@ -33,7 +33,7 @@ class DefaultController extends AppController {
 
     public function add() {
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             $this->render('add');
@@ -49,7 +49,7 @@ class DefaultController extends AppController {
 
     public function category() {
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             $this->render('results');
@@ -58,7 +58,7 @@ class DefaultController extends AppController {
 
     public function item() {
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             $this->render('item');
@@ -67,7 +67,7 @@ class DefaultController extends AppController {
 
     public function info() {
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             $this->render('info');
@@ -76,7 +76,7 @@ class DefaultController extends AppController {
 
     public function updateUserData() {
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             $this->render('updateUserData');
@@ -85,7 +85,7 @@ class DefaultController extends AppController {
 
     public function updateDataSite() {
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             $this->render('change-user-data');
@@ -94,7 +94,7 @@ class DefaultController extends AppController {
 
     public function updateItemData() {
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             $this->render('updateItemData');
@@ -103,7 +103,7 @@ class DefaultController extends AppController {
 
     public function updateItemSite() {
         if(!isset($_SESSION['email'])) {
-            $this->render('login', ['messages' => ['You are not logged in!']]);
+            $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
             $this->render('change-item-data');

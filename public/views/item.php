@@ -22,6 +22,14 @@
             <div class="text">
                 <h1>Dane ogłoszenia</h1>
             </div>
+            <div class="messages">
+                <?php if(isset($messages)) {
+                    foreach ($messages as $message) {
+                        echo $message;
+                    }
+                }
+                ?>
+            </div>
             <div class="img-and-price-container">
                 <img alt="Item Image" src="public/img/form-images/<?= $articles->getImg(); ?>">
                 <div class="item-information">
@@ -31,14 +39,6 @@
                     <div id="price" class="info-container"><?= $articles->getPrice(); ?></div>
                     <h2>Stan:</h2>
                     <div id="state" class="info-container"><?= $articles->getStateString(); ?></div>
-                    <div id="buttons-container">
-                        <form action="updateItemSite" method="get" id="update-form">
-                            <button class="button-36 action-button" type="submit" name="item-id" value="<?= $articles->getId();?>">Aktualizuj</button>
-                        </form>
-                        <form action="deleteItem" method="get" id="delete-form">
-                            <button class="button-36 action-button" type="submit" name="item-id" value="<?= $articles->getId();?>">Usuń ogłoszenie</button>
-                        </form>
-                    </div>
                 </div>
             </div>
             <div class="map-and-description-container">
@@ -47,6 +47,21 @@
                     <section>
                         <div id="map2" class="mapboxgl-map"></div>
                     </section>
+                </div>
+                <div class="bid-form-container">
+                    <h2>Dodaj ofertę</h2>
+                    <form class="bid-form" method="post" action="bid">
+                        <span id="close">X</span>
+                        <h2>Podaj miasto, w którym proponujesz spotkanie:</h2>
+                        <input class="bid-input" type="text" name="location" placeholder="Podaj miasto" required>
+                        <h2>Podaj cenę, którą proponujesz:</h2>
+                        <input class="bid-input" type="number" step="0.01" min="<?= $articles->getPrice(); ?>" name="bid-value" placeholder="Podaj proponowaną kwotę" required>
+                        <h2>Podaj datę i godzinę spotkania:</h2>
+                        <input class="bid-input" type="datetime-local" id="meeting-time" name="meeting-time" required>
+                        <input type="text" name="lng" id="lng" hidden>
+                        <input type="text" name="lat" id="lat" hidden>
+                        <input type="submit" id="bid-submit" class="button-36" name="bid" value="Złóż ofertę">
+                    </form>
                 </div>
                 <div class="description-and-user-info">
                     <div class="description">

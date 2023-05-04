@@ -7,41 +7,6 @@ const map = new mapboxgl.Map({
    zoom: 9 // starting zoom
 });
 
-const geojson = {
-   type: 'FeatureCollection',
-   features: [
-      {
-         type: 'Feature',
-         geometry: {
-            type: 'Point',
-            coordinates: [19.94498, 50.06465]
-         },
-         properties: {
-            title: 'Dupa',
-            description: 'Dupa dupa'
-         }
-      }
-   ]
-};
-
-// add markers to map
-for (const feature of geojson.features) {
-// create a HTML element for each feature
-   const el = document.createElement('div');
-   el.className = 'marker';
-
-// make a marker for each feature and add it to the map
-   new mapboxgl.Marker(el)
-       .setLngLat(feature.geometry.coordinates)
-       .setPopup(
-           new mapboxgl.Popup({ offset: 25 }) // add popups
-               .setHTML(
-                   `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
-               )
-       )
-       .addTo(map);
-}
-
 var marker = new mapboxgl.Marker();
 var lng;
 var lat;
@@ -56,8 +21,40 @@ function add_marker (event) {
 }
 const button = document.querySelector("#add");
 map.on('click', add_marker);
+map.on('click', function()  {
+   document.querySelector(".description-and-user-info").classList.add("description-and-user-info-inactive");
+   document.querySelector(".description-and-user-info-inactive").classList.remove("description-and-user-info");
+   document.querySelector(".bid-form-container").classList.add("bid-form-container-active");
+   document.querySelector(".bid-form-container-active").classList.remove("bid-form-container");
+});
 
-var date = new Date();
-var currentDate = date.getFullYear() + "-" + date.getMonth()+1 + "-" + date.getDate() + "T" + date.getHours() + ":" + date.getMinutes();
+const close = document.querySelector("#close");
+close.addEventListener("click", function () {
+   document.querySelector(".description-and-user-info-inactive").classList.add("description-and-user-info");
+   document.querySelector(".description-and-user-info").classList.remove("description-and-user-info-inactive");
+   document.querySelector(".bid-form-container-active").classList.add("bid-form-container");
+   document.querySelector(".bid-form-container").classList.remove("bid-form-container-active");
+});
+
+let date = new Date();
+let month = date.getMonth()+1;
+if (month < 10) {
+   month = "0" + month;
+}
+let day = date.getDate();
+if (day < 10) {
+   day = "0" + day;
+}
+let hour = date.getHours();
+if (hour < 10) {
+   hour = "0" + hour;
+}
+let minutes = date.getMinutes();
+if (minutes < 10) {
+   minutes = "0" + minutes;
+}
+
+
+let currentDate = date.getFullYear() + "-" + month + "-" + day + "T" + hour + ":" + minutes;
 console.log(currentDate);
-//document.getElementById("meeting-time").setAttribute('min', currentDate);
+document.getElementById("meeting-time").setAttribute('min', currentDate);

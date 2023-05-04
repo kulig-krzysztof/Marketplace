@@ -24,15 +24,15 @@ class AddUserController extends AppController
             $email = $_POST['email'];
             $check = $this->userRepository->getUser($email);
             if ($check) {
-                return $this->render('register', ['messages' => ['User with this email already exists!']]);
+                return $this->render('register', ['messages' => ['Użytkownik o takim adresie e-mail już istnieje!']]);
             }
             $this->userRepository->addUser($user);
-            return $this->render('login', ['messages' => ['User added!']]);
+            return $this->render('login', ['messages' => ['Dodano użytkownika!']]);
 
 
         }
         elseif ($_POST['email'] == null || $_POST['password'] == null || $_POST['repeatPassword'] != $_POST['password'] || $_POST['name'] == null || $_POST['surname'] == null) {
-            return $this->render('register', ['messages' => ['Wrong data!']]);
+            return $this->render('register', ['messages' => ['Błędne dane!']]);
         }
 
 

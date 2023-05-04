@@ -15,6 +15,14 @@
     <?php include('header.php'); ?>
     <?php include('search-bar.php'); ?>
     <div class="category-container">
+        <div class="messages">
+            <?php if(isset($messages)) {
+                foreach ($messages as $message) {
+                    echo $message;
+                }
+            }
+            ?>
+        </div>
         <form id="form" action="item" method="post" class="categories">
             <?php foreach ($articles as $article): ?>
             <button type="submit" name="item-id" value="<?= $article->getId(); ?>" id="<?= $article->getId(); ?>">

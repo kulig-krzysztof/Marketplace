@@ -170,14 +170,6 @@ h2, h1 {
     justify-content: center;
 }
 
-#buttons-container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 1vh;
-}
-
 .meeting-information-container {
     display: flex;
     flex-direction: column;
@@ -262,4 +254,66 @@ section {
 .popup-h3, .popup-p, .popup-h2 {
     margin: 0;
     color: black;
+}
+
+.bid-form-container,  .description-and-user-info-inactive {
+    display: none;
+}
+
+.bid-form-container-active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 2vh;
+}
+
+.bid-form {
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 1vh;
+    width: 100%;
+    box-sizing: border-box;
+    color: black;
+    font-size: 15px;
+    text-align: left;
+    background-color: #E6E6E6;
+    height: 50vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bid-form > h2 {
+    color: black;
+    font-size: 100%;
+}
+
+.bid-input {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 1%;
+    width: 100%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 20px;
+    text-align: center;
+}
+
+#close {
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+}
+
+#close:hover {
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+    color:#fff;
 }

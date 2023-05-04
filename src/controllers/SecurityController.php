@@ -34,15 +34,15 @@ class SecurityController extends AppController
         $user = $this->userRepository->getUser($email);
 
         if(!$user) {
-            return $this->render('login', ['messages' => ['Wrong email or password!']]);
+            return $this->render('login', ['messages' => ['Błędny adres e-mail lub hasło!']]);
         }
 
         if($user->getEmail() !== $email) {
-            return $this->render('login', ['messages' => ['Wrong email or password!']]);
+            return $this->render('login', ['messages' => ['Błędny adres e-mail lub hasło!']]);
         }
 
         if($user->getPassword() !== $password) {
-            return $this->render('login', ['messages' => ['Wrong password!']]);
+            return $this->render('login', ['messages' => ['Błędne hasło!']]);
         }
 
         $url = "http://$_SERVER[HTTP_HOST]";
@@ -52,7 +52,7 @@ class SecurityController extends AppController
     public function logout() {
         session_start();
         session_unset();
-        return $this->render('login', ['messages' => ['Logged out successfully!']]);
+        return $this->render('login', ['messages' => ['Pomyślnie wylogowano!']]);
     }
 
     public function info() {
@@ -67,7 +67,7 @@ class SecurityController extends AppController
         $boughtArticles = $this->articleRepository->getBoughtArticlesByUserId($_SESSION['id']);
 
         if(!$user) {
-            return $this->render('login', ['messages' => ['You are not logged in!']]);
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else return $this->render('info', ['user' => $user, 'activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles, 'biddedArticles' => $biddedArticles, 'boughtArticles' => $boughtArticles]);
     }
@@ -80,12 +80,12 @@ class SecurityController extends AppController
             $user = $this->userRepository->getUser($_SESSION['email']);
             $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
             if(!$user) {
-                return $this->render('login', ['messages' => ['You are not logged in!']]);
+                return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
             }
             elseif($activeArticles != null) return $this->render('active-items', ['user' => $user, 'activeArticles' => $activeArticles]);
             else return $this->render('active-items', ['messages' => ['Brak artykułów do wyświetlenia'], 'activeArticles' => $activeArticles]);
         }
-        else return $this->render('login', ['messages' => ['Something went wrong!']]);
+        else return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
     }
 
     public function archiveItems() {
@@ -96,12 +96,12 @@ class SecurityController extends AppController
             $user = $this->userRepository->getUser($_SESSION['email']);
             $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
             if(!$user) {
-                return $this->render('login', ['messages' => ['You are not logged in!']]);
+                return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
             }
             elseif($inactiveArticles != null) return $this->render('archive-items', ['user' => $user, 'inactiveArticles' => $inactiveArticles]);
             else return $this->render('archive-items', ['messages' => ['Brak artykułów do wyświetlenia'], 'inactiveArticles' => $inactiveArticles]);
         }
-        else return $this->render('login', ['messages' => ['Something went wrong!']]);
+        else return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
     }
 
     public function biddedItems() {
@@ -112,12 +112,12 @@ class SecurityController extends AppController
             $user = $this->userRepository->getUser($_SESSION['email']);
             $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
             if(!$user) {
-                return $this->render('login', ['messages' => ['You are not logged in!']]);
+                return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
             }
             elseif($biddedArticles != null) return $this->render('bidded-items', ['user' => $user, 'biddedArticles' => $biddedArticles]);
             else return $this->render('bidded-items', ['messages' => ['Brak artykułów do wyświetlenia'], 'biddedArticles' => $biddedArticles]);
         }
-        else return $this->render('login', ['messages' => ['Something went wrong!']]);
+        else return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
     }
 
     public function boughtItems() {
@@ -128,12 +128,12 @@ class SecurityController extends AppController
             $user = $this->userRepository->getUser($_SESSION['email']);
             $boughtArticles = $this->articleRepository->getBoughtArticlesByUserId($_SESSION['id']);
             if(!$user) {
-                return $this->render('login', ['messages' => ['You are not logged in!']]);
+                return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
             }
             elseif($boughtArticles != null) return $this->render('bought-items', ['user' => $user, 'boughtArticles' => $boughtArticles]);
             else return $this->render('bought-items', ['messages' => ['Brak artykułów do wyświetlenia'], 'boughtArticles' => $boughtArticles]);
         }
-        else return $this->render('login', ['messages' => ['Something went wrong!']]);
+        else return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
     }
 
     public function updateUserData() {
@@ -144,11 +144,11 @@ class SecurityController extends AppController
             $password = md5($_POST['password']);
             $user = $this->userRepository->getUser($_SESSION['email']);
             if(!$user) {
-                return $this->render('change-user-data', ['messages' => ['Wrong email or password!']]);
+                return $this->render('change-user-data', ['messages' => ['Błędny adres e-mail lub hasło!']]);
             }
 
             if($user->getPassword() !== $password) {
-                return $this->render('change-user-data', ['messages' => ['Wrong password!']]);
+                return $this->render('change-user-data', ['messages' => ['Błędne hasło!']]);
             }
             $this->userRepository->changeData($_SESSION['email']);
             $user = $this->userRepository->getUser($_SESSION['email']);
@@ -157,7 +157,7 @@ class SecurityController extends AppController
             return $this->render('info', ['user' => $user, 'activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles]);
         }
         else {
-            return $this->render('change-user-data', ['messages' => ['Wrong data!']]);
+            return $this->render('change-user-data', ['messages' => ['Błędne dane!']]);
         }
 
     }
