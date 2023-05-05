@@ -29,8 +29,9 @@ class OfferController extends AppController
         if(isset($_SESSION['email']) && isset($_POST['bid'])) {
             $offer = new Offer(0, $_SESSION['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], $_POST['lng'], $_POST['lat'], $_SESSION['email'], $_POST['meeting-time'], "active");
             $articles = $this->articleRepository->getArticle($_SESSION['item-id']);
+            $offers = $this->offerRepository->getOfferByItemId($_SESSION['item-id']);
             $this->offerRepository->addOffer($offer);
-            return $this->render('item', ['messages' => ['Dodano ofertę!'], 'articles' => $articles]);
+            return $this->render('bidded-item-data', ['messages' => ['Dodano ofertę!'], 'articles' => $articles, 'offers' => $offers]);
         }
         if(!isset($_SESSION['email'])) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);

@@ -204,3 +204,11 @@ section {
     text-align: center;
     font-family: 'Open Sans', sans-serif;
 }
+
+.user-data-form {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}

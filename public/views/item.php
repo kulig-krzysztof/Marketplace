@@ -54,8 +54,8 @@
                         <span id="close">X</span>
                         <h2>Podaj miasto, w którym proponujesz spotkanie:</h2>
                         <input class="bid-input" type="text" name="location" placeholder="Podaj miasto" required>
-                        <h2>Podaj cenę, którą proponujesz:</h2>
-                        <input class="bid-input" type="number" step="0.01" min="<?= $articles->getPrice(); ?>" name="bid-value" placeholder="Podaj proponowaną kwotę" required>
+                        <h2>Podaj cenę, którą proponujesz: (Aktualnie najwyższa oferta to <?= $currentHighestBid; ?> zł)</h2>
+                        <input class="bid-input" type="number" step="0.01" min="<?= $currentHighestBid ?>" name="bid-value" placeholder="Podaj proponowaną kwotę" required>
                         <h2>Podaj datę i godzinę spotkania:</h2>
                         <input class="bid-input" type="datetime-local" id="meeting-time" name="meeting-time" required>
                         <input type="text" name="lng" id="lng" hidden>
@@ -72,7 +72,9 @@
             </div>
             <div class="user">
                 <h2>Posted by user</h2>
-                <div id="user-email"><?= $articles->getEmail(); ?></div>
+                <form class="user-data-form" action="userProfile" method="get">
+                    <button id="user-email" type="submit" name="user-email" value="<?= $articles->getEmail(); ?>"><?= $articles->getEmail(); ?></button>
+                </form>
             </div>
         </div>
     </div>

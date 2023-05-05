@@ -27,9 +27,8 @@ class SecurityController extends AppController
         }
 
         $email = $_POST['email'];
-        $password = md5($_POST['password']);
+        $password = $_POST['password'];
         session_start();
-        $_SESSION['email'] = $email;
 
         $user = $this->userRepository->getUser($email);
 
@@ -37,16 +36,20 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['Błędny adres e-mail lub hasło!']]);
         }
 
-        if($user->getEmail() !== $email) {
+        elseif($user->getEmail() !== $email) {
             return $this->render('login', ['messages' => ['Błędny adres e-mail lub hasło!']]);
         }
 
-        if($user->getPassword() !== $password) {
+        elseif(password_verify($password, $user->getPassword()) != true) {
             return $this->render('login', ['messages' => ['Błędne hasło!']]);
         }
 
-        $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/actions");
+        else {
+            $_SESSION['email'] = $email;
+            //$url = "http://$_SERVER[HTTP_HOST]";
+            //header("Location: {$url}/actions");
+            return $this->render('actions');
+        }
     }
 
     public function logout() {
@@ -141,13 +144,13 @@ class SecurityController extends AppController
             return $this->render('login');
         }
         elseif ($_POST['password'] != null && $_POST['repeatPassword'] == $_POST['password'] && $_POST['name'] != null && $_POST['surname'] != null) {
-            $password = md5($_POST['password']);
+            $password = $_POST['password'];
             $user = $this->userRepository->getUser($_SESSION['email']);
             if(!$user) {
                 return $this->render('change-user-data', ['messages' => ['Błędny adres e-mail lub hasło!']]);
             }
 
-            if($user->getPassword() !== $password) {
+            if(password_verify($password, $user->getPassword()) != true) {
                 return $this->render('change-user-data', ['messages' => ['Błędne hasło!']]);
             }
             $this->userRepository->changeData($_SESSION['email']);
@@ -160,5 +163,22 @@ class SecurityController extends AppController
             return $this->render('change-user-data', ['messages' => ['Błędne dane!']]);
         }
 
+    }
+
+    public function userProfile() {
+        if(!$this->isGet()) {
+            return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
+        }
+        elseif (!isset($_SESSION['email'])) {
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
+        }
+        elseif ($_GET['user-email']) {
+            $user = $this->userRepository->getUser($_GET['user-email']);
+            $activeArticles = $this->articleRepository->getArticlesByEmail($_GET['user-email']);
+            return $this->render('user-profile', ['user' => $user, 'activeArticles' => $activeArticles]);
+        }
+        else {
+            return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
+        }
     }
 }

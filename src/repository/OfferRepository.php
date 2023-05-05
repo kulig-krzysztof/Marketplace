@@ -249,4 +249,23 @@ class OfferRepository extends Repository
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
     }
+
+    public function checkForActiveOfferForItemById(int $id, int $user_id) : int {
+        $stmt = $this->database->connect()->prepare("
+            SELECT COUNT(*) FROM offers WHERE offer_from_id = :user_id AND item_id = :id AND state_of_offer = 'active' OR user_id_2 = :user_id AND item_id = :id AND state_of_offer = 'active';
+        ");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch()[0];
+    }
+
+    public function checkCurrentHighestBidForItemId(int $id) : ?float {
+        $stmt = $this->database->connect()->prepare("
+            SELECT MAX(price) FROM offers WHERE item_id = :id;
+        ");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch()[0];
+    }
 }

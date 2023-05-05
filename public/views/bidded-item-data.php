@@ -18,6 +18,14 @@
     <?php include('search-bar.php'); ?>
     <div class="category-container">
         <div class="main-container">
+            <div class="messages">
+                <?php if(isset($messages)) {
+                    foreach ($messages as $message) {
+                        echo $message;
+                    }
+                }
+                ?>
+            </div>
             <div class="text">
                 <h1>Dane ogłoszenia</h1>
             </div>
@@ -48,7 +56,9 @@
             </div>
             <div class="user">
                 <h2>Posted by user</h2>
-                <div id="user-email"><?= $articles->getEmail(); ?></div>
+                <form class="user-data-form" action="userProfile" method="get">
+                    <button id="user-email" type="submit" name="user-email" value="<?= $articles->getEmail(); ?>"><?= $articles->getEmail(); ?></button>
+                </form>
             </div>
         </div>
     </div>

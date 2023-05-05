@@ -10,7 +10,7 @@ if(search) {
             const data = {search: this.value};
 
             fetch("/search", {
-                method: "POST",
+                method: "GET",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -34,7 +34,7 @@ if(searchLocation) {
             const data = {search: this.value};
 
             fetch("/search", {
-                method: "POST",
+                method: "GET",
                 headers: {
                     'Content-Type': 'application/json'
                 },

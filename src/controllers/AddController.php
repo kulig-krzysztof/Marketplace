@@ -97,8 +97,17 @@ class AddController extends AppController
     }
 
     public function category() {
-            $articles = $this->articleRepository->getArticleByCategory($_POST['category']);
-            $this->render('result', ['articles' => $articles]);
+            if ($this->isGet() && isset($_SESSION['email'])) {
+                $articles = $this->articleRepository->getArticleByCategory($_GET['category']);
+                if ($articles != null) {
+                    return $this->render('result', ['articles' => $articles]);
+                } else {
+                    return $this->render('result', ['articles' => $articles, 'messages' => ['Nie znaleziono artykułów w tej kategorii']]);
+                }
+            }
+            else {
+                return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
+            }
     }
 
 
@@ -117,13 +126,26 @@ class AddController extends AppController
     }
 
     public function item() {
-        if($this->isPost() && isset($_POST['item-id']) && isset($_SESSION['email'])) {
-            $id = trim($_POST['item-id']);
+        if($this->isGet() && isset($_GET['item-id']) && isset($_SESSION['email'])) {
+            $id = trim($_GET['item-id']);
+            $user_id = $_SESSION['id'];
             $_SESSION['item-id'] = $id;
             $articles = $this->articleRepository->getArticle($id);
-            $this->render('item', ['articles' => $articles]);
+            $result = $this->offerRepository->checkForActiveOfferForItemById($id, $user_id);
+            $currentHighestBid = $this->offerRepository->checkCurrentHighestBidForItemId($id);
+            if($currentHighestBid == null) {
+                $currentHighestBid = $articles->getPrice();
+            }
+            //var_dump($result);
+            if($result > 0) {
+                $offers = $this->offerRepository->getOfferByItemId($_SESSION['item-id']);
+                return $this->render('bidded-item-data', ['articles' => $articles, 'offers' => $offers, 'messages' => ['Dodałeś już ofertę do tego produktu! Oto jej detale:']]);
+            }
+            else {
+                $this->render('item', ['articles' => $articles, 'currentHighestBid' => $currentHighestBid]);
+            }
         }
-        elseif (!isset($_POST['item-id']) && isset($_SESSION['email'])){
+        elseif (!isset($_GET['item-id']) && isset($_SESSION['email'])){
             $this->render('categories');
         }
         elseif (!isset($_SESSION['email'])) {
@@ -198,15 +220,15 @@ class AddController extends AppController
     }
 
     public function inactiveItemData() {
-        $id = intval($_POST['item-id']);
+        $id = intval($_GET['item-id']);
         $articles = $this->articleRepository->getArticle($id);
         $_SESSION['item-id'] = $id;
-        $offers = $this->offerRepository->getWinnerOfferByItemId($_POST['item-id']);
+        $offers = $this->offerRepository->getWinnerOfferByItemId($_GET['item-id']);
         return $this->render('inactive-item-data' , ['articles' => $articles, 'offers' => $offers]);
     }
 
     public function biddedItemData() {
-        $id = intval($_POST['item-id']);
+        $id = intval($_GET['item-id']);
         $articles = $this->articleRepository->getArticle($id);
         $_SESSION['item-id'] = $id;
         $offers = $this->offerRepository->getOfferByItemId($_SESSION['item-id']);
@@ -214,7 +236,7 @@ class AddController extends AppController
     }
 
     public function boughtItemData() {
-        $id = intval($_POST['item-id']);
+        $id = intval($_GET['item-id']);
         $articles = $this->articleRepository->getArticle($id);
         $_SESSION['item-id'] = $id;
         $offers = $this->offerRepository->getWinnerOfferByItemId($_SESSION['item-id']);

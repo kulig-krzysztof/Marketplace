@@ -26,7 +26,7 @@
         ?>
     </div>
     <div class="items-container">
-        <form id="form" action="boughtItemData" method="post" class="categories">
+        <form id="form" action="boughtItemData" method="get" class="categories">
             <?php foreach ($boughtArticles as $boughtArticle): ?>
                 <button type="submit" name="item-id" value="<?= $boughtArticle->getId(); ?>" id="<?= $boughtArticle->getId(); ?>">
                     <img alt="Item image" src="public/img/form-images/<?= $boughtArticle->getImg(); ?>">

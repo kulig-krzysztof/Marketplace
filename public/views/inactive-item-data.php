@@ -47,8 +47,10 @@
                 </div>
             </div>
             <div class="user">
-                <h2>Autor ogłoszenia</h2>
-                <div id="user-email"><?= $articles->getEmail(); ?></div>
+                <h2>Posted by user</h2>
+                <form class="user-data-form" action="userProfile" method="get">
+                    <button id="user-email" type="submit" name="user-email" value="<?= $articles->getEmail(); ?>"><?= $articles->getEmail(); ?></button>
+                </form>
             </div>
         </div>
     </div>

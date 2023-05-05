@@ -32,7 +32,7 @@
         <div><?= $user->getSurname(); ?></div>
         <h3>Adres e-mail</h3>
         <div><?= $user->getEmail(); ?></div>
-        <form class="update-form" action="updateDataSite" method="post">
+        <form class="update-form" action="updateDataSite" method="get">
             <button class="button-36" type="submit" name="update" value="Update">Zmień</button>
         </form>
     </div>

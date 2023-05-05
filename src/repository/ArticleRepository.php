@@ -81,9 +81,9 @@ class ArticleRepository extends Repository
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM items INNER JOIN categories ON items.category = categories.id INNER JOIN users ON items.user_id = users.id WHERE items.active = true AND items.user_id != :id;
+            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM items INNER JOIN categories ON items.category = categories.id INNER JOIN users ON items.user_id = users.id WHERE items.active = true AND users.email != :email;
         ');
-        $stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -114,11 +114,11 @@ class ArticleRepository extends Repository
         $searchString = '%' . strtolower($searchString) . '%';
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM items INNER JOIN categories ON items.category = categories.id WHERE items.active = true AND LOWER(title) LIKE :search AND items.user_id != :id OR items.active = true AND LOWER(categories.category) LIKE :search AND items.user_id != :id OR items.active = true AND LOWER(city_name) LIKE :search AND items.user_id != :id;
+            SELECT * FROM items INNER JOIN categories ON items.category = categories.id INNER JOIN users ON items.user_id = users.id WHERE items.active = true AND LOWER(title) LIKE :search AND users.email != :email OR items.active = true AND LOWER(categories.category) LIKE :search AND users.email != :email OR items.active = true AND LOWER(city_name) LIKE :search AND users.email != :email;
         ');
 
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
-        $stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -144,10 +144,10 @@ class ArticleRepository extends Repository
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM categories INNER JOIN items ON categories.id = items.category INNER JOIN users ON items.user_id = users.id WHERE LOWER(categories.category) LIKE :search AND items.active = true AND items.user_id != :id;
+            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM categories INNER JOIN items ON categories.id = items.category INNER JOIN users ON items.user_id = users.id WHERE LOWER(categories.category) LIKE :search AND items.active = true AND users.email != :email;
         ');
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
-        $stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -177,10 +177,10 @@ class ArticleRepository extends Repository
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM items INNER JOIN categories ON items.category = categories.id INNER JOIN users ON items.user_id = users.id WHERE items.active = true AND LOWER(items.city_name) LIKE :search AND items.user_id != :id OR items.active = true AND LOWER(items.title) LIKE :search AND items.user_id != :id OR items.active = true AND LOWER(categories.category) LIKE :search AND items.user_id != :id;
+            SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM items INNER JOIN categories ON items.category = categories.id INNER JOIN users ON items.user_id = users.id WHERE items.active = true AND LOWER(items.city_name) LIKE :search AND users.email != :email OR items.active = true AND LOWER(items.title) LIKE :search AND users.email != :email OR items.active = true AND LOWER(categories.category) LIKE :search AND users.email != :email;
         ');
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
-        $stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

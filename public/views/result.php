@@ -23,7 +23,7 @@
             }
             ?>
         </div>
-        <form id="form" action="item" method="post" class="categories">
+        <form id="form" action="item" method="get" class="categories">
             <?php foreach ($articles as $article): ?>
             <button type="submit" name="item-id" value="<?= $article->getId(); ?>" id="<?= $article->getId(); ?>">
                 <img alt="Item Image" src="public/img/form-images/<?= $article->getImg(); ?>">
