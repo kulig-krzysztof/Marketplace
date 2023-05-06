@@ -26,14 +26,14 @@ class OfferController extends AppController
     }
 
     public function bid() {
-        if(isset($_SESSION['email']) && isset($_POST['bid'])) {
-            $offer = new Offer(0, $_SESSION['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], $_POST['lng'], $_POST['lat'], $_SESSION['email'], $_POST['meeting-time'], "active");
+        if(isset($_COOKIE['email']) && isset($_POST['bid'])) {
+            $offer = new Offer(0, $_COOKIE['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], $_POST['lng'], $_POST['lat'], $_COOKIE['email'], $_POST['meeting-time'], "active");
             $articles = $this->articleRepository->getArticle($_SESSION['item-id']);
             $offers = $this->offerRepository->getOfferByItemId($_SESSION['item-id']);
             $this->offerRepository->addOffer($offer);
             return $this->render('bidded-item-data', ['messages' => ['Dodano ofertę!'], 'articles' => $articles, 'offers' => $offers]);
         }
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -42,21 +42,21 @@ class OfferController extends AppController
     }
 
     public function offers() {
-        $offers = $this->offerRepository->getWinnerOfferForItem($_SESSION['item-id'], $_SESSION['id']);
+        $offers = $this->offerRepository->getWinnerOfferForItem($_SESSION['item-id'], $_COOKIE['id']);
         header('Content-type: application/json');
         http_response_code(200);
         echo json_encode($offers);
     }
 
     public function allOffersForItem() {
-        $offers = $this->offerRepository->getOffersForItem($_SESSION['item-id'], $_SESSION['id']);
+        $offers = $this->offerRepository->getOffersForItem($_SESSION['item-id'], $_COOKIE['id']);
         header('Content-type: application/json');
         http_response_code(200);
         echo json_encode($offers);
     }
 
     public function offersOfBidder() {
-        $offersOfBidder = $this->offerRepository->getOffersForItemBidder($_SESSION['item-id'], $_SESSION['id']);
+        $offersOfBidder = $this->offerRepository->getOffersForItemBidder($_SESSION['item-id'], $_COOKIE['id']);
         $_SESSION['offer-id'] = $offersOfBidder[0]["id"];
         header('Content-type: application/json');
         http_response_code(200);
@@ -64,20 +64,20 @@ class OfferController extends AppController
     }
 
     public function counterOffer() {
-        $counterOffer = $this->offerRepository->getResponseOffer($_SESSION['item-id'], $_SESSION['id']);
+        $counterOffer = $this->offerRepository->getResponseOffer($_SESSION['item-id'], $_COOKIE['id']);
         header('Content-type: application/json');
         http_response_code(200);
         echo json_encode($counterOffer);
     }
 
     public function acceptOffer() {
-        if(isset($_SESSION['email']) && isset($_POST['accept'])) {
+        if(isset($_COOKIE['email']) && isset($_POST['accept'])) {
             $id = $this->offerRepository->getOfferItemId($_POST['id']);
             $this->articleRepository->setArticleInactive($id);
-            $user = $this->userRepository->getUser($_SESSION['email']);
-            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $user = $this->userRepository->getUser($_COOKIE['email']);
+            $articles = $this->articleRepository->getArticlesByEmail($_COOKIE['email']);
             $this->offerRepository->removeOtherOffers($id, $_POST['id']);
-            $this->offerRepository->setOfferAccepted($_POST['id'], $_SESSION['id']);
+            $this->offerRepository->setOfferAccepted($_POST['id'], $_COOKIE['id']);
             $article = $this->articleRepository->getArticle($_SESSION['item-id']);
             if ($articles != null) $this->render('info', ['messages' => ['Zaakceptowano ofertę'], 'user' => $user, 'articles' => $articles]);
             else $this->render('item', ['messages' => ['Zaakceptowano ofertę!'], 'articles' => $article]);
@@ -85,10 +85,10 @@ class OfferController extends AppController
     }
 
     public function declineOffer() {
-        if(isset($_SESSION['email']) && isset($_POST['decline'])) {
-            $user = $this->userRepository->getUser($_SESSION['email']);
+        if(isset($_COOKIE['email']) && isset($_POST['decline'])) {
+            $user = $this->userRepository->getUser($_COOKIE['email']);
             $this->offerRepository->declineOffer($_POST['id']);
-            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $articles = $this->articleRepository->getArticlesByEmail($_COOKIE['email']);
             $article = $this->articleRepository->getArticle($_SESSION['item-id']);
             if ($articles != null) $this->render('info', ['messages' => ['Odrzucono ofertę'], 'user' => $user, 'articles' => $articles]);
             else $this->render('item', ['messages' => ['Odrzucono ofertę!'], 'articles' => $article]);
@@ -96,7 +96,7 @@ class OfferController extends AppController
     }
 
     public function respondToOffer() {
-        if(isset($_SESSION['email']) && isset($_POST['respond'])) {
+        if(isset($_COOKIE['email']) && isset($_POST['respond'])) {
             $article = $this->articleRepository->getArticle($_SESSION['item-id']);
             $offer = $this->offerRepository->getOfferObjectById($_POST['id']);
             $_SESSION['offer-id'] = $_POST['id'];
@@ -112,26 +112,26 @@ class OfferController extends AppController
     }
 
     public function respond() {
-        if(isset($_SESSION['email']) && isset($_POST['respond'])) {
+        if(isset($_COOKIE['email']) && isset($_POST['respond'])) {
             $article = $this->articleRepository->getArticle($_SESSION['item-id']);
-            $user = $this->userRepository->getUser($_SESSION['email']);
-            $offer = new Offer(0, $_SESSION['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], $_POST['lng'], $_POST['lat'], $_SESSION['email'], $_POST['meeting-time'], "active");
+            $user = $this->userRepository->getUser($_COOKIE['email']);
+            $offer = new Offer(0, $_COOKIE['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], $_POST['lng'], $_POST['lat'], $_COOKIE['email'], $_POST['meeting-time'], "active");
             $this->offerRepository->setOfferResponded($_SESSION['offer-id']);
             $this->offerRepository->respondToOffer($offer);
-            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $articles = $this->articleRepository->getArticlesByEmail($_COOKIE['email']);
             if ($articles != null) $this->render('info', ['messages' => ['Wysłano odpowiedź'], 'user' => $user, 'articles' => $articles]);
             else $this->render('item', ['messages' => ['Wysłano odpowiedź!'], 'articles' => $article]);
         }
     }
 
     public function deleteOffer() {
-        if($this->isGet() && isset($_SESSION['email']) && isset($_GET['offer-id'])) {
+        if($this->isGet() && isset($_COOKIE['email']) && isset($_GET['offer-id'])) {
             $id = intval($_GET['offer-id']);
             $article = $this->articleRepository->getArticleByOfferId($id);
             $this->offerRepository->deleteOffer($id);
             return $this->render('item', ['messages' => ['Oferta usunięta'], 'articles' => $article]);
         }
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {

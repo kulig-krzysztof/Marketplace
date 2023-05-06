@@ -45,7 +45,8 @@ class SecurityController extends AppController
         }
 
         else {
-            $_SESSION['email'] = $email;
+            setcookie('email', $email, time() + 7 * 24 * 60 * 60);
+            //$_SESSION['email'] = $email;
             //$url = "http://$_SERVER[HTTP_HOST]";
             //header("Location: {$url}/actions");
             return $this->render('actions');
@@ -55,6 +56,8 @@ class SecurityController extends AppController
     public function logout() {
         session_start();
         session_unset();
+        setcookie('email', "", time() - 3600);
+        setcookie('id', "", time() - 3600);
         return $this->render('login', ['messages' => ['Pomyślnie wylogowano!']]);
     }
 
@@ -63,11 +66,11 @@ class SecurityController extends AppController
             return $this->render('login');
         }
 
-        $user = $this->userRepository->getUser($_SESSION['email']);
-        $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
-        $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
-        $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
-        $boughtArticles = $this->articleRepository->getBoughtArticlesByUserId($_SESSION['id']);
+        $user = $this->userRepository->getUser($_COOKIE['email']);
+        $activeArticles = $this->articleRepository->getArticlesByEmail($_COOKIE['email']);
+        $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_COOKIE['email']);
+        $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_COOKIE['id']);
+        $boughtArticles = $this->articleRepository->getBoughtArticlesByUserId($_COOKIE['id']);
 
         if(!$user) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
@@ -79,9 +82,9 @@ class SecurityController extends AppController
         if(!$this->isGet()) {
             return $this->render('login');
         }
-        elseif(isset($_SESSION['email']) && isset($_GET['UserItems'])) {
-            $user = $this->userRepository->getUser($_SESSION['email']);
-            $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+        elseif(isset($_COOKIE['email']) && isset($_GET['UserItems'])) {
+            $user = $this->userRepository->getUser($_COOKIE['email']);
+            $activeArticles = $this->articleRepository->getArticlesByEmail($_COOKIE['email']);
             if(!$user) {
                 return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
             }
@@ -95,9 +98,9 @@ class SecurityController extends AppController
         if(!$this->isGet()) {
             return $this->render('login');
         }
-        elseif(isset($_SESSION['email']) && isset($_GET['ArchiveItems'])) {
-            $user = $this->userRepository->getUser($_SESSION['email']);
-            $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
+        elseif(isset($_COOKIE['email']) && isset($_GET['ArchiveItems'])) {
+            $user = $this->userRepository->getUser($_COOKIE['email']);
+            $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_COOKIE['email']);
             if(!$user) {
                 return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
             }
@@ -111,9 +114,9 @@ class SecurityController extends AppController
         if(!$this->isGet()) {
             return $this->render('login');
         }
-        elseif(isset($_SESSION['email']) && isset($_GET['BiddedItems'])) {
-            $user = $this->userRepository->getUser($_SESSION['email']);
-            $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
+        elseif(isset($_COOKIE['email']) && isset($_GET['BiddedItems'])) {
+            $user = $this->userRepository->getUser($_COOKIE['email']);
+            $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_COOKIE['id']);
             if(!$user) {
                 return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
             }
@@ -127,9 +130,9 @@ class SecurityController extends AppController
         if(!$this->isGet()) {
             return $this->render('login');
         }
-        elseif(isset($_SESSION['email']) && isset($_GET['BoughtItems'])) {
-            $user = $this->userRepository->getUser($_SESSION['email']);
-            $boughtArticles = $this->articleRepository->getBoughtArticlesByUserId($_SESSION['id']);
+        elseif(isset($_COOKIE['email']) && isset($_GET['BoughtItems'])) {
+            $user = $this->userRepository->getUser($_COOKIE['email']);
+            $boughtArticles = $this->articleRepository->getBoughtArticlesByUserId($_COOKIE['id']);
             if(!$user) {
                 return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
             }
@@ -145,7 +148,7 @@ class SecurityController extends AppController
         }
         elseif ($_POST['password'] != null && $_POST['repeatPassword'] == $_POST['password'] && $_POST['name'] != null && $_POST['surname'] != null) {
             $password = $_POST['password'];
-            $user = $this->userRepository->getUser($_SESSION['email']);
+            $user = $this->userRepository->getUser($_COOKIE['email']);
             if(!$user) {
                 return $this->render('change-user-data', ['messages' => ['Błędny adres e-mail lub hasło!']]);
             }
@@ -153,10 +156,10 @@ class SecurityController extends AppController
             if(password_verify($password, $user->getPassword()) != true) {
                 return $this->render('change-user-data', ['messages' => ['Błędne hasło!']]);
             }
-            $this->userRepository->changeData($_SESSION['email']);
-            $user = $this->userRepository->getUser($_SESSION['email']);
-            $activeArticles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
-            $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
+            $this->userRepository->changeData($_COOKIE['email']);
+            $user = $this->userRepository->getUser($_COOKIE['email']);
+            $activeArticles = $this->articleRepository->getArticlesByEmail($_COOKIE['email']);
+            $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_COOKIE['email']);
             return $this->render('info', ['user' => $user, 'activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles]);
         }
         else {
@@ -169,7 +172,7 @@ class SecurityController extends AppController
         if(!$this->isGet()) {
             return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
         }
-        elseif (!isset($_SESSION['email'])) {
+        elseif (!isset($_COOKIE['email'])) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         elseif ($_GET['user-email']) {

@@ -5,7 +5,7 @@ session_start();
 
 class DefaultController extends AppController {
     public function index() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login');
         }
         else {
@@ -14,7 +14,7 @@ class DefaultController extends AppController {
     }
 
     public function actions() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -23,7 +23,7 @@ class DefaultController extends AppController {
     }
 
     public function categories() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -32,7 +32,7 @@ class DefaultController extends AppController {
     }
 
     public function add() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -48,7 +48,7 @@ class DefaultController extends AppController {
     }
 
     public function category() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -57,7 +57,7 @@ class DefaultController extends AppController {
     }
 
     public function item() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -66,7 +66,7 @@ class DefaultController extends AppController {
     }
 
     public function info() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -75,7 +75,7 @@ class DefaultController extends AppController {
     }
 
     public function updateUserData() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -84,7 +84,7 @@ class DefaultController extends AppController {
     }
 
     public function updateDataSite() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -93,7 +93,7 @@ class DefaultController extends AppController {
     }
 
     public function updateItemData() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -102,7 +102,7 @@ class DefaultController extends AppController {
     }
 
     public function updateItemSite() {
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {

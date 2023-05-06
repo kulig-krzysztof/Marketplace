@@ -29,7 +29,7 @@ class AddController extends AppController
     }
 
     public function results() {
-        if(isset($_SESSION['email']) && !isset($_POST['name-search'])) {
+        if(isset($_COOKIE['email']) && !isset($_POST['name-search'])) {
             $articles = $this->articleRepository->getAllArticles();
             if($articles != null) {
                 $this->render('result', ['articles' => $articles]);
@@ -38,7 +38,7 @@ class AddController extends AppController
                 $this->render('result', ['articles' => $articles, 'messages' => ['Nie znaleziono żadnych artykułów do wyświetlenia.']]);
             }
         }
-        elseif (isset($_SESSION['email']) && isset($_POST['name-search'])) {
+        elseif (isset($_COOKIE['email']) && isset($_POST['name-search'])) {
             $articles = $this->articleRepository->getArticlesByString($_POST['name-search']);
             if($articles != null) {
                 $this->render('result', ['articles' => $articles]);
@@ -68,13 +68,13 @@ class AddController extends AppController
                 $state = false;
             }
 
-                $article = new Article(0,$_POST['title'],$_POST['category'],$_POST['desc'],$_POST['price'],$_SESSION['email'], $_FILES['file']['name'], floatval($_POST['lng']), floatval($_POST['lat']), $_POST['city-name'], $_POST['size'], $state);
+                $article = new Article(0,$_POST['title'],$_POST['category'],$_POST['desc'],$_POST['price'],$_COOKIE['email'], $_FILES['file']['name'], floatval($_POST['lng']), floatval($_POST['lat']), $_POST['city-name'], $_POST['size'], $state);
                 $this->articleRepository->addArticle($article);
 
                 return $this->render('categories', ['messages' => $this->messages]);
 
         }
-        if(!isset($_SESSION['email'])) {
+        if(!isset($_COOKIE['email'])) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -97,7 +97,7 @@ class AddController extends AppController
     }
 
     public function category() {
-            if ($this->isGet() && isset($_SESSION['email'])) {
+            if ($this->isGet() && isset($_COOKIE['email'])) {
                 $articles = $this->articleRepository->getArticleByCategory($_GET['category']);
                 if ($articles != null) {
                     return $this->render('result', ['articles' => $articles]);
@@ -126,9 +126,9 @@ class AddController extends AppController
     }
 
     public function item() {
-        if($this->isGet() && isset($_GET['item-id']) && isset($_SESSION['email'])) {
+        if($this->isGet() && isset($_GET['item-id']) && isset($_COOKIE['email'])) {
             $id = trim($_GET['item-id']);
-            $user_id = $_SESSION['id'];
+            $user_id = $_COOKIE['id'];
             $_SESSION['item-id'] = $id;
             $articles = $this->articleRepository->getArticle($id);
             $result = $this->offerRepository->checkForActiveOfferForItemById($id, $user_id);
@@ -145,10 +145,10 @@ class AddController extends AppController
                 $this->render('item', ['articles' => $articles, 'currentHighestBid' => $currentHighestBid]);
             }
         }
-        elseif (!isset($_GET['item-id']) && isset($_SESSION['email'])){
+        elseif (!isset($_GET['item-id']) && isset($_COOKIE['email'])){
             $this->render('categories');
         }
-        elseif (!isset($_SESSION['email'])) {
+        elseif (!isset($_COOKIE['email'])) {
             $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
     }
@@ -173,21 +173,21 @@ class AddController extends AppController
 
 
     public function updateItemData() {
-        if($this->isPost() && isset($_SESSION['email']) && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
+        if($this->isPost() && isset($_COOKIE['email']) && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file(
                 $_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
             $this->articleRepository->updateItem($_SESSION['item-id']);
             $articles = $this->articleRepository->getArticle($_SESSION['item-id']);
-            //$inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_SESSION['email']);
+            //$inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_COOKIE['email']);
             //$biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_SESSION['id']);
             $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
-            //$user = $this->userRepository->getUser($_SESSION['email']);
+            //$user = $this->userRepository->getUser($_COOKIE['email']);
             return $this->render('active-item-data' , ['articles' => $articles, 'offers' => $offers]);
 
         }
-        elseif (!isset($_SESSION['email'])) {
+        elseif (!isset($_COOKIE['email'])) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
 
@@ -206,12 +206,12 @@ class AddController extends AppController
     }
 
     public function showOffersForItem() {
-        if($this->isGet() && isset($_SESSION['email'])) {
+        if($this->isGet() && isset($_COOKIE['email'])) {
             $offers = $this->offerRepository->getOffersByItemId($_SESSION['item-id']);
             $articles = $this->articleRepository->getArticle($_SESSION['item-id']);
             return $this->render('offers-for-item', ['articles' => $articles, 'offers' => $offers]);
         }
-        elseif(!isset($_SESSION['email'])) {
+        elseif(!isset($_COOKIE['email'])) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
@@ -244,14 +244,14 @@ class AddController extends AppController
     }
 
     public function deleteItem() {
-        if($this->isGet() && isset($_SESSION['email'])) {
+        if($this->isGet() && isset($_COOKIE['email'])) {
             $id = intval($_GET['item-id']);
             $this->articleRepository->deleteItem($id);
             $this->offerRepository->deleteOffers($id);
-            $articles = $this->articleRepository->getArticlesByEmail($_SESSION['email']);
+            $articles = $this->articleRepository->getArticlesByEmail($_COOKIE['email']);
             return $this->render('active-items', ['activeArticles' => $articles, 'messages' => ['Usunięto aukcję pomyślnie']]);
         }
-        elseif(!isset($_SESSION['email'])) {
+        elseif(!isset($_COOKIE['email'])) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
         else {
