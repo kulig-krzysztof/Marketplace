@@ -20,7 +20,7 @@ class AddUserController extends AppController
 
         if ($this->isPost() && $_POST['email'] != null && $_POST['password'] != null && $_POST['repeatPassword'] == $_POST['password'] && $_POST['name'] != null && $_POST['surname'] != null) {
             $hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
-            $user = new User($_POST['email'], $hash, $_POST['name'], $_POST['surname']);
+            $user = new User($_POST['email'], $hash, $_POST['name'], $_POST['surname'], 1);
 
             $email = $_POST['email'];
             $check = $this->userRepository->getUser($email);

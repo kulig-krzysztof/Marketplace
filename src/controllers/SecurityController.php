@@ -3,8 +3,10 @@
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../models/Article.php';
+require_once __DIR__.'/../models/Offer.php';
 require_once __DIR__.'/../repository/UserRepository.php';
 require_once __DIR__.'/../repository/ArticleRepository.php';
+require_once __DIR__.'/../repository/OfferRepository.php';
 
 class SecurityController extends AppController
 {
@@ -12,12 +14,14 @@ class SecurityController extends AppController
     private array $userInfo = [];
     private UserRepository $userRepository;
     private ArticleRepository $articleRepository;
+    private OfferRepository $offerRepository;
 
     public function __construct()
     {
         parent::__construct();
         $this->userRepository = new UserRepository();
         $this->articleRepository = new ArticleRepository();
+        $this->offerRepository = new OfferRepository();
     }
 
     public function login() {
@@ -71,11 +75,22 @@ class SecurityController extends AppController
         $inactiveArticles = $this->articleRepository->getInactiveArticlesByEmail($_COOKIE['email']);
         $biddedArticles = $this->articleRepository->getBiddedArticlesByUserId($_COOKIE['id']);
         $boughtArticles = $this->articleRepository->getBoughtArticlesByUserId($_COOKIE['id']);
+        $isAdmin = $this->userRepository->isAdmin($_COOKIE['email']);
 
         if(!$user) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
         }
-        else return $this->render('info', ['user' => $user, 'activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles, 'biddedArticles' => $biddedArticles, 'boughtArticles' => $boughtArticles]);
+        elseif ($isAdmin == true) {
+            return $this->render('admin-info', ['user' => $user]);
+        }
+        //elseif ()
+        elseif ($isAdmin == false) {
+            return $this->render('info', ['user' => $user, 'activeArticles' => $activeArticles, 'inactiveArticles' => $inactiveArticles, 'biddedArticles' => $biddedArticles, 'boughtArticles' => $boughtArticles]);
+        }
+
+        else {
+            return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
+        }
     }
 
     public function userItems() {
@@ -182,6 +197,51 @@ class SecurityController extends AppController
         }
         else {
             return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
+        }
+    }
+
+    public function admin() {
+        if(!$this->isGet()) {
+            return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
+        }
+        elseif (!isset($_COOKIE['email'])) {
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
+        }
+        elseif ($this->userRepository->isAdmin($_COOKIE['email']) == false) {
+            return $this->render('categories', ['messages' => ['Nie masz odpowiednich uprawnień!']]);
+        }
+        else{
+            $allUsers = $this->userRepository->getAllOtherUsers($_COOKIE['email']);
+            if ($allUsers != null) {
+                return $this->render('admin-panel', ['users' => $allUsers]);
+            }
+            else {
+                return $this->render('admin-panel', ['users' => $allUsers, ['messages' => 'W bazie nie ma żadnych użytkowników']]);
+            }
+        }
+    }
+
+    public function deleteUser() {
+        if(!$this->isPost()) {
+            return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
+        }
+        elseif (!isset($_COOKIE['email'])) {
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
+        }
+        elseif ($this->userRepository->isAdmin($_COOKIE['email']) == false) {
+            return $this->render('categories', ['messages' => ['Nie masz odpowiednich uprawnień!']]);
+        }
+        else{
+            $this->userRepository->deleteUser($_POST['user-email']);
+            $this->offerRepository->deleteOffersOfUser($_POST['user-email']);
+            $this->articleRepository->deleteItemsOfUser($_POST['user-email']);
+            $allUsers = $this->userRepository->getAllOtherUsers($_COOKIE['email']);
+            if ($allUsers != null) {
+                return $this->render('admin-panel', ['users' => $allUsers, ['messages' => 'Usunięto użytkownika']]);
+            }
+            else {
+                return $this->render('admin-panel', ['users' => $allUsers, ['messages' => 'W bazie nie ma żadnych użytkowników']]);
+            }
         }
     }
 }

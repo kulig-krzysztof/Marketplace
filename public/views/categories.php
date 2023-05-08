@@ -24,6 +24,14 @@
                 <div class="text">
                     Kategorie
                 </div>
+            <div class="messages">
+                <?php if(isset($messages)) {
+                    foreach ($messages as $message) {
+                        echo $message;
+                    }
+                }
+                ?>
+            </div>
             <form method='get' action="category" class="categories">
                 <button name="category" value="buty" id="buty" class="category">
                     <img alt="shoes" class="category-img" src="public/img/uploads/shoes.jpg">

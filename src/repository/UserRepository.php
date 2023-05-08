@@ -26,7 +26,8 @@ class UserRepository extends Repository
             $user['email'],
             $user['password'],
             $user['name'],
-            $user['surname']
+            $user['surname'],
+            $user['account_type']
         );
     }
 
@@ -51,6 +52,52 @@ class UserRepository extends Repository
         ');
         $stmt->bindParam(':name', $name, PDO::PARAM_STR);
         $stmt->bindParam(':surname', $surname, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function isAdmin(string $email) : bool {
+        $stmt = $this->database->connect()->prepare("
+            SELECT account_types.account_type FROM account_types INNER JOIN users u on account_types.id = u.account_type WHERE u.email = :email;
+        ");
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($result['account_type'] === "Administrator") {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function getAllOtherUsers(string $email) : array {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare("
+            SELECT users.name as name, users.email as email, users.surname as surname, users.account_type as account_type FROM users WHERE users.email != :email;
+        ");
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($users as $user) {
+            $result[] = new User(
+                $user['email'],
+                'temp',
+                $user['name'],
+                $user['surname'],
+                $user['account_type']
+            );
+        }
+        return $result;
+    }
+
+    public function deleteUser(string $email) : void {
+        $stmt = $this->database->connect()->prepare("
+            DELETE FROM users WHERE users.email = :email
+        ");
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
     }

@@ -38,7 +38,7 @@ class OfferRepository extends Repository
         ');
         session_start();
         $stmt->execute([
-            $_SESSION['id'],
+            $_COOKIE['id'],
             $offer->getCityName(),
             $offer->getPrice(),
             $_SESSION['item-id'],
@@ -214,7 +214,7 @@ class OfferRepository extends Repository
             INSERT INTO offers (offer_from_id, city_name, price, item_id, lng, lat, data, state_of_offer, response_to_id) VALUES (?, ?, ?, ?, ? ,?, ?, ?, ?)
         ");
         $stmt->execute([
-            $_SESSION['id'],
+            $_COOKIE['id'],
             $offer->getCityName(),
             $offer->getPrice(),
             $_SESSION['item-id'],
@@ -267,5 +267,13 @@ class OfferRepository extends Repository
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch()[0];
+    }
+
+    public function deleteOffersOfUser(string $email) : void {
+        $stmt = $this->database->connect()->prepare("
+            DELETE FROM offers WHERE offer_from_id = (SELECT id FROM users WHERE email = :email) OR user_id_2 = (SELECT id FROM users WHERE email = :email);
+        ");
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
     }
 }

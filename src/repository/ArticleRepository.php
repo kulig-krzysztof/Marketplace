@@ -67,7 +67,7 @@ class ArticleRepository extends Repository
             $article->getDescription(),
             $article->getPrice(),
             $article->getImg(),
-            $_SESSION['id'],
+            $_COOKIE['id'],
             $article->getLng(),
             $article->getLat(),
             $article->getLocation(),
@@ -83,7 +83,7 @@ class ArticleRepository extends Repository
         $stmt = $this->database->connect()->prepare('
             SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM items INNER JOIN categories ON items.category = categories.id INNER JOIN users ON items.user_id = users.id WHERE items.active = true AND users.email != :email;
         ');
-        $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $_COOKIE['email'], PDO::PARAM_STR);
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -118,7 +118,7 @@ class ArticleRepository extends Repository
         ');
 
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $_COOKIE['email'], PDO::PARAM_STR);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -147,7 +147,7 @@ class ArticleRepository extends Repository
             SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM categories INNER JOIN items ON categories.id = items.category INNER JOIN users ON items.user_id = users.id WHERE LOWER(categories.category) LIKE :search AND items.active = true AND users.email != :email;
         ');
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $_COOKIE['email'], PDO::PARAM_STR);
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -180,7 +180,7 @@ class ArticleRepository extends Repository
             SELECT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM items INNER JOIN categories ON items.category = categories.id INNER JOIN users ON items.user_id = users.id WHERE items.active = true AND LOWER(items.city_name) LIKE :search AND users.email != :email OR items.active = true AND LOWER(items.title) LIKE :search AND users.email != :email OR items.active = true AND LOWER(categories.category) LIKE :search AND users.email != :email;
         ');
         $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $_COOKIE['email'], PDO::PARAM_STR);
         $stmt->execute();
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -396,6 +396,14 @@ class ArticleRepository extends Repository
             DELETE FROM items WHERE items.id = :id;
         ");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function deleteItemsOfUser(string $email) : void {
+        $stmt = $this->database->connect()->prepare("
+            DELETE FROM items WHERE user_id = (SELECT id FROM users WHERE email = :email);
+        ");
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->execute();
     }
 
