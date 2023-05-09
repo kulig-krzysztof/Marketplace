@@ -49,4 +49,5 @@ Routing::get('deleteOffer', 'OfferController');
 Routing::get('userProfile', 'SecurityController');
 Routing::get('admin', 'SecurityController');
 Routing::post('deleteUser', 'SecurityController');
+Routing::get('roulette', 'AddController');
 Routing::run($path);

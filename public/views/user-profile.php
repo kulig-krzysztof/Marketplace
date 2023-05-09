@@ -34,7 +34,7 @@
             ?>
         </div>
         <div class="items-container">
-            <form id="form" action="activeItemSite" method="get" class="categories">
+            <form id="form" action="item" method="get" class="categories">
                 <?php foreach ($activeArticles as $activeArticle): ?>
                     <button type="submit" name="item-id" value="<?= $activeArticle->getId(); ?>" id="<?= $activeArticle->getId(); ?>">
                         <img alt="Item image" src="public/img/form-images/<?= $activeArticle->getImg(); ?>">

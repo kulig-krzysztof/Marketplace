@@ -42,7 +42,7 @@ form {
 }
 
 .name-search, .location, .search-button {
-    border-radius: 39px;   
+    border-radius: 39px;
     height: 5vh;
     padding: 0;
     border: 0;
@@ -68,7 +68,7 @@ form {
 .text {
     text-align: center;
     font-size: 40px;
-    margin-bottom: 80px;
+    margin-bottom: 120px;
 }
 
 .category {
@@ -91,6 +91,7 @@ form {
     border-radius: 50%;
     padding: 0;
     border: white 10px solid;
+    overflow: hidden;
 }
 
 .categories {

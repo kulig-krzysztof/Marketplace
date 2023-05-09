@@ -438,4 +438,32 @@ class ArticleRepository extends Repository
             $article['new']
         );
     }
+
+    public function getRandomArticlesArray(int $id) : array {
+        $result = [];
+        $stmt = $this->database->connect()->prepare("
+            SELECT * FROM items WHERE user_id != :id ORDER BY RANDOM();
+        ");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($articles as $article) {
+            $result[] = new Article(
+                $article['id'],
+                $article['title'],
+                $article['category'],
+                $article['description'],
+                $article['price'],
+                $article['email'],
+                $article['img'],
+                $article['lng'],
+                $article['lat'],
+                $article['city_name'],
+                $article['size'],
+                $article['new']
+            );
+        }
+        return $result;
+    }
 }

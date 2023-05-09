@@ -50,6 +50,9 @@ class SecurityController extends AppController
 
         else {
             setcookie('email', $email, time() + 7 * 24 * 60 * 60);
+            if($this->userRepository->isAdmin($email) == true) {
+                setcookie('admin-email', $email, time() + 7 * 24 * 60 * 60);
+            }
             //$_SESSION['email'] = $email;
             //$url = "http://$_SERVER[HTTP_HOST]";
             //header("Location: {$url}/actions");
@@ -62,6 +65,7 @@ class SecurityController extends AppController
         session_unset();
         setcookie('email', "", time() - 3600);
         setcookie('id', "", time() - 3600);
+        setcookie('admin-email', "", time() - 3600);
         return $this->render('login', ['messages' => ['Pomyślnie wylogowano!']]);
     }
 

@@ -34,24 +34,28 @@
             </div>
             <form method='get' action="category" class="categories">
                 <button name="category" value="buty" id="buty" class="category">
-                    <img alt="shoes" class="category-img" src="public/img/uploads/shoes.jpg">
+                    <img alt="shoes" class="category-img" src="public/img/uploads/shoes_2.jpg">
                     Buty
                 </button>
                 <button name="category" value="koszulki" id="koszulki" class="category">
-                    <img alt="tshorts" class="category-img" src="public/img/uploads/tshirts.jpg">
+                    <img alt="tshorts" class="category-img" src="public/img/uploads/graphic-tshirt-trendy-design-mockup-presented-wooden-hanger.jpg">
                     Koszulki
                 </button>
                 <button name="category" value="bluzy" id="bluzy" class="category">
-                    <img alt="hoodies" class="category-img" src="public/img/uploads/hoodies.jpg">
+                    <img alt="hoodies" class="category-img" src="public/img/uploads/hoody.jpg">
                     Bluzy
                 </button>
                 <button name="category" value="kurtki" id="kurtki" class="category">
-                    <img alt="jackets" class="category-img" src="public/img/uploads/jackets.jpg">
+                    <img alt="jackets" class="category-img" src="public/img/uploads/jacket.jpg">
                     Kurtki
                 </button>
                 <button name="category" value="akcesoria" id="akcesoria" class="category">
-                    <img alt="caps" class="category-img" src="public/img/uploads/caps.jpg">
+                    <img alt="caps" class="category-img" src="public/img/uploads/cap.jpg">
                     Akcesoria
+                </button>
+                <button formmethod="get" formaction="roulette" id="ruletka" class="category">
+                    <img alt="roulette" class="category-img" src="public/img/uploads/random.jpg">
+                    Ruletka
                 </button>
             </form>
         </div>

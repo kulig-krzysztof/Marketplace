@@ -39,6 +39,13 @@
                     <div id="price" class="info-container"><?= $articles->getPrice(); ?></div>
                     <h2>Stan:</h2>
                     <div id="state" class="info-container"><?= $articles->getStateString(); ?></div>
+                    <?php if(isset($_COOKIE['admin-email'])) {
+                        echo "<div id='buttons-container'>
+                        <form action='deleteItem' method='get' id='delete-form'>
+                            <button class='button-36 action-button' type='submit' name='item-id' value='" . $articles->getId() . "'>Usuń ogłoszenie</button>
+                    </form>
+                </div>";
+                    } ?>
                 </div>
             </div>
             <div class="map-and-description-container">

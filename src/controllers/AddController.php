@@ -244,12 +244,51 @@ class AddController extends AppController
     }
 
     public function deleteItem() {
-        if($this->isGet() && isset($_COOKIE['email'])) {
+        if($this->isGet() && isset($_COOKIE['email']) && !isset($_COOKIE['admin-email'])) {
             $id = intval($_GET['item-id']);
             $this->articleRepository->deleteItem($id);
             $this->offerRepository->deleteOffers($id);
             $articles = $this->articleRepository->getArticlesByEmail($_COOKIE['email']);
             return $this->render('active-items', ['activeArticles' => $articles, 'messages' => ['Usunięto aukcję pomyślnie']]);
+        }
+        elseif (isset($_COOKIE['admin-email'])) {
+            $id = intval($_GET['item-id']);
+            $this->articleRepository->deleteItem($id);
+            $this->offerRepository->deleteOffers($id);
+            $allUsers = $this->userRepository->getAllOtherUsers($_COOKIE['email']);
+            if ($allUsers != null) {
+                return $this->render('admin-panel', ['users' => $allUsers, ['messages' => 'Usunięto aukcję użytkownika']]);
+            }
+            else {
+                return $this->render('admin-panel', ['users' => $allUsers, ['messages' => 'W bazie nie ma żadnych użytkowników']]);
+            }
+        }
+        elseif(!isset($_COOKIE['email'])) {
+            return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
+        }
+        else {
+            return $this->render('login', ['messages' => ['Coś poszło nie tak!']]);
+        }
+    }
+
+    public function getRandomFromArray(array $randomArticles, int $counter) : ?Article {
+        return $randomArticles[$counter];
+    }
+
+    /*
+    public function getRandom() : array
+    {
+        return $this->articleRepository->getRandomArticlesArray($_COOKIE['id']);
+    }
+    */
+
+    public function roulette() {
+        if($this->isGet() && isset($_COOKIE['email'])) {
+            $counter = 0;
+            $randomArticles = $this->articleRepository->getRandomArticlesArray($_COOKIE['id']);
+            $articles = $this->getRandomFromArray($randomArticles, $counter);
+            $currentHighestBid = $this->offerRepository->checkCurrentHighestBidForItemId($articles->getId());
+            return $this->render('item', ['articles' => $articles, 'currentHighestBid' => $currentHighestBid]);
         }
         elseif(!isset($_COOKIE['email'])) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);
