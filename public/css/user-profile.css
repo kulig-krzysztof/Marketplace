@@ -20,7 +20,8 @@ body {
             #E6E6E6;
     /*linear-gradient(rgba(224,231,238, 0.6), rgba(102,102,102, 0.6)); */
     width: 100%;
-    height: 73vh;
+    min-height: 73vh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;

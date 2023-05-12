@@ -209,9 +209,9 @@ class OfferRepository extends Repository
         $stmt->execute();
     }
 
-    public function respondToOffer(Offer $offer) : void {
+    public function respondToOffer(Offer $offer, int $user_id_2) : void {
         $stmt = $this->database->connect()->prepare("
-            INSERT INTO offers (offer_from_id, city_name, price, item_id, lng, lat, data, state_of_offer, response_to_id) VALUES (?, ?, ?, ?, ? ,?, ?, ?, ?)
+            INSERT INTO offers (offer_from_id, city_name, price, item_id, lng, lat, data, state_of_offer, response_to_id, user_id_2) VALUES (?, ?, ?, ?, ? ,?, ?, ?, ?, ?)
         ");
         $stmt->execute([
             $_COOKIE['id'],
@@ -222,7 +222,8 @@ class OfferRepository extends Repository
             $offer->getLat(),
             $offer->getData(),
             $offer->getState(),
-            $_SESSION['offer-id']
+            $_SESSION['offer-id'],
+            $user_id_2
         ]);
     }
 
@@ -275,5 +276,14 @@ class OfferRepository extends Repository
         ");
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
+    }
+
+    public function getUserIdByOfferId(int $offerId) : int {
+        $stmt = $this->database->connect()->prepare("
+            SELECT offer_from_id FROM offers WHERE id = :id;
+        ");
+        $stmt->bindParam(':id', $offerId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch()[0];
     }
 }

@@ -8,10 +8,9 @@ require_once __DIR__.'/../repository/OfferRepository.php';
 require_once __DIR__.'/../repository/ArticleRepository.php';
 require_once __DIR__.'/../repository/UserRepository.php';
 
-session_start();
-
 class OfferController extends AppController
 {
+
     private $messages = [];
     private $offerRepository;
     private $articleRepository;
@@ -96,11 +95,11 @@ class OfferController extends AppController
     }
 
     public function respondToOffer() {
-        if(isset($_COOKIE['email']) && isset($_POST['respond'])) {
+        if(isset($_COOKIE['email']) && $this->isPost()) {
             $article = $this->articleRepository->getArticle($_SESSION['item-id']);
-            $offer = $this->offerRepository->getOfferObjectById($_POST['id']);
-            $_SESSION['offer-id'] = $_POST['id'];
-            $this->render('respond-to-offer', ['articles' => $article, 'offers' => $offer]);
+            $offer = $this->offerRepository->getOfferObjectById(intval($_POST['id']));
+            $_SESSION['offer-id'] = intval($_POST['id']);
+            $this->render('active-item-data', ['articles' => $article, 'offers' => $offer]);
         }
     }
 
@@ -112,12 +111,14 @@ class OfferController extends AppController
     }
 
     public function respond() {
-        if(isset($_COOKIE['email']) && isset($_POST['respond'])) {
+        if(isset($_COOKIE['email']) && $this->isPost()) {
+            $_SESSION['offer-id'] = intval($_POST['id']);
             $article = $this->articleRepository->getArticle($_SESSION['item-id']);
             $user = $this->userRepository->getUser($_COOKIE['email']);
-            $offer = new Offer(0, $_COOKIE['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], $_POST['lng'], $_POST['lat'], $_COOKIE['email'], $_POST['meeting-time'], "active");
+            $offer = new Offer(0, $_COOKIE['id'], $_POST['location'], $_POST['bid-value'], $_SESSION['item-id'], floatval($_POST['lng']), floatval($_POST['lat']), $_COOKIE['email'], $_POST['meeting-time'], "active");
             $this->offerRepository->setOfferResponded($_SESSION['offer-id']);
-            $this->offerRepository->respondToOffer($offer);
+            $user_id_2 = $this->offerRepository->getUserIdByOfferId($_SESSION['offer-id']);
+            $this->offerRepository->respondToOffer($offer, $user_id_2);
             $articles = $this->articleRepository->getArticlesByEmail($_COOKIE['email']);
             if ($articles != null) $this->render('info', ['messages' => ['Wysłano odpowiedź'], 'user' => $user, 'articles' => $articles]);
             else $this->render('item', ['messages' => ['Wysłano odpowiedź!'], 'articles' => $article]);

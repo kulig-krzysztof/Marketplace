@@ -19,8 +19,11 @@ class UserRepository extends Repository
         }
 
         session_start();
-        setcookie('id', $user['id'], time() + 7 * 24 * 60 * 60);
-        //$_SESSION['id'] = $user['id'];
+        if(!isset($_COOKIE['id'])) {
+            setcookie('id', $user['id'], time() + 7 * 24 * 60 * 60);
+            //$_SESSION['id'] = $user['id'];
+        }
+
 
         return new User(
             $user['email'],

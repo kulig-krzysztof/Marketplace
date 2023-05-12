@@ -47,6 +47,22 @@
                         <div id="map2" class="mapboxgl-map"></div>
                     </section>
                 </div>
+                <div class="bid-form-container">
+                    <h2>Dodaj ofertę</h2>
+                    <form class="bid-form" method="post" action="respond">
+                        <span id="close">X</span>
+                        <h2>Podaj miasto, w którym proponujesz spotkanie:</h2>
+                        <input id="input-city" class="bid-input" type="text" name="location" placeholder="Podaj miasto" required>
+                        <h2>Podaj cenę, którą proponujesz: (Aktualnie najwyższa oferta to <?= $currentHighestBid; ?> zł)</h2>
+                        <input id="input-bid" class="bid-input" type="number" step="0.01" min="<?= $currentHighestBid ?>" name="bid-value" placeholder="Podaj proponowaną kwotę" required>
+                        <h2>Podaj datę i godzinę spotkania:</h2>
+                        <input class="bid-input" type="datetime-local" id="meeting-time" name="meeting-time" required>
+                        <input type="text" name="lng" id="lng" hidden required>
+                        <input type="text" name="lat" id="lat" hidden required>
+                        <input id="input-id" type="text" name="id" hidden>
+                        <input type="submit" id="bid-submit" class="button-36" name="bid" value="Złóż ofertę">
+                    </form>
+                </div>
                 <div class="description-and-user-info">
                     <div class="description">
                         <h2>Description:</h2>

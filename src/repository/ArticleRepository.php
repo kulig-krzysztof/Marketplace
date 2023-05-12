@@ -336,7 +336,7 @@ class ArticleRepository extends Repository
         $result = [];
 
         $stmt = $this->database->connect()->prepare("
-            SELECT DISTINCT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM users INNER JOIN items ON users.id = items.user_id INNER JOIN categories ON items.category = categories.id INNER JOIN offers ON items.id = offers.item_id WHERE offers.offer_from_id = :id AND items.active = true AND offers.state_of_offer = 'active'
+            SELECT DISTINCT items.id, items.title, categories.category, items.description, items.price, users.email, items.img, items.lng, items.lat, items.city_name, items.size, items.new FROM users INNER JOIN items ON users.id = items.user_id INNER JOIN categories ON items.category = categories.id INNER JOIN offers ON items.id = offers.item_id WHERE offers.offer_from_id = :id AND items.active = true AND offers.state_of_offer = 'active' OR offers.user_id_2 = :id AND items.active = true AND offers.state_of_offer = 'active'
         ");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
