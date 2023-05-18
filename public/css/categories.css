@@ -101,6 +101,7 @@ form {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    margin-top: 2vh;
 }
 
 .category-container {
@@ -147,10 +148,95 @@ form {
     transition-duration: .5s;
 }
 
+.input-and-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.filters-container {
+    display: none;
+}
+
+.filters-container-active {
+    display: block;
+}
+
+.filters-container-active > input {
+    width: 5vw;
+    height: 3vh;
+    margin-top: 1vh;
+}
+
+
+.filter-icon-container {
+    display: flex;
+    justify-content: center;
+}
+
+#filter-icon {
+    margin-top: 1vh;
+    height: 2.5vh;
+}
+
+#close {
+    display: none;
+}
+
+.filter-button {
+    margin-top: 1vh;
+    background-color: black;
+    border-radius: 3px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 2.5vh;
+    width: 5vw;
+    padding: 0 1.6rem;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+    transition: all .5s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.filter-button-active {
+    display: none;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: column;
+}
+
 @media only screen and (max-device-width : 420px) {
 
+    .input-and-button-container {
+        width: 100%;
+    }
+
+    .filter-icon-container {
+        width: 100%;
+    }
+
+    #filter-icon {
+        width: 30vw;
+        height: 3vh;
+    }
+
+    .search {
+        height: 20vh;
+    }
+
     .input-container {
-        width: 80vw;
+        width: 50vw;
 
     }
     .search-bar {
@@ -163,8 +249,8 @@ form {
         margin: 0;
     }
 
-    .input-container {
-        margin-bottom: 10px;
+    .name-search {
+        width: 60vw;
     }
 
     .search-button {
@@ -172,17 +258,19 @@ form {
         height: 12vw;
     }
 
-    form i {
-        margin-bottom: 10px;
+    .input-container i {
+        display: none;
     }
 
     .text {
-        margin-bottom: 30px;
+        margin-bottom: 10px;
+        font-size: 20px;
     }
 
     .category-container {
-        height: 60vh;
+        min-height: 100vh;
         width: 100%;
+        overflow: hidden;
     }
 
     .categories {
@@ -192,19 +280,25 @@ form {
     }
 
     .category-img {
-        height: 25vw;
-        width: 25vw;
+        height: 40vw;
+        width: 40vw;
+        border-radius: 50%;
+        border: white 5px solid;
+        overflow: hidden;
     }
 
     .category {
-        width: 35vw;
-        height: 35vw;
+        width: 100%;
+        height: 100%;
         font-size: 20px;
-        width:100%;
     }
 
     #last-cat {
         grid-column: auto / span 2;
         width: 100%;
+    }
+
+    .button-36 {
+        width: 25vw;
     }
 }

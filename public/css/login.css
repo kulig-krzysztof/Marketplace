@@ -95,12 +95,6 @@ body {
     margin-top: 10px;
 }
 
-@media (min-width: 768px) {
-    .button-36 {
-        padding: 0 2.6rem;
-    }
-}
-
 input {
     background-color: transparent;
     border: none;
@@ -149,6 +143,7 @@ input {
     .login {
         margin: auto;
         height: 50vh;
+        border-radius: 10px;
     }
 
     .login input {
@@ -156,7 +151,7 @@ input {
         width: 60%;
     }
 
-    .button {
+    .button-36 {
         width: 70%;
         text-align: center;
     }
@@ -171,24 +166,6 @@ input {
         font-size: 40px;
         margin-bottom: 20%;
         margin-top: -20%;
-    }
-
-    .sell, .buy {
-        font-size: 25px;
-    }
-
-    .option-icon {
-        width: 100px;
-        height: 100px;
-    }
-
-    .option {
-        height: 45vw;
-        width: 45vw;
-    }
-
-    #register {
-        margin-top: -5px;
     }
 }
 
