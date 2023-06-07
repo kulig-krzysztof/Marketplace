@@ -65,7 +65,7 @@
                 </div>
                 <div class="description-and-user-info">
                     <div class="description">
-                        <h2>Description:</h2>
+                        <h2>Opis:</h2>
                         <div id="description-h2"><?= str_replace("\n", "<br>", $articles->getDescription()); ?></div>
                     </div>
                 </div>

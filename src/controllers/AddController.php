@@ -288,7 +288,7 @@ class AddController extends AppController
             $randomArticles = $this->articleRepository->getRandomArticlesArray($_COOKIE['id']);
             $articles = $this->getRandomFromArray($randomArticles, $counter);
             $currentHighestBid = $this->offerRepository->checkCurrentHighestBidForItemId($articles->getId());
-            return $this->render('item', ['articles' => $articles, 'currentHighestBid' => $currentHighestBid]);
+            return $this->render('item', ['articles' => $articles, 'currentHighestBid' => $currentHighestBid, 'roulette' => true]);
         }
         elseif(!isset($_COOKIE['email'])) {
             return $this->render('login', ['messages' => ['Nie jesteś zalogowany!']]);

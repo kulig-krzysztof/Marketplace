@@ -39,13 +39,20 @@
                     <div id="price" class="info-container"><?= $articles->getPrice(); ?></div>
                     <h2>Stan:</h2>
                     <div id="state" class="info-container"><?= $articles->getStateString(); ?></div>
-                    <?php if(isset($_COOKIE['admin-email'])) {
+                    <?php if(isset($_COOKIE['admin-email']) && !$roulette) {
                         echo "<div id='buttons-container'>
                         <form action='deleteItem' method='get' id='delete-form'>
                             <button class='button-36 action-button' type='submit' name='item-id' value='" . $articles->getId() . "'>Usuń ogłoszenie</button>
-                    </form>
-                </div>";
-                    } ?>
+                    </form></div>
+                ";
+                    }
+                        elseif($roulette) {
+                            echo "<div id='buttons-container'>
+                            <form action='roulette' method='get' id='delete-form'>
+                                <button class='button-36 action-button' type='submit' name='item-id' value='" . $articles->getId() . "'>Losuj dalej</button>
+                        </form></div>";
+                        }
+                    ?>
                 </div>
             </div>
             <div class="map-and-description-container">
@@ -58,7 +65,7 @@
                 <div class="bid-form-container">
                     <h2>Dodaj ofertę</h2>
                     <form class="bid-form" method="post" action="bid">
-                        <span id="close">X</span>
+                        <span id="close-form">X</span>
                         <h2>Podaj miasto, w którym proponujesz spotkanie:</h2>
                         <input class="bid-input" type="text" name="location" placeholder="Podaj miasto" required>
                         <h2>Podaj cenę, którą proponujesz: (Aktualnie najwyższa oferta to <?= $currentHighestBid; ?> zł)</h2>
@@ -72,7 +79,7 @@
                 </div>
                 <div class="description-and-user-info">
                     <div class="description">
-                        <h2>Description:</h2>
+                        <h2>Opis:</h2>
                         <div id="description-h2"><?= str_replace("\n", "<br>", $articles->getDescription()); ?></div>
                     </div>
                 </div>
