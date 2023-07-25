@@ -11,6 +11,38 @@ The aim of this project was to enable convenient and intuitive trading of limite
 
 ## Frontend
 
-&emsp;The website's framework has been implemented using HTML technology. Styling has been achieved through CSS. Different views for the mobile version have been defined using media queries. All user interactions with the website and asynchronous data display have been handled via JavaScript. For interactive maps, the website utilizes a solution provided by Mapbox.
+&emsp;The website's structure has been implemented using HTML. Styling has been achieved through CSS. Different views for the mobile version have been defined using media queries. All user interactions with the website and asynchronous data display have been handled via JavaScript. For interactive maps, the website utilizes a solution provided by Mapbox.
 
-![Alt text](/../<screenshots>/screenshots/login_page.png?raw=true "Desktop login page")
+
+![Alt text](/screenshots/login_page.png?raw=true "Desktop login page")
+
+![Alt text](/screenshots/form.png?raw=true "Desktop form page")
+
+## Backend
+
+&emsp;The entire application logic has been implemented in PHP. This includes the routing of the website and handling connections to the database along with SQL query processing. It was possible because of the extension called PDO.
+
+```
+public function connect() {
+        try {
+            $conn = new PDO (
+                "pgsql:host=$this->host;port=5432;dbname=$this->database",
+                $this->username,
+                $this->password,
+                ["sslmode" => "prefer"]
+            );
+
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $conn;
+
+        }   catch(PDOException $e) {
+                die("Connection failed!: ".$e->getMessage());
+        }
+    }
+```
+
+## Database
+
+&emsp;The database has been implemented using PostgreSQL. It has been hosted on an external server provided by Amazon using the RDS (Relational Database Service).
+
+![Alt text](/screenshots/database_erd.png?raw=true "Database")
