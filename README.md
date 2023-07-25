@@ -14,9 +14,9 @@ The aim of this project was to enable convenient and intuitive trading of limite
 &emsp;The website's structure has been implemented using HTML. Styling has been achieved through CSS. Different views for the mobile version have been defined using media queries. All user interactions with the website and asynchronous data display have been handled via JavaScript. For interactive maps, the website utilizes a solution provided by Mapbox.
 
 
-![Picture](/screenshots/login_page.png#center?raw=true)
+![Picture](/screenshots/login_page.png?raw=true)
 
-![Picture](/screenshots/form.png#center)
+![Picture](/screenshots/form.png?raw=true)
 
 ## Backend
 
