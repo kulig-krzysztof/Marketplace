@@ -2,3 +2,4 @@ public/form-images/
 .idea
 .vscode
 config.php
+docker-compose.yml
