@@ -1,13 +1,13 @@
 
 # Online marketplace for limited edition clothing
 
----
+
 
 ## Description
 
 &emsp;The aim of this project was to enable convenient and intuitive trading of limited edition clothing. It allows arranging a meeting place for conducting transactions in person, due to the high price of the items. It operates similarly to StockX. The price, date, time, and location are determined until both parties agree.
 
----
+
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@
 * [Features](#features)
 * [Development Kit](#development-kit)
 
----
+
 
 ## Technologies used
 
@@ -30,13 +30,13 @@
 - PostgreSQL
 - Mapbox
 
----
+
 
 ## Architecture
 
 &emsp;The application consists of three layers - frontend, backend and database. Frontend was implemented in basic technologies, such as HTML5, CSS3, JavaScript. All the logic was impolemented in PHP 8.1. Fetch APi and HTML forms were used for communication between these two layers. Data was stored in PostgreSQL database in AWS server.
 
----
+
 
 ## Frontend
 
@@ -47,7 +47,7 @@
 
 ![Picture](/screenshots/form.png?raw=true)
 
----
+
 
 ## Backend
 
@@ -72,7 +72,7 @@ public function connect() {
     }
 ```
 
----
+
 
 ## Database
 
@@ -80,7 +80,7 @@ public function connect() {
 
 ![Alt text](/screenshots/database_erd.png?raw=true "Database")
 
----
+
 
 ## Features
 
@@ -89,7 +89,7 @@ public function connect() {
 - Searching with different filters
 - Randomized search (in case that the customer doesn't exactly know that he/she wants)
 
----
+
 
 ## Development kit
 
